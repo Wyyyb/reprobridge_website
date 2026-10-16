@@ -62,11 +62,12 @@
   function css(name, el) { return getComputedStyle(el || document.documentElement).getPropertyValue(name).trim(); }
 
   /* ---------------------------------------------------------------- tooltip */
-  var tipEl = null;
+  var tipEl = null, tipAnchor = null, tipHtml = '';
   function tipNode() { return tipEl || (tipEl = document.getElementById('rb-tip')); }
   var tip = {
     show: function (html, x, y) {
       var t = tipNode(); if (!t) return;
+      tipHtml = html;
       t.innerHTML = html; t.hidden = false;
       var w = t.offsetWidth, hgt = t.offsetHeight, vw = window.innerWidth, vh = window.innerHeight;
       var left = x + 14, top = y + 14;
@@ -80,16 +81,28 @@
     showFor: function (el, html) {
       var r = el.getBoundingClientRect();
       tip.show(html, r.right, r.top + r.height / 2 - 20);
+      tipAnchor = el;
     },
-    hide: function () { var t = tipNode(); if (t) t.hidden = true; }
+    hide: function () { var t = tipNode(); if (t) t.hidden = true; tipAnchor = null; }
   };
-  window.addEventListener('scroll', function () { tip.hide(); }, { passive: true });
+  /* pointer tooltips hide on scroll; a keyboard-focus tooltip follows its element (focus often scrolls it into view) */
+  var tipRaf = 0;
+  window.addEventListener('scroll', function () {
+    if (tipAnchor && document.activeElement === tipAnchor) {
+      if (!tipRaf) tipRaf = requestAnimationFrame(function () {
+        tipRaf = 0;
+        if (tipAnchor && document.activeElement === tipAnchor) { var a = tipAnchor; tip.showFor(a, tipHtml); }
+      });
+      return;
+    }
+    tip.hide();
+  }, { passive: true });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') tip.hide(); });
 
   /* bind hover + focus tooltips to an element; html may be a function */
   function bindTip(el, html) {
     var get = typeof html === 'function' ? html : function () { return html; };
-    el.addEventListener('pointermove', function (e) { tip.show(get(), e.clientX, e.clientY); });
+    el.addEventListener('pointermove', function (e) { tipAnchor = null; tip.show(get(), e.clientX, e.clientY); });
     el.addEventListener('pointerleave', tip.hide);
     el.addEventListener('focus', function () { tip.showFor(el, get()); });
     el.addEventListener('blur', tip.hide);

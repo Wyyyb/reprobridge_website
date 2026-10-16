@@ -1,0 +1,75 @@
+/* Release (#release): four "Soon" cards (paper, arXiv, code, dataset; no links until they are public) and the
+ * citation block (#cite) with a copy button. The copy click itself is handled by site.js ([data-copy]);
+ * assets/js/release.js swaps the button icon and announces the result. */
+
+#release .nw { white-space: nowrap; }
+
+/* ------------------------------------------------------------------ release cards */
+#release .rel-grid {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;
+  margin: 0; padding: 0; list-style: none;
+}
+#release .rel-card {
+  position: relative; display: flex; flex-direction: column; align-items: flex-start;
+  padding: 22px 22px 24px; border-radius: var(--rad-lg); background: var(--bg); border: 1px solid var(--line);
+}
+#release .rel-top { display: flex; align-items: center; margin-bottom: 22px; }
+#release .rel-ic {
+  display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px;
+  background: var(--panel); color: var(--ink-2);
+}
+#release .rel-ic svg { width: 20px; height: 20px; }
+#release .rel-card .soon { position: absolute; top: 33px; right: 22px; color: var(--ink-3); opacity: 1; border-color: var(--line-2); }
+#release .rel-card .kicker { display: block; margin-bottom: 8px; }
+#release .rel-card h3 { font-size: 18px; font-weight: 600; letter-spacing: -.012em; margin: 0 0 8px; }
+#release .rel-card p { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--ink-3); }
+
+/* ------------------------------------------------------------------ citation */
+#release .rel-cite-title { margin-top: 80px; margin-bottom: 16px; }
+#release .rel-bib { border: 1px solid var(--line); }
+:root[data-theme="dark"] #release .rel-bib { border-color: var(--line-2); }
+#release .rel-bib .code-head { padding: 9px 10px 9px 18px; border-bottom: 1px solid var(--line); }
+:root[data-theme="dark"] #release .rel-bib .code-head { border-bottom-color: var(--line-2); }
+#release .rel-bib-lang { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+
+#release .copy-btn { position: relative; transition: color .2s, border-color .2s, background-color .2s; }
+#release .copy-btn:focus-visible { outline: 2px solid var(--rra); outline-offset: 2px; }
+#release .copy-btn .ic-ok { display: none; }
+#release .copy-btn.is-ok { color: var(--rra-ink); border-color: color-mix(in srgb, var(--rra) 45%, var(--line-2)); background: var(--rra-tint); }
+#release .copy-btn.is-ok .ic-copy { display: none; }
+#release .copy-btn.is-ok .ic-ok { display: block; }
+#release .copy-btn.is-err { color: var(--gold-ink); }
+
+/* one block span per BibTeX line (no newline characters, so the copied text is exactly the entry); wrapped lines
+ * hang under the field value on narrow screens */
+#release .rel-bib pre {
+  font-family: var(--mono); padding: 18px 20px 20px; font-size: 13.5px; line-height: 1.75; tab-size: 2;
+  background: transparent; outline: none;
+}
+#release .rel-bib pre:focus-visible { box-shadow: inset 0 0 0 2px var(--rra); }
+#release .rel-bib pre { white-space: pre-wrap; overflow-wrap: break-word; }
+#release .rel-bib .bl { display: block; padding-left: 12ch; text-indent: -12ch; }
+#release .bt-at { color: var(--rra-ink); }
+#release .bt-key { color: var(--ink); font-weight: 600; }
+#release .bt-f { color: var(--ink-3); }
+
+/* ------------------------------------------------------------------ responsive */
+@media (max-width: 1080px) {
+  #release .rel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  #release .rel-cite-title { margin-top: 64px; }
+  #release .rel-bib pre { font-size: 12.5px; padding: 16px 16px 18px; }
+}
+/* phones: one compact row per item (icon | text), badge in the corner */
+@media (max-width: 560px) {
+  #release .rel-grid { grid-template-columns: 1fr; gap: 10px; }
+  #release .rel-card { display: grid; grid-template-columns: 42px minmax(0, 1fr); column-gap: 16px; padding: 18px 18px 18px 16px; }
+  #release .rel-top { display: contents; }
+  #release .rel-ic { grid-row: 1 / span 3; align-self: start; }
+  #release .rel-card .soon { top: 18px; right: 16px; }
+  #release .rel-card .kicker { grid-column: 2; margin: 2px 0 4px; }
+  #release .rel-card h3 { grid-column: 2; font-size: 17px; margin-bottom: 4px; padding-right: 56px; }
+  #release .rel-card .kicker { padding-right: 56px; }
+  #release .rel-card p { grid-column: 2; font-size: 14px; }
+}

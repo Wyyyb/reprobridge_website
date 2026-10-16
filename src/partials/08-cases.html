@@ -1,5 +1,493 @@
-<section class="sec" id="cases" aria-labelledby="cases-title">
+<section class="sec sec-soft" id="cases" aria-labelledby="cases-title">
   <div class="wrap">
-    <div class="sec-head"><h2 id="cases-title"><span class="sec-no">05 · Cases</span>Placeholder for cases</h2></div>
+    <div class="sec-head" data-reveal>
+      <h2 id="cases-title"><span class="sec-no">05 · Cases</span>What the artifacts recover</h2>
+      <p class="lede">Across paired task–model outcomes in the first evaluation, <b>813</b> raw-code failures become successes, against <b>136</b> reversals. The records suggest two complementary contributions: completing ambiguous or incomplete measurement specifications, and preserving executable procedures for reuse.</p>
+    </div>
+
+    <!-- C1 · recoveries and reversals (first evaluation, Table "First-evaluation success counts and transitions") -->
+    <div class="chart-card cs-trans" data-reveal>
+      <div class="chart-head">
+        <div>
+          <h4>Recoveries and reversals by Reproducer</h4>
+          <p class="cap">Paired task–model outcomes, 1,029 tasks per model. <b>Recovery:</b> Raw failure to RRA success. <b>Reversal:</b> Raw success to RRA failure. Net is recoveries minus reversals. <span class="tag-note">Eval 1 · Codex</span></p>
+        </div>
+        <div class="legend cs-legend" aria-hidden="true" data-js-only><span><i class="sw sq cs-sw-rec"></i>Recoveries</span><span><i class="sw red"></i>Reversals</span></div>
+      </div>
+      <div class="chart cs-div" id="cases-trans" data-js-only></div>
+      <div class="tbl-scroll cs-nojs-tbl" data-nojs-only>
+        <table class="tbl">
+          <caption>First-evaluation success counts and transitions, 1,029 tasks per model.</caption>
+          <thead><tr><th>Model</th><th class="n">Raw</th><th class="n">RRA</th><th class="n">Recoveries</th><th class="n">Reversals</th><th class="n">Net</th></tr></thead>
+          <tbody>
+            <tr><td>Sonnet 4.6</td><td class="n">742</td><td class="n">945</td><td class="n">234</td><td class="n">31</td><td class="n">203</td></tr>
+            <tr><td>Sonnet 5</td><td class="n">787</td><td class="n">962</td><td class="n">208</td><td class="n">33</td><td class="n">175</td></tr>
+            <tr><td>Opus 5</td><td class="n">918</td><td class="n">981</td><td class="n">100</td><td class="n">37</td><td class="n">63</td></tr>
+            <tr><td>Gemini 3.8 Flash</td><td class="n">696</td><td class="n">932</td><td class="n">271</td><td class="n">35</td><td class="n">236</td></tr>
+            <tr class="hl"><td><b>Total</b></td><td class="n"><b>3,143</b></td><td class="n"><b>3,820</b></td><td class="n"><b>813</b></td><td class="n"><b>136</b></td><td class="n"><b>677</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cs-parts">
+        <figure class="cs-part">
+          <figcaption class="cs-part-h"><span class="kicker">Raw outcome of the 813 recoveries</span></figcaption>
+          <div class="cs-stack" role="img" aria-label="Raw outcome of the 813 recoveries: 348 numerical mismatch, 210 not run because of an execution or resource barrier, 255 audit-invalid numerical match.">
+            <span class="mm" style="--n:348"><b>348</b></span><span class="nr" style="--n:210"><b>210</b></span><span class="iv" style="--n:255"><b>255</b></span>
+          </div>
+          <ul class="cs-keys">
+            <li><i class="sw sq mm"></i><span>Numerical mismatch</span><b>348</b></li>
+            <li><i class="sw sq nr"></i><span>Not run (execution or resource barrier)</span><b>210</b></li>
+            <li><i class="sw sq iv"></i><span>Audit-invalid numerical match</span><b>255</b></li>
+          </ul>
+        </figure>
+        <figure class="cs-part">
+          <figcaption class="cs-part-h"><span class="kicker">Refined-artifact outcome of the 136 reversals</span></figcaption>
+          <div class="cs-stack" role="img" aria-label="Refined-artifact outcome of the 136 reversals: 84 numerical mismatch (61.8%), 31 resource or access limit (22.8%), 11 audit-invalid match (8.1%), 10 execution blocked (7.4%).">
+            <span class="mm" style="--n:84"><b>84</b></span><span class="nr" style="--n:31"><b>31</b></span><span class="iv" style="--n:11"><b>11</b></span><span class="bl" style="--n:10"><b>10</b></span>
+          </div>
+          <ul class="cs-keys">
+            <li><i class="sw sq mm"></i><span>Numerical mismatch</span><b>84</b><small>61.8%</small></li>
+            <li><i class="sw sq nr"></i><span>Resource/access limit</span><b>31</b><small>22.8%</small></li>
+            <li><i class="sw sq iv"></i><span>Audit-invalid match</span><b>11</b><small>8.1%</small></li>
+            <li><i class="sw sq bl"></i><span>Execution blocked</span><b>10</b><small>7.4%</small></li>
+          </ul>
+        </figure>
+      </div>
+      <p class="caveat">Harnesses differ across vendors, so cross-model comparisons are descriptive. Counts span four models, so a task can appear in several pairs. Per-model outcome splits appear only as bar segments in the paper figure.</p>
+      <p class="paper-figs"><button class="paper-fig" type="button" data-zoom="assets/img/fig/transitions-2400.webp" data-title="Paper figure: Recovering failures and shortening preparation">Paper figure: Recovering failures and shortening preparation ↗</button></p>
+    </div>
+
+    <!-- C2 · less reconstruction (first evaluation, Table "Downstream repair and time-to-execution diagnostics") -->
+    <h3 class="sub" data-reveal>Less reconstruction downstream</h3>
+    <p class="sub-lede" data-reveal>With refined artifacts, model–paper sessions that change code downstream fall from 113/144 to 54/144, and median time to first scored execution decreases for every model. “Together with lower token use, this indicates less reconstruction.”</p>
+    <div class="cs-diag">
+      <div class="chart-card" data-reveal>
+        <div class="chart-head">
+          <div><h4>Time to first scored execution</h4><p class="cap">Median minutes across paper sessions. <span class="tag-note">Eval 1</span></p></div>
+          <div class="legend" aria-hidden="true" data-js-only><span><i class="sw raw"></i>Raw</span><span><i class="sw rra"></i>RRA</span></div>
+        </div>
+        <div class="chart cs-db" id="cases-time" data-js-only></div>
+        <div class="tbl-scroll cs-nojs-tbl" data-nojs-only>
+          <table class="tbl">
+            <thead><tr><th>Model</th><th class="n">Raw (min)</th><th class="n">RRA (min)</th></tr></thead>
+            <tbody>
+              <tr><td>Sonnet 4.6</td><td class="n">30.0</td><td class="n">16.2</td></tr>
+              <tr><td>Sonnet 5</td><td class="n">54.0</td><td class="n">31.8</td></tr>
+              <tr><td>Opus 5</td><td class="n">32.4</td><td class="n">19.2</td></tr>
+              <tr><td>Gemini 3.8 Flash</td><td class="n">43.8</td><td class="n">15.6</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cs-sum">Median time to first scored execution decreases for every model.</p>
+      </div>
+      <div class="chart-card" data-reveal>
+        <div class="chart-head">
+          <div><h4>Papers with a Reproducer code diff</h4><p class="cap">Out of 36 papers per model. <span class="tag-note">Eval 1</span></p></div>
+          <div class="legend" aria-hidden="true" data-js-only><span><i class="sw raw"></i>Raw</span><span><i class="sw rra"></i>RRA</span></div>
+        </div>
+        <div class="chart cs-db" id="cases-patch" data-js-only></div>
+        <div class="tbl-scroll cs-nojs-tbl" data-nojs-only>
+          <table class="tbl">
+            <thead><tr><th>Model</th><th class="n">Raw</th><th class="n">RRA</th></tr></thead>
+            <tbody>
+              <tr><td>Sonnet 4.6</td><td class="n">26</td><td class="n">11</td></tr>
+              <tr><td>Sonnet 5</td><td class="n">30</td><td class="n">14</td></tr>
+              <tr><td>Opus 5</td><td class="n">24</td><td class="n">16</td></tr>
+              <tr><td>Gemini 3.8 Flash</td><td class="n">33</td><td class="n">13</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cs-sum">All four models <span class="cs-sum-v"><b class="t-raw">113/144</b><span class="cs-arr" aria-hidden="true">→</span><span class="sr-only"> to </span><b class="t-rra">54/144</b></span> model–paper sessions</p>
+      </div>
+    </div>
+    <p class="caveat cs-diag-cav" data-reveal>Time is the median to the first scored execution, not end-to-end runtime. Patch counts are papers with a Reproducer code diff, not independent defects.</p>
+
+    <!-- C3 · case gallery (Section "Preserved procedures support recovery…", appendix worked examples and failure modes) -->
+    <div class="cs-gallery">
+      <h3 class="sub" data-reveal>Eleven cases from the paper's records</h3>
+      <p class="sub-lede" data-reveal>One card per case the paper describes: what the released code (Raw) left implicit, what the refined artifact (RRA) preserved, and the recorded outcome where the paper gives one. Quoted lines are the paper's own words.</p>
+      <div class="cs-tools" data-reveal>
+        <div class="chips cs-chips" role="group" aria-label="Filter cases by type" data-js-only data-hscroll></div>
+        <div class="legend cs-key" aria-hidden="true">
+          <span><i class="sw raw"></i>Raw</span><span><i class="sw rra"></i>RRA</span><span><i class="cs-k-tk"></i>Paper value</span><span><i class="cs-k-band"></i>Compatibility interval</span>
+        </div>
+      </div>
+      <p class="sr-only" id="cases-status" aria-live="polite"></p>
+
+      <div class="cs-grid">
+
+        <!-- 1 · Mixture of Concept Bottleneck Experts (6_experiments: "Completing and clarifying…"; appendix: "A measurement is not just a model execution") -->
+        <article class="cs-card" id="case-mcbe" data-cat="measurement" data-paper="135" data-model="s5" aria-labelledby="case-mcbe-t">
+          <div class="cs-top"><span class="cs-cat"><b>01</b>Measurement</span><span class="cs-who">Sonnet 5 · paired runs</span></div>
+          <h4 id="case-mcbe-t">Mixture of Concept Bottleneck Experts</h4>
+          <p class="cs-tags"><span class="tag guide">Guide</span><span class="tag launch inf">Launchers<span class="sr-only"> (mapped from the component definitions)</span></span></p>
+          <dl class="cs-lines">
+            <div class="cs-l raw"><dt>Raw</dt><dd>The paper leaves the reduction of multiple tree-edit distances unspecified, and the release lacks a collector for its Table 1. The raw attempt sums the four distances.</dd></div>
+            <div class="cs-l rra"><dt>RRA</dt><dd>The refined artifact documents the denominator, the per-expression mean, and implements the corresponding collector.</dd></div>
+          </dl>
+          <div class="cs-ev">
+            <div class="cs-ev-k"><span>Tree-edit distance · two tasks</span><span>sum → per-expression mean</span></div>
+            <div class="cs-tr">
+              <div class="cs-trk" style="--lo:0;--hi:200" role="img" aria-label="First task: sum 60, per-expression mean 15">
+                <i class="conn" style="--a:15;--b:60"></i><i class="ring" style="--v:60"></i><i class="dot" style="--v:15;--f:60"></i>
+              </div>
+              <span class="cs-tv" aria-hidden="true"><span class="r">60</span><span class="ar">→</span><span class="g">15</span></span>
+            </div>
+            <div class="cs-tr">
+              <div class="cs-trk" style="--lo:0;--hi:200" role="img" aria-label="Second task: sum 188, per-expression mean 47">
+                <i class="conn" style="--a:47;--b:188"></i><i class="ring" style="--v:188"></i><i class="dot" style="--v:47;--f:188"></i>
+              </div>
+              <span class="cs-tv" aria-hidden="true"><span class="r">188</span><span class="ar">→</span><span class="g">47</span></span>
+            </div>
+          </div>
+          <blockquote class="cs-q"><p>“The case locates the discrepancy in the underspecified reporting statistic.”</p></blockquote>
+          <div class="cs-full" id="case-mcbe-full">
+            <div class="cs-full-in">
+              <p class="cs-src"><span class="kicker">From the paper · Appendix, worked reproduction examples</span><b>A measurement is not just a model execution: Mixture of Concept Bottleneck Experts.</b></p>
+              <p>For four-expert settings in Mixture of Concept Bottleneck Experts, the paper does not specify how multiple expression distances should be reduced, and the repository provides no Table 1 collector. The raw Sonnet 5 attempt constructs a matching between learned and reference expressions but reports the sum of tree-edit distances. For two tasks this produces 60 and 188, whereas the per-expression means are 15 and 47. The refined artifact resolves the ambiguity by documenting the denominator and implementing the corresponding collector; those downstream values are 15 and 47. The case locates the discrepancy in the underspecified reporting statistic.</p>
+            </div>
+          </div>
+          <div class="cs-foot"><button class="cs-more" type="button" aria-expanded="false" aria-controls="case-mcbe-full" data-js-only><span class="cs-more-t">More</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div>
+        </article>
+
+        <!-- 2 · SCIQL (6_experiments: same paragraph; appendix: "Preserving the experimental aggregation") -->
+        <article class="cs-card" id="case-sciql" data-cat="measurement" data-paper="2" data-model="s46" aria-labelledby="case-sciql-t">
+          <div class="cs-top"><span class="cs-cat"><b>02</b>Measurement</span><span class="cs-who">Sonnet 4.6 · paired runs</span></div>
+          <h4 id="case-sciql-t">SCIQL</h4>
+          <p class="cs-tags"><span class="tag launch">Launchers</span><span class="tag guide">Guide</span></p>
+          <dl class="cs-lines">
+            <div class="cs-l raw"><dt>Raw</dt><dd>The release does not assemble the table statistic. The raw attempt uses one default criterion, one seed, and an incorrect output column for a statistic that averages across six criteria and five seeds.</dd></div>
+            <div class="cs-l rra"><dt>RRA</dt><dd>The refined artifact's launcher and collector make the mapping explicit by specifying the sweep and the correct alignment field.</dd></div>
+          </dl>
+          <div class="cs-ev">
+            <div class="cs-ev-k"><span>One representative measurement</span><span class="cs-ev-p"><i class="cs-k-tk"></i>paper 58.6</span></div>
+            <div class="cs-tr">
+              <div class="cs-trk" style="--lo:0;--hi:65" role="img" aria-label="Raw 19.70, refined artifact 55.66, paper value 58.6">
+                <i class="conn up" style="--a:19.70;--b:55.66"></i><i class="tk" style="--v:58.6"></i><i class="ring" style="--v:19.70"></i><i class="dot" style="--v:55.66;--f:19.70"></i>
+              </div>
+              <span class="cs-tv" aria-hidden="true"><span class="r">19.70</span><span class="ar">→</span><span class="g">55.66</span></span>
+            </div>
+          </div>
+          <blockquote class="cs-q"><p>“Criterion selection, output mapping, and repetition change together in this case, illustrating preservation of the complete measurement protocol.”</p></blockquote>
+          <div class="cs-full" id="case-sciql-full">
+            <div class="cs-full-in">
+              <p class="cs-src"><span class="kicker">From the paper · Appendix, worked reproduction examples</span><b>Preserving the experimental aggregation: SCIQL.</b></p>
+              <p>The released SCIQL code produces run outputs but does not assemble the Table 1 statistic, leaving the mapping from logged fields and experiment settings to reported values incomplete. The raw Sonnet 4.6 attempt uses one default criterion, one seed, and an incorrect output column for a table statistic that averages across six criteria and five seeds. The refined artifact's launcher and collector make this mapping explicit by specifying the sweep and the correct alignment field. One representative measurement changes from 19.70 to 55.66 against a paper value of 58.6. Criterion selection, output mapping, and repetition change together in this case, illustrating preservation of the complete measurement protocol.</p>
+              <p class="cs-note">The paper also uses SCIQL's refined artifact to illustrate all four components; its guide entries specify the six-criterion, five-seed protocol and unweighted aggregation.</p>
+            </div>
+          </div>
+          <div class="cs-foot"><button class="cs-more" type="button" aria-expanded="false" aria-controls="case-sciql-full" data-js-only><span class="cs-more-t">More</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><button class="paper-fig cs-link" type="button" data-zoom="assets/img/fig/guide_components-2400.webp" data-title="Paper figure: A refined artifact for SCIQL">Paper figure ↗</button></div>
+        </article>
+
+        <!-- 3 · HELIX (6_experiments: "Recovered configurations become executable"; appendix: "Recovering omitted configuration") -->
+        <article class="cs-card" id="case-helix" data-cat="config" data-paper="40" data-model="o5" aria-labelledby="case-helix-t">
+          <div class="cs-top"><span class="cs-cat"><b>03</b>Configuration</span><span class="cs-who">Opus 5 · paired runs</span></div>
+          <h4 id="case-helix-t">HELIX</h4>
+          <p class="cs-tags"><span class="tag guide">Guide</span><span class="tag launch">Launchers</span></p>
+          <dl class="cs-lines">
+            <div class="cs-l raw"><dt>Raw</dt><dd>Opus 5 restores the paper's architecture but keeps the shipped batch size of 32 and learning rate of ≈6.29×10<sup>−4</sup>.</dd></div>
+            <div class="cs-l rra"><dt>RRA</dt><dd>Guide entry A6 traces batch size 8 and learning rate 5.75×10<sup>−4</sup> to revision <code>9760b347</code>, whose architecture matches the paper; the <code>--paper_config</code> launcher makes the choice executable.</dd></div>
+          </dl>
+          <div class="cs-ev">
+            <div class="cs-ev-k"><span>MAE · lower is better</span><span class="cs-ev-p"><i class="cs-k-band"></i>interval</span></div>
+            <div class="cs-tr stk">
+              <span class="cs-tid">T004</span>
+              <div class="cs-trk" style="--lo:0.115;--hi:0.16" role="img" aria-label="Task T004: Raw 0.15265, refined artifact 0.12986, compatibility interval 0.12524 to 0.13448">
+                <i class="band" style="--a:0.12524;--b:0.13448"></i><i class="conn" style="--a:0.12986;--b:0.15265"></i><i class="ring" style="--v:0.15265"></i><i class="dot" style="--v:0.12986;--f:0.15265"></i>
+              </div>
+              <span class="cs-tv" aria-hidden="true"><span class="r">0.15265</span><span class="ar">→</span><span class="g">0.12986</span></span>
+            </div>
+            <div class="cs-tr stk">
+              <span class="cs-tid">T006</span>
+              <div class="cs-trk" style="--lo:0.37;--hi:0.52" role="img" aria-label="Task T006: Raw 0.50527, refined artifact 0.41160, compatibility interval 0.38442 to 0.43878">
+                <i class="band" style="--a:0.38442;--b:0.43878"></i><i class="conn" style="--a:0.4116;--b:0.50527"></i><i class="ring" style="--v:0.50527"></i><i class="dot" style="--v:0.4116;--f:0.50527"></i>
+              </div>
+              <span class="cs-tv" aria-hidden="true"><span class="r">0.50527</span><span class="ar">→</span><span class="g">0.41160</span></span>
+            </div>
+          </div>
+          <blockquote class="cs-q"><p>“The guide records the evidence for the choice, and the launcher makes it reusable.”</p></blockquote>
+          <div class="cs-full" id="case-helix-full">
+            <div class="cs-full-in">
+              <p class="cs-src"><span class="kicker">From the paper · Appendix, worked reproduction examples</span><b>Recovering omitted configuration: HELIX.</b></p>
+              <p>For HELIX, Opus 5 restores the paper's architecture on raw code but retains a shipped batch size of 32 and learning rate of approximately 6.29×10<sup>−4</sup>. The guide's ambiguity entry A6 identifies revision <code>9760b347</code>, whose architecture matches the paper configuration, as the source for batch size 8 and learning rate 5.75×10<sup>−4</sup>. The <code>--paper_config</code> launcher makes this choice executable. The recorded MAE changes from 0.15265 to 0.12986 for T004 and from 0.50527 to 0.41160 for T006; the respective compatibility intervals are [0.12524, 0.13448] and [0.38442, 0.43878]. The artifact records the repository history and architectural match as the rationale for adopting these settings.</p>
+            </div>
+          </div>
+          <div class="cs-foot"><button class="cs-more" type="button" aria-expanded="false" aria-controls="case-helix-full" data-js-only><span class="cs-more-t">More</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><a class="cs-link" href="#story" data-needs="story">Replay the walkthrough ↑</a></div>
+        </article>
+
+        <!-- 4 · WBMM (6_experiments: "A compatible environment transfers across sessions"; appendix: "An environment route that transfers") -->
+        <article class="cs-card" id="case-wbmm" data-cat="env" data-paper="238" data-model="s46" aria-labelledby="case-wbmm-t">
+          <div class="cs-top"><span class="cs-cat"><b>04</b>Environment</span><span class="cs-who">Sonnet 4.6 · paired runs</span></div>
+          <h4 id="case-wbmm-t">WBMM</h4>
+          <p class="cs-tags"><span class="tag env">Environment</span></p>
+          <dl class="cs-lines">
+            <div class="cs-l raw"><dt>Raw</dt><dd>Sonnet 4.6 fails to install a compatible <code>mmcv-full</code> stack for H100.</dd></div>
+            <div class="cs-l rra"><dt>RRA</dt><dd>The refined artifact specifies matching PyTorch/MMDetection dependencies, the Ninja build prerequisite, and a source build for the target architecture.</dd></div>
+          </dl>
+          <div class="cs-ev">
+            <div class="cs-ev-k"><span>Six COCO tasks · T063–T068</span><span class="cs-ap-k"><b>RRA</b> / reported</span></div>
+            <table class="cs-ap">
+              <caption class="sr-only">AP values of the refined-artifact session against the reported targets</caption>
+              <tbody>
+                <tr><th scope="row">Box AP</th><td><b>51.61</b><span class="sr-only"> against reported </span><span class="t">51.6</span></td><td><b>52.78</b><span class="sr-only"> against reported </span><span class="t">52.8</span></td></tr>
+                <tr><th scope="row">Mask AP</th><td><b>44.78</b><span class="sr-only"> against reported </span><span class="t">44.8</span></td><td><b>45.64</b><span class="sr-only"> against reported </span><span class="t">45.6</span></td></tr>
+              </tbody>
+            </table>
+            <p class="cs-ev-n">All six tasks execute, with no code patch.</p>
+          </div>
+          <blockquote class="cs-q"><p>“This case shows how an environment repair can become a reusable installation procedure.”</p></blockquote>
+          <div class="cs-full" id="case-wbmm-full">
+            <div class="cs-full-in">
+              <p class="cs-src"><span class="kicker">From the paper · Appendix, worked reproduction examples</span><b>An environment route that transfers: WBMM.</b></p>
+              <p>For six COCO tasks (T063–T068) in WBMM, Sonnet 4.6's raw attempt fails to install a compatible <code>mmcv-full</code> stack for H100. The refined artifact specifies matching PyTorch/MMDetection dependencies, the Ninja build prerequisite, and a source build for the target architecture. The downstream refined-artifact session makes no code patch and executes all six tasks. Its two box AP values, 51.61 and 52.78, agree numerically with reported targets 51.6 and 52.8; mask AP is 44.78/45.64 against 44.8/45.6. The artifact preserves an executable dependency route for later reuse.</p>
+              <p class="cs-note"><b>Without the prepared environment.</b> In the component ablation that removes this route, Sonnet 5 reconstructs a Python 3.10 / PyTorch 2.0 / CUDA 11.8 stack, and a supplied binary lacking an operator's H100 kernels needs a source rebuild. “No paper-source patch is required, yet substantial environment work returns downstream.”</p>
+            </div>
+          </div>
+          <div class="cs-foot"><button class="cs-more" type="button" aria-expanded="false" aria-controls="case-wbmm-full" data-js-only><span class="cs-more-t">More</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div>
+        </article>
+
+        <!-- 5 · Effective Model Pruning (6_experiments: "Fixing bugs in the released code"; appendix: "Fixing validation labels") -->
+        <article class="cs-card" id="case-emp" data-cat="code" data-paper="121" data-model="g38" aria-labelledby="case-emp-t">
+          <div class="cs-top"><span class="cs-cat"><b>05</b>Code</span><span class="cs-who">Gemini 3.8 Flash · paired runs</span></div>
+          <h4 id="case-emp-t">Effective Model Pruning</h4>
+          <p class="cs-tags"><span class="tag code">Refined code</span><span class="tag launch">Launchers</span></p>
+          <dl class="cs-lines">
+            <div class="cs-l raw"><dt>Raw</dt><dd>The released loader assigns all 10,000 TinyImageNet validation images to one class.</dd></div>
+            <div class="cs-l rra"><dt>RRA</dt><dd>A preparation script places images into class directories, verifies 200 classes and 10,000 images, and writes a preparation receipt required by the launcher.</dd></div>
+          </dl>
+          <div class="cs-ev">
+            <div class="cs-ev-k"><span>ResNet-18 validation loss</span><span class="cs-ev-p"><i class="cs-k-tk"></i>paper 2.303</span></div>
+            <div class="cs-tr">
+              <div class="cs-trk" style="--lo:0;--hi:9.5" role="img" aria-label="Raw 8.898, refined artifact 2.288, paper value 2.303">
+                <i class="conn" style="--a:2.288;--b:8.898"></i><i class="tk" style="--v:2.303"></i><i class="ring" style="--v:8.898"></i><i class="dot" style="--v:2.288;--f:8.898"></i>
+              </div>
+              <span class="cs-tv" aria-hidden="true"><span class="r">8.898</span><span class="ar">→</span><span class="g">2.288</span></span>
+            </div>
+          </div>
+          <blockquote class="cs-q"><p>“This records a concrete repair and its downstream reuse.”</p></blockquote>
+          <div class="cs-full" id="case-emp-full">
+            <div class="cs-full-in">
+              <p class="cs-src"><span class="kicker">From the paper · Appendix, worked reproduction examples</span><b>Fixing validation labels: Effective Model Pruning.</b></p>
+              <p>The released TinyImageNet loader uses <code>ImageFolder</code> on a validation directory containing only an <code>images</code> subdirectory. It therefore assigns all 10,000 validation images to one class. During construction, ReproBridge adds a preparation script that places images into class directories using <code>val_annotations.txt</code>, verifies 200 classes and 10,000 images, and writes a preparation receipt required by the launcher. In Gemini 3.8 Flash's paired runs, the ResNet-18 validation loss is 8.898 with raw code and 2.288 with the refined artifact, against the paper's 2.303. This records a concrete repair and its downstream reuse.</p>
+            </div>
+          </div>
+          <div class="cs-foot"><button class="cs-more" type="button" aria-expanded="false" aria-controls="case-emp-full" data-js-only><span class="cs-more-t">More</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div>
+        </article>
+
+        <!-- 6 · ETTFS (6_experiments: "Explicit procedures also help the model that built them"; appendix: "Organizing measurement code for reuse") -->
+        <article class="cs-card" id="case-ettfs" data-cat="code" data-paper="116" data-model="o5" aria-labelledby="case-ettfs-t">
+          <div class="cs-top"><span class="cs-cat"><b>06</b>Code</span><span class="cs-who">Opus 5 · paired runs</span></div>
+          <h4 id="case-ettfs-t">ETTFS</h4>
+          <p class="cs-tags"><span class="tag code">Refined code</span><span class="tag launch">Launchers</span><span class="tag guide inf">Guide<span class="sr-only"> (mapped from the component definitions)</span></span></p>
+          <dl class="cs-lines">
+            <div class="cs-l raw"><dt>Raw</dt><dd>Opus 5 searches 6,377 lines of Python for measurement code absent from the release and leaves the inference-time measurement unexecuted.</dd></div>
+            <div class="cs-l rra"><dt>RRA</dt><dd>The artifact adds <code>Code/profile_ttfs.py</code>, documents the metric definitions and output fields, and supplies a launcher that trains a checkpoint before profiling it. A fresh Opus 5 session follows this route.</dd></div>
+          </dl>
+          <div class="cs-ev">
+            <div class="cs-ev-k"><span>Inference time steps</span><span class="cs-ev-p"><i class="cs-k-tk"></i>paper 2.03</span></div>
+            <div class="cs-pair">
+              <span class="cs-pv raw"><small>Raw</small><b>not run</b></span>
+              <span class="cs-pair-ar" aria-hidden="true">→</span>
+              <span class="cs-pv rra"><small>RRA</small><b>2.0652</b></span>
+            </div>
+            <p class="cs-ev-n">6,377 lines searched; no producing implementation in the release</p>
+          </div>
+          <blockquote class="cs-q"><p>“Explicit procedures also help the model that built them.”</p></blockquote>
+          <div class="cs-full" id="case-ettfs-full">
+            <div class="cs-full-in">
+              <p class="cs-src"><span class="kicker">From the paper · Appendix, worked reproduction examples</span><b>Organizing measurement code for reuse: ETTFS.</b></p>
+              <p>The raw Opus 5 attempt searches the released ETTFS source for the metrics in Tables 2 and 3, finds no producing implementation, and leaves the inference-time measurement unexecuted. During construction, ReproBridge adds <code>Code/profile_ttfs.py</code>, documents the metric definitions and output fields, and supplies a launcher that trains a checkpoint before profiling it. The later Opus 5 session uses this explicit route and reports 2.0652 inference time steps against the paper's 2.03. The artifact localizes code and resolved decisions that would otherwise require renewed investigation.</p>
+              <p class="cs-note">Opus 5 also constructs the refined artifacts for the main experiment. “Clearer code organization and explicit execution decisions can reduce repeated search and context demands, even for the model that built the artifact.”</p>
+            </div>
+          </div>
+          <div class="cs-foot"><button class="cs-more" type="button" aria-expanded="false" aria-controls="case-ettfs-full" data-js-only><span class="cs-more-t">More</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div>
+        </article>
+
+        <!-- 7 · FlashOptim (appendix: "An optimizer release is not a complete experiment") -->
+        <article class="cs-card" id="case-flashoptim" data-cat="code" data-paper="81" data-model="g38" aria-labelledby="case-flashoptim-t">
+          <div class="cs-top"><span class="cs-cat"><b>07</b>Code</span><span class="cs-who">Gemini 3.8 Flash · paired runs</span></div>
+          <h4 id="case-flashoptim-t">FlashOptim</h4>
+          <p class="cs-tags"><span class="tag code inf">Refined code<span class="sr-only"> (mapped from the component definitions)</span></span><span class="tag env inf">Environment<span class="sr-only"> (mapped from the component definitions)</span></span><span class="tag launch">Launchers</span></p>
+          <dl class="cs-lines">
+            <div class="cs-l raw"><dt>Raw</dt><dd>The release supplies optimizer code but not the GPT-2 training and evaluation harness for the selected table. The raw attempt leaves 18 GPT-2 outcomes unexecuted.</dd></div>
+            <div class="cs-l rra"><dt>RRA</dt><dd>The refined artifact adds a training/evaluation harness, data acquisition, output mapping, and launchers.</dd></div>
+          </dl>
+          <div class="cs-ev">
+            <div class="cs-ev-k"><span>18 GPT-2 outcomes</span><span>+6,346 lines</span></div>
+            <div class="cs-sq" role="img" aria-label="18 GPT-2 outcomes: unexecuted with raw code; all 18 pass with the refined artifact">
+              <div class="cs-sq-r raw"><span class="cs-sq-l">Raw</span><span class="cs-sq-c" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="cs-sq-v">not run</span></div>
+              <div class="cs-sq-r rra"><span class="cs-sq-l">RRA</span><span class="cs-sq-c" aria-hidden="true"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i><i style="--k:6"></i><i style="--k:7"></i><i style="--k:8"></i><i style="--k:9"></i><i style="--k:10"></i><i style="--k:11"></i><i style="--k:12"></i><i style="--k:13"></i><i style="--k:14"></i><i style="--k:15"></i><i style="--k:16"></i><i style="--k:17"></i></span><span class="cs-sq-v">18 pass</span></div>
+            </div>
+            <p class="cs-ev-n">The construction report lists 6,346 added lines of experiment support.</p>
+          </div>
+          <blockquote class="cs-q"><p>“An optimizer release is not a complete experiment.”</p></blockquote>
+          <div class="cs-full" id="case-flashoptim-full">
+            <div class="cs-full-in">
+              <p class="cs-src"><span class="kicker">From the paper · Appendix, worked reproduction examples</span><b>An optimizer release is not a complete experiment: FlashOptim.</b></p>
+              <p>FlashOptim supplies optimizer code but not the GPT-2 training and evaluation harness for the selected table. Gemini's raw attempt leaves 18 GPT-2 outcomes unexecuted. The refined artifact adds a training/evaluation harness, data acquisition, output mapping, and launchers; all 18 pass in its recorded downstream attempt. The construction report lists 6,346 added lines of experiment support.</p>
+            </div>
+          </div>
+          <div class="cs-foot"><button class="cs-more" type="button" aria-expanded="false" aria-controls="case-flashoptim-full" data-js-only><span class="cs-more-t">More</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div>
+        </article>
+
+        <!-- 8 · POET-X (appendix: "A localized repair") -->
+        <article class="cs-card" id="case-poetx" data-cat="code" data-paper="141" aria-labelledby="case-poetx-t">
+          <div class="cs-top"><span class="cs-cat"><b>08</b>Code</span><span class="cs-who">Recorded repair</span></div>
+          <h4 id="case-poetx-t">POET-X</h4>
+          <p class="cs-tags"><span class="tag code">Refined code</span><span class="tag guide inf">Guide<span class="sr-only"> (mapped from the component definitions)</span></span></p>
+          <dl class="cs-lines">
+            <div class="cs-l raw"><dt>Raw</dt><dd>Full batches call <code>collate_fn</code>, but the trailing partial batch is returned as a list, so the evaluator's <code>batch.items()</code> fails when the final batch is reached.</dd></div>
+            <div class="cs-l rra"><dt>RRA</dt><dd>The patch changes the tail to <code>yield collate_fn(batch)</code>; the record traces the sole caller to validation and describes CPU checks.</dd></div>
+          </dl>
+          <div class="cs-ev cs-ev-code">
+            <div class="cs-ev-k"><span>Where the defect occurs</span><span>line 222</span></div>
+            <p class="cs-path">examples/<wbr>peft_pretraining/<wbr>training_utils.py</p>
+            <p class="cs-diff"><span class="cs-diff-l">tail</span><code>yield collate_fn(batch)</code></p>
+            <p class="cs-checks"><span class="cs-checks-l">CPU checks</span><span>empty</span><span>partial</span><span>complete</span><span>over-full</span></p>
+          </div>
+          <blockquote class="cs-q"><p>“This example illustrates how a later reproducer can recover both the fix and its experimental scope.”</p></blockquote>
+          <div class="cs-full" id="case-poetx-full">
+            <div class="cs-full-in">
+              <p class="cs-src"><span class="kicker">From the paper · Appendix, worked reproduction examples</span><b>A localized repair: POET-X.</b></p>
+              <p>The defect occurs in <code>examples/peft_pretraining/training_utils.py</code>, line 222. Full batches call <code>collate_fn</code>, whereas the trailing partial batch is returned as a list. The evaluator calls <code>batch.items()</code>, so it fails when the final batch is reached. The patch changes the tail to <code>yield collate_fn(batch)</code>. The record traces the sole caller to validation and describes CPU checks covering empty, partial, complete, and over-full batch counts, without changing the example count. This example illustrates how a later reproducer can recover both the fix and its experimental scope.</p>
+            </div>
+          </div>
+          <div class="cs-foot"><button class="cs-more" type="button" aria-expanded="false" aria-controls="case-poetx-full" data-js-only><span class="cs-more-t">More</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div>
+        </article>
+
+        <!-- 9 · Manifold-Aware Perturbations (appendix: "Flagging a setup discrepancy"; discussion: "Paper–code misalignment") -->
+        <article class="cs-card" id="case-map" data-cat="flag" data-paper="95" aria-labelledby="case-map-t">
+          <div class="cs-top"><span class="cs-cat is-flag"><b>09</b>Flagged discrepancy</span><span class="cs-who">Guide entry</span></div>
+          <h4 id="case-map-t">Manifold-Aware Perturbations</h4>
+          <p class="cs-tags"><span class="tag guide">Guide</span></p>
+          <dl class="cs-lines">
+            <div class="cs-l raw"><dt>Raw</dt><dd>The paper states a learning rate of 10<sup>−4</sup>, but the released driver, training scripts, and 171 committed manifests use 10<sup>−3</sup>.</dd></div>
+            <div class="cs-l rra"><dt>RRA</dt><dd>The guide's ambiguity entry A1 contrasts the two values and marks the discrepancy as high sensitivity.</dd></div>
+          </dl>
+          <div class="cs-ev cs-ev-flag">
+            <div class="cs-ev-k"><span>Ambiguity entry A1</span><span class="cs-sens">High sensitivity</span></div>
+            <div class="cs-cmp">
+              <span class="cs-cmp-v"><small>Paper</small><b>10<sup>−4</sup></b></span>
+              <span class="cs-cmp-ne" aria-hidden="true">≠</span>
+              <span class="cs-cmp-v"><small>Released code</small><b>10<sup>−3</sup></b></span>
+            </div>
+            <p class="cs-ev-n">driver · training scripts · 171 committed manifests</p>
+          </div>
+          <blockquote class="cs-q"><p>“This gives authors a concrete inconsistency to inspect and resolve before submission.”</p></blockquote>
+          <div class="cs-full" id="case-map-full">
+            <div class="cs-full-in">
+              <p class="cs-src"><span class="kicker">From the paper · Appendix, worked reproduction examples</span><b>Flagging a setup discrepancy: Manifold-Aware Perturbations.</b></p>
+              <p>The guide's ambiguity entry A1 contrasts the paper's stated learning rate of 10<sup>−4</sup> with the released driver, training scripts, and 171 committed manifests using 10<sup>−3</sup>, and marks the discrepancy as high sensitivity. This gives authors a concrete inconsistency to inspect and resolve before submission.</p>
+              <p class="cs-note">“When the paper and released code conflict, ReproBridge strictly follows the paper's setup and flags the discrepancy with source locations and affected tasks.” And from the separate alignment analysis: “A learning-rate disagreement is concrete even without retraining: one can point to the paper's 10<sup>−4</sup> and the code's 10<sup>−3</sup>. But the resulting change in final accuracy cannot be inferred from that factor alone.”</p>
+            </div>
+          </div>
+          <div class="cs-foot"><button class="cs-more" type="button" aria-expanded="false" aria-controls="case-map-full" data-js-only><span class="cs-more-t">More</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div>
+        </article>
+
+        <!-- 10 · AuxiliaryMCMC (appendix: "Failure modes and concentrated regressions") -->
+        <article class="cs-card is-fail" id="case-auxmcmc" data-cat="fail" data-paper="112" data-model="o5" aria-labelledby="case-auxmcmc-t">
+          <div class="cs-top"><span class="cs-cat is-fail"><b>10</b>When it fails</span><span class="cs-who">Opus 5 · RRA attempt</span></div>
+          <h4 id="case-auxmcmc-t">AuxiliaryMCMC</h4>
+          <p class="cs-tags"><span class="tag red">Reversals</span></p>
+          <dl class="cs-lines">
+            <div class="cs-l plan"><dt>Plan</dt><dd>The refined-artifact Gaussian sweep targets 100 rounds at each of three acceptance rates.</dd></div>
+            <div class="cs-l run"><dt>Run</dt><dd>The measured workload exceeds the clock at the chosen concurrency; only 55 rounds per rate execute, and the primary audit invalidates the affected matches.</dd></div>
+          </dl>
+          <div class="cs-ev">
+            <div class="cs-ev-k"><span>Rounds per acceptance rate</span><span>55 of 100</span></div>
+            <div class="cs-br" role="img" aria-label="55 of the targeted 100 rounds per acceptance rate execute">
+              <span class="cs-br-t"><i class="cs-br-f" style="--w:55"></i><i class="cs-br-gap" style="--a:55;--w:45"></i></span>
+            </div>
+            <div class="cs-ev-k cs-ev-k2"><span>Reversals, all four models</span><span>50 of 136</span></div>
+            <div class="cs-br red" role="img" aria-label="50 of the 136 reversals, across all four models, come from AuxiliaryMCMC">
+              <span class="cs-br-t"><i class="cs-br-f" style="--w:36.765"></i></span>
+            </div>
+          </div>
+          <blockquote class="cs-q"><p>“These records illustrate runtime constraints, numerical edge cases, and deviations from the prescribed measurement procedure.”</p></blockquote>
+          <div class="cs-full" id="case-auxmcmc-full">
+            <div class="cs-full-in">
+              <p class="cs-src"><span class="kicker">From the paper · Appendix, failure modes and concentrated regressions</span><b>AuxiliaryMCMC: numerical fragility interacts with a finite budget.</b></p>
+              <p>The Opus 5 refined-artifact Gaussian sweep for AuxiliaryMCMC targets 100 rounds at each of three acceptance rates. Its measured workload exceeds the available clock at the chosen concurrency, and the agent executes only 55 rounds per rate. The primary audit invalidates numerical matches affected by this altered measurement procedure. Separately, one Poisson-MALA chain remains constant with zero acceptance. Its undefined effective sample size propagates through the evaluator's ordinary mean, leaving three measurements unavailable. The Reproducer declines to redraw only the failed chain, which would select a repetition based on its outcome. Effective sample size per second also varies with host load and concurrency.</p>
+              <p>The raw attempt also runs fewer than 100 rounds in part of its sweep. These records illustrate runtime constraints, numerical edge cases, and deviations from the prescribed measurement procedure.</p>
+              <p class="cs-note">“A paper can contain both recovered and lost tasks: Gemini's AuxiliaryMCMC total remains 12 successes in each condition despite five reversals offset by five recoveries.”</p>
+            </div>
+          </div>
+          <div class="cs-foot"><button class="cs-more" type="button" aria-expanded="false" aria-controls="case-auxmcmc-full" data-js-only><span class="cs-more-t">More</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div>
+        </article>
+
+        <!-- 11 · LiME (appendix: "Failure modes and concentrated regressions") -->
+        <article class="cs-card is-fail" id="case-lime" data-cat="fail" data-paper="84" data-model="s5" aria-labelledby="case-lime-t">
+          <div class="cs-top"><span class="cs-cat is-fail"><b>11</b>When it fails</span><span class="cs-who">Sonnet 5 · RRA attempt</span></div>
+          <h4 id="case-lime-t">LiME</h4>
+          <p class="cs-tags"><span class="tag red">Reversals</span></p>
+          <dl class="cs-lines">
+            <div class="cs-l plan"><dt>Setup</dt><dd>Data staging and environment preparation take approximately 83 minutes.</dd></div>
+            <div class="cs-l run"><dt>Run</dt><dd>At the observed throughput, 5,949 training steps plus evaluation over 47 splits project 7 to 92 wall-clock hours per variant, against the paper's 24-hour allocation. The session reaches parameter counts but not accuracy measurements.</dd></div>
+          </dl>
+          <div class="cs-ev">
+            <div class="cs-ev-k"><span>Wall-clock hours</span></div>
+            <div class="cs-tl" style="--lo:0;--hi:96" role="img" aria-label="Setup about 83 minutes; projected 7 to 92 hours per variant; 24-hour allocation">
+              <i class="setup" style="--a:0;--b:1.383"></i><i class="proj" style="--a:7;--b:92"></i><i class="alloc" style="--v:24"></i><b class="cs-tl-a" style="--v:24" aria-hidden="true">24 h allocation</b>
+            </div>
+            <div class="cs-tl-l" aria-hidden="true"><span class="s">≈83 min setup</span><span class="p">7–92 h projected per variant</span></div>
+            <p class="cs-ev-n">Across models, 13 of LiME's 14 reversals are resource/access failures.</p>
+          </div>
+          <blockquote class="cs-q"><p>“Setup success is not experiment completion.”</p></blockquote>
+          <div class="cs-full" id="case-lime-full">
+            <div class="cs-full-in">
+              <p class="cs-src"><span class="kicker">From the paper · Appendix, failure modes and concentrated regressions</span><b>LiME: setup success is not experiment completion.</b></p>
+              <p>In Sonnet 5's refined-artifact attempt on LiME, data staging and environment preparation take approximately 83 minutes, but the full schedule includes 5,949 training steps followed by evaluation over 47 splits. The attempted run's observed throughput projects 7 to 92 wall-clock hours per variant, competing within the paper's 24-hour allocation. Model-construction parameter counts are available before training finishes, whereas accuracy measurements require completed training and evaluation. The session reaches the former but not the latter. Across models, 13 of LiME's 14 reversals are resource/access failures and one is a numerical mismatch.</p>
+            </div>
+          </div>
+          <div class="cs-foot"><button class="cs-more" type="button" aria-expanded="false" aria-controls="case-lime-full" data-js-only><span class="cs-more-t">More</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div>
+        </article>
+
+      </div>
+      <p class="cs-tagnote" data-reveal><span><span class="tag guide">Guide</span>Component named in the paper's case text</span><span><span class="tag guide inf">Guide</span>Mapped from the paper's component definitions</span></p>
+      <p class="caveat" data-reveal>Case annotations describe patterns rather than isolate causal effects. Opus 5 constructs every refined artifact in the main experiment; case measurements come from the first evaluation.</p>
+    </div>
+
+    <!-- C4 · attribution (appendix: "Explanations for recovered outcomes") -->
+    <h3 class="sub" data-reveal>What explains the recoveries</h3>
+    <p class="sub-lede" data-reveal>An agent-assisted case review assigns primary explanations across 101 model–paper pairs, grounded in execution records. In the paper's words, clarification and experiment-to-result mapping “together represent about 35% of the case-review attribution distribution.”</p>
+    <div class="chart-card cs-attr" data-reveal>
+      <div class="chart-head">
+        <div><h4>Explanations for recovered outcomes</h4><p class="cap">Share of the case review, and estimated outcomes when the shares are allocated across the 813 recoveries. <span class="tag-note">Eval 1 · 101 pairs</span></p></div>
+      </div>
+      <div class="cs-at-head" aria-hidden="true"><span>Explanation</span><span class="cs-at-hd">Definition, in the paper's words</span><span class="cs-at-hb"></span><span class="cs-at-hv"><span>Share</span><span>Est.</span></span></div>
+      <ol class="cs-at" aria-label="Explanations for recovered outcomes, sorted by share">
+        <li class="cs-at-r"><span class="cs-at-l">Integrity</span><span class="cs-at-d">replacing measurement shortcuts with valid execution</span><span class="cs-at-b"><i style="--s:26.7"></i></span><span class="cs-at-v"><b>26.7%</b><small>217</small></span></li>
+        <li class="cs-at-r"><span class="cs-at-l">Protocol</span><span class="cs-at-d">clarified settings and reporting rules</span><span class="cs-at-b"><i style="--s:25.8"></i></span><span class="cs-at-v"><b>25.8%</b><small>210</small></span></li>
+        <li class="cs-at-r"><span class="cs-at-l">Code</span><span class="cs-at-d">repairs or missing implementations</span><span class="cs-at-b"><i style="--s:12.2"></i></span><span class="cs-at-v"><b>12.2%</b><small>99</small></span></li>
+        <li class="cs-at-r"><span class="cs-at-l">Env</span><span class="cs-at-d">compatible dependencies</span><span class="cs-at-b"><i style="--s:10.7"></i></span><span class="cs-at-v"><b>10.7%</b><small>87</small></span></li>
+        <li class="cs-at-r"><span class="cs-at-l">Artifact</span><span class="cs-at-d">data/checkpoint acquisition and paths</span><span class="cs-at-b"><i style="--s:9.7"></i></span><span class="cs-at-v"><b>9.7%</b><small>79</small></span></li>
+        <li class="cs-at-r"><span class="cs-at-l">Launcher</span><span class="cs-at-d">entry points and experiment-to-result mapping</span><span class="cs-at-b"><i style="--s:9.4"></i></span><span class="cs-at-v"><b>9.4%</b><small>76</small></span></li>
+        <li class="cs-at-r"><span class="cs-at-l">Budget</span><span class="cs-at-d">resource planning and scheduling</span><span class="cs-at-b"><i style="--s:4.5"></i></span><span class="cs-at-v"><b>4.5%</b><small>37</small></span></li>
+        <li class="cs-at-r"><span class="cs-at-l">Other</span><span class="cs-at-d">remaining explanations</span><span class="cs-at-b"><i style="--s:1.0"></i></span><span class="cs-at-v"><b>1.0%</b><small>8</small></span></li>
+      </ol>
+      <p class="caveat">An agent-assisted case review of 101 model–paper pairs; estimated counts allocate the reviewed shares across the 813 recoveries and are not independent causal measurements. Integrity is an explanation; audit-invalid names a scored outcome.</p>
+    </div>
+
+    <!-- C5 · remaining failures (6_experiments: "Remaining failures"; appendix: "Reversals after refinement") -->
+    <h3 class="sub" data-reveal>Remaining failures</h3>
+    <div class="cs-fail" data-reveal>
+      <div class="cs-fail-txt">
+        <p class="cs-fail-lead">Failures shared by both handoffs mainly reflect paper–code setup mismatches, typographical errors in the paper, or experimental variability placing measurements outside the compatibility interval. Refinement can also preserve or introduce incorrect experimental choices.</p>
+        <p>The 84 numerical reversals span several possible mechanisms: stochastic training, timing conditions, changed execution choices, and unresolved paper–code disagreements. Construction may also introduce an incorrect setting, metric interpretation, or repair that later agents inherit. Diagnosing a particular reversal requires tracing its executed configuration and measurement procedure.</p>
+      </div>
+      <div class="cs-conc">
+        <p class="kicker">Reversals by paper</p>
+        <p class="cs-conc-h">Four papers account for <b>93 of the 136</b> reversals (68.4%).</p>
+        <ul class="cs-conc-l">
+          <li><span class="cs-conc-n">AuxiliaryMCMC</span><span class="cs-conc-b"><i style="--n:50"></i></span><b>50</b><button class="cs-jump" type="button" data-case="case-auxmcmc" data-js-only aria-label="Open the AuxiliaryMCMC case card">Case 10 ↑</button></li>
+          <li><span class="cs-conc-n">Manifold-Aware Perturbations</span><span class="cs-conc-b"><i style="--n:19"></i></span><b>19</b><span class="cs-jump-x" data-js-only></span></li>
+          <li><span class="cs-conc-n">LiME</span><span class="cs-conc-b"><i style="--n:14"></i></span><b>14</b><button class="cs-jump" type="button" data-case="case-lime" data-js-only aria-label="Open the LiME case card">Case 11 ↑</button></li>
+          <li><span class="cs-conc-n">ExactFANOVA</span><span class="cs-conc-b"><i style="--n:10"></i></span><b>10</b><span class="cs-jump-x" data-js-only></span></li>
+          <li class="rest"><span class="cs-conc-n">Other papers</span><span class="cs-conc-b"><i style="--n:43"></i></span><b>43</b><span class="cs-jump-x" data-js-only></span></li>
+        </ul>
+        <p class="cs-conc-f">Bar lengths are shares of all 136 reversals across the four models. AuxiliaryMCMC and LiME alone account for 47.1%.</p>
+      </div>
+    </div>
   </div>
 </section>

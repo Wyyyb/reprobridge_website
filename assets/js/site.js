@@ -58,6 +58,7 @@
   var spyIds = [];
   spyLinks.forEach(function (a) { var id = a.getAttribute('href').slice(1); if (id && spyIds.indexOf(id) < 0) spyIds.push(id); });
   var spySecs = spyIds.map(function (id) { return doc.getElementById(id); }).filter(Boolean);
+  spySecs.sort(function (x, y) { return x.compareDocumentPosition(y) & 4 ? -1 : 1; });  /* document order */
   function spy() {
     var line = window.innerHeight * 0.33, cur = null;
     spySecs.forEach(function (s) { if (s.getBoundingClientRect().top <= line) cur = s.id; });
@@ -91,8 +92,12 @@
     if (!t) return;
     var text = t.innerText.replace(/\u00a0/g, ' ').trim();
     var label = b.querySelector('.copy-label');
+    if (label && !label.hasAttribute('data-label')) label.setAttribute('data-label', label.textContent);
     function done(ok) {
-      if (label) { var old = label.textContent; label.textContent = ok ? 'Copied' : 'Press Ctrl+C'; setTimeout(function () { label.textContent = old; }, 1600); }
+      if (!label) return;
+      label.textContent = ok ? 'Copied' : 'Press Ctrl+C';
+      clearTimeout(b._rbCopyT);
+      b._rbCopyT = setTimeout(function () { label.textContent = label.getAttribute('data-label'); }, 1600);
     }
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
     else {

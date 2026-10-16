@@ -1,5 +1,68 @@
 <section class="sec" id="release" aria-labelledby="release-title">
   <div class="wrap">
-    <div class="sec-head"><h2 id="release-title"><span class="sec-no">Release</span>Placeholder for release</h2><div id="cite"></div></div>
+    <div class="sec-head" data-reveal>
+      <p class="eyebrow">Release</p>
+      <h2 id="release-title">Code and <span class="nw">ReproBridge-Bench</span>, coming soon</h2>
+      <p class="lede">We will open-source the ReproBridge code and the ReproBridge-Bench dataset. Links will appear here once they are public.</p>
+    </div>
+
+    <!-- #cite wraps the release cards and the citation, so the nav "Cite" link lands with the BibTeX in view and the
+         scrollspy can still mark "Release & cite" at the bottom of the page -->
+    <div class="rel-body" id="cite">
+      <!-- TODO at release: turn each card into a link (keep the layout) and drop its "Soon" badge -->
+      <ul class="rel-grid" role="list" data-reveal>
+        <li class="rel-card">
+          <div class="rel-top">
+            <span class="rel-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span>
+          </div>
+          <span class="kicker">Paper</span>
+          <h3>ReproBridge paper</h3>
+          <p>Full paper with appendices: protocols, inventories, and worked examples.</p>
+          <span class="soon">Soon</span>
+        </li>
+        <li class="rel-card">
+          <div class="rel-top">
+            <span class="rel-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+          </div>
+          <span class="kicker">arXiv</span>
+          <h3>arXiv preprint</h3>
+          <p>Citable preprint.</p>
+          <span class="soon">Soon</span>
+        </li>
+        <li class="rel-card">
+          <div class="rel-top">
+            <span class="rel-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg></span>
+          </div>
+          <span class="kicker">Code</span>
+          <h3>ReproBridge</h3>
+          <p>The agent workflow that turns a paper and its released code into a refined reproducible artifact.</p>
+          <span class="soon">Soon</span>
+        </li>
+        <li class="rel-card">
+          <div class="rel-top">
+            <span class="rel-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6.5c0 1.6 3.4 2.8 7.5 2.8s7.5-1.2 7.5-2.8V5.5M4.5 12v6.5c0 1.6 3.4 2.8 7.5 2.8s7.5-1.2 7.5-2.8V12"/></svg></span>
+          </div>
+          <span class="kicker">Dataset</span>
+          <h3 class="nw">ReproBridge-Bench</h3>
+          <p>1,029 tasks from 387 experiments across 36 papers, with five human-verified reference scores per task.</p>
+          <span class="soon">Soon</span>
+        </li>
+      </ul>
+
+      <h3 class="sub rel-cite-title" data-reveal>Citation</h3>
+      <div class="code rel-bib" data-reveal>
+        <div class="code-head">
+          <span class="rel-bib-lang">BibTeX</span>
+          <button class="copy-btn" type="button" data-copy="#bibtex">
+            <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2.5"/><path d="M15.5 8.5V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2.5"/></svg>
+            <svg class="ic-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+            <span class="copy-label">Copy</span><span class="sr-only"> BibTeX citation</span>
+          </button>
+        </div>
+        <!-- TODO: add eprint/arXiv ID once assigned -->
+        <pre id="bibtex" tabindex="0" role="region" aria-label="BibTeX citation"><span class="bl"><span class="bt-at">@article</span>{<span class="bt-key">wang2026reprobridge</span>,</span><span class="bl">  <span class="bt-f">title</span>   = {{ReproBridge}: Building Reproducibility into {ML} Research Artifacts},</span><span class="bl">  <span class="bt-f">author</span>  = {Wang, Yubo and Meng, Rui and Nam, Jaehyun and Pfister, Tomas and Yoon, Jinsung},</span><span class="bl">  <span class="bt-f">journal</span> = {arXiv preprint},</span><span class="bl">  <span class="bt-f">year</span>    = {2026}</span><span class="bl">}</span></pre>
+      </div>
+      <p class="sr-only" id="rel-copy-status" aria-live="polite"></p>
+    </div>
   </div>
 </section>

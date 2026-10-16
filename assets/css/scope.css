@@ -1,0 +1,187 @@
+/* Scope (#scope): intended use, paper–code misalignment, and the paper's limitations.
+ * assets/js/scope.js draws the findings split (293 recorded = 238 + 44 + 11) and the category bar table from
+ * RB_DATA.alignment. The grey steps below are one ordinal ramp (validated: monotone, ΔL >= .06, light end >= 2:1):
+ * in-scope findings and the category bars share the strongest step; separately recorded findings are lighter. */
+#scope {
+  --sc-s1: var(--ink-3);       /* in-scope contradiction findings, category bars */
+  --sc-s2: #8090A0;            /* absent implementation */
+  --sc-s3: var(--ink-4);       /* paper silent */
+  --sc-bar-hi: var(--ink-2);   /* hovered / focused bar */
+}
+:root[data-theme="dark"] #scope { --sc-s2: #687A87; }
+
+/* ------------------------------------------------------------------ A1: intended uses */
+#scope .sc-uses { align-items: stretch; }
+#scope .sc-use {
+  position: relative; display: flex; flex-direction: column;
+  padding: 30px 30px 26px; border-radius: var(--rad-lg); background: var(--bg); border: 1px solid var(--line);
+}
+#scope .sc-use-top { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+#scope .sc-ic {
+  flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px;
+  background: var(--panel); color: var(--ink-2);
+}
+#scope .sc-ic svg { width: 22px; height: 22px; }
+#scope .sc-use.is-primary .sc-ic { background: var(--accent-fill); color: var(--on-accent); }
+#scope .sc-use.is-primary .kicker { color: var(--rra-ink); }
+#scope .sc-use-title { font-size: clamp(21px, 1.9vw, 24px); font-weight: 580; letter-spacing: -.018em; margin: 0 0 10px; }
+#scope .sc-use > p { margin: 0 0 22px; color: var(--ink-2); font-size: 16px; line-height: 1.62; }
+#scope .sc-use-foot { display: grid; gap: 10px; margin: auto 0 0; padding-top: 18px; border-top: 1px solid var(--line); }
+#scope .sc-use-foot > div { display: grid; grid-template-columns: 108px minmax(0, 1fr); align-items: start; gap: 12px; }
+#scope .sc-use-foot dt, #scope .sc-foot-l {
+  font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3);
+}
+#scope .sc-use-foot dt { padding-top: 5px; }
+#scope .sc-use-foot dd { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+#scope .sc-use-foot .tag, #scope .sc-entry .tag {
+  font-family: var(--sans); font-size: 12.5px; font-weight: 550; letter-spacing: 0; text-transform: none; padding: 3px 10px;
+}
+#scope .sc-uses-caveat { margin-top: 16px; }
+
+/* ------------------------------------------------------------------ A2: misalignment */
+#scope .sc-mis { gap: 40px; align-items: stretch; margin-bottom: 28px; }
+/* the illustrative guide entry */
+#scope .sc-entry {
+  margin: 0; display: flex; flex-direction: column;
+  padding: 24px 26px 22px; border-radius: var(--rad-lg); background: var(--bg); border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+#scope .sc-entry-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 18px; }
+#scope .sc-entry-paper { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -.01em; color: var(--ink); }
+#scope .sc-entry-param { margin: 2px 0 16px; font-size: 14px; color: var(--ink-3); }
+#scope .sc-vs { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.25fr); align-items: stretch; gap: 10px; }
+#scope .sc-v {
+  display: flex; flex-direction: column; gap: 2px; padding: 14px 16px 13px; border-radius: var(--rad);
+  background: var(--panel);
+}
+#scope .sc-v-k { font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+#scope .sc-v-n { font-family: var(--mono); font-size: 30px; font-weight: 500; letter-spacing: -.02em; line-height: 1.2; color: var(--ink); margin: 4px 0 4px; }
+#scope .sc-v-n sup { font-size: .5em; line-height: 0; vertical-align: .95em; margin-left: 1px; }
+#scope .sc-v-s { font-size: 12.5px; line-height: 1.4; color: var(--ink-3); }
+#scope .sc-neq { align-self: center; font-size: 26px; line-height: 1; color: var(--ink-3); font-weight: 400; }
+#scope .sc-entry-sens { display: flex; align-items: center; gap: 10px; margin: 16px 0 0; }
+#scope .sc-entry figcaption { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); }
+#scope .sc-entry-sens + figcaption { margin-top: 16px; }
+#scope .sc-entry figcaption sup { font-size: .7em; }
+
+/* aggregate: two stats, the definition, the findings split */
+#scope .sc-agg { display: flex; flex-direction: column; justify-content: center; }
+#scope .sc-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#scope .sc-stats .stat { padding: 22px 20px 20px 0; }
+#scope .sc-stats .stat + .stat { padding-left: 24px; }
+#scope .sc-stats .stat:nth-child(2n) { border-right: 0; }
+#scope .sc-stats .n { font-variant-numeric: normal; }
+#scope .sc-agg-text { margin: 20px 0 0; color: var(--ink-2); font-size: 15.5px; line-height: 1.62; }
+#scope .sc-agg .cap { margin: 16px 0 0; }
+
+#scope .sc-split { margin-top: 22px; }
+#scope .sc-split-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+#scope .sc-split-head .kicker b { font-weight: 600; color: var(--ink); letter-spacing: .04em; }
+#scope .sc-split-bar { display: flex; gap: 2px; height: 14px; }
+#scope .sc-split-bar span { display: block; min-width: 3px; height: 100%; flex-basis: 0; transition: filter .2s; }
+#scope .sc-split-bar span:first-child { border-radius: 4px 0 0 4px; }
+#scope .sc-split-bar span:last-child { border-radius: 0 4px 4px 0; }
+#scope .sc-split-bar span:hover { filter: brightness(.9); }
+:root[data-theme="dark"] #scope .sc-split-bar span:hover { filter: brightness(1.18); }
+#scope .sc-split-bar .s-in { background: var(--sc-s1); }
+#scope .sc-split-bar .s-absent { background: var(--sc-s2); }
+#scope .sc-split-bar .s-silent { background: var(--sc-s3); }
+#scope .sc-split-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 10px 0 0; padding: 0; list-style: none; font-size: 13px; color: var(--ink-2); }
+#scope .sc-split-legend li { display: inline-flex; align-items: center; gap: 7px; }
+#scope .sc-split-legend .sw { width: 10px; height: 10px; border-radius: 3px; }
+#scope .sc-split-legend b { font-family: var(--mono); font-size: 12.5px; font-weight: 600; color: var(--ink); }
+#scope .sc-split-legend .s-in { background: var(--sc-s1); }
+#scope .sc-split-legend .s-absent { background: var(--sc-s2); }
+#scope .sc-split-legend .s-silent { background: var(--sc-s3); }
+
+/* category bar table (SVG) */
+#scope .sc-cats-card { padding: 26px 28px 22px; }
+#scope .sc-cats-card .chart-head { margin-bottom: 18px; }
+#scope .sc-cats-card .chart-head .cap { max-width: 760px; }
+#scope .sc-cats-card .tag-note { vertical-align: 1px; }
+#scope #scope-cats { min-height: 200px; }
+#scope .sc-cats-card .tbl tbody th { font-weight: 500; }
+#scope #scope-cats svg { display: block; }
+#scope .chart .sc-colh { font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; fill: var(--ink-3); }
+#scope .chart .sc-lbl { font-size: 13.5px; font-weight: 500; fill: var(--ink); }
+#scope .chart .sc-val { font-family: var(--mono); font-size: 12px; font-weight: 600; fill: var(--ink); }
+#scope .chart .sc-num { font-family: var(--mono); font-size: 12.5px; font-weight: 500; fill: var(--ink-2); font-variant-numeric: tabular-nums; }
+#scope .chart .sc-sub { font-family: var(--mono); font-size: 11.5px; fill: var(--ink-3); }
+#scope .chart .sc-rule { stroke: var(--line); stroke-width: 1; shape-rendering: crispEdges; }
+#scope .chart .sc-bar { fill: var(--sc-s1); transition: fill .18s; }
+#scope .chart .sc-rowbg { fill: var(--bg-soft); opacity: 0; transition: opacity .18s; }
+:root[data-theme="dark"] #scope .chart .sc-rowbg { fill: var(--panel); }
+#scope .chart .sc-row.on .sc-rowbg { opacity: 1; }
+#scope .chart .sc-row.on .sc-bar { fill: var(--sc-bar-hi); }
+#scope .chart .sc-hit { fill: transparent; cursor: default; outline: none; }
+#scope .chart .sc-ring { fill: none; stroke: var(--rra); stroke-width: 2; opacity: 0; pointer-events: none; }
+#scope .chart .sc-hit:focus-visible + .sc-ring { opacity: 1; }
+/* bars grow once when the chart first scrolls into view (skipped under reduced motion) */
+#scope .chart .sc-bar { transform-box: fill-box; transform-origin: 0 50%; }
+#scope .chart svg.pre .sc-bar { transform: scaleX(0); }
+#scope .chart svg.grow .sc-bar { transition: transform .9s var(--ease-out), fill .18s; }
+#scope .chart svg.pre .sc-val { opacity: 0; }
+#scope .chart svg.grow .sc-val { transition: opacity .5s var(--ease) .45s; }
+
+/* ------------------------------------------------------------------ A3: limitations */
+#scope .sc-lims { align-items: stretch; }
+#scope .sc-lim {
+  display: flex; flex-direction: column; padding: 24px 24px 20px; border-radius: var(--rad-lg); background: var(--panel);
+}
+#scope .sc-lim-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+#scope .sc-lim-no { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--rra-ink); }
+#scope .sc-lim-ic { width: 26px; height: 26px; color: var(--ink-3); }
+#scope .sc-lim h4 { font-size: 18px; font-weight: 600; letter-spacing: -.012em; margin: 0 0 8px; }
+#scope .sc-lim p { margin: 0 0 18px; color: var(--ink-2); font-size: 15px; line-height: 1.6; }
+#scope .sc-lim .sc-lim-ev { margin-top: -8px; font-size: 13.5px; line-height: 1.55; color: var(--ink-3); }
+#scope .sc-lim-link {
+  margin-top: auto; align-self: flex-start; padding-top: 12px; width: 100%;
+  border-top: 1px solid var(--line-2);
+  font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-3); text-decoration: none; transition: color .2s;
+}
+#scope .sc-lim-link:hover { color: var(--rra-ink); }
+
+#scope .sc-future {
+  display: flex; align-items: flex-start; gap: 16px; margin-top: 24px;
+  padding: 20px 24px; border-radius: var(--rad-lg); border: 1.5px dashed var(--line-2);
+}
+#scope .sc-future-ic {
+  flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid var(--line-2); color: var(--rra-ink); margin-top: 1px;
+}
+#scope .sc-future-ic svg { width: 16px; height: 16px; }
+#scope .sc-future p { margin: 0; color: var(--ink); font-size: 16.5px; line-height: 1.55; }
+#scope .sc-future .note-title { margin-bottom: 2px; }
+
+/* ------------------------------------------------------------------ responsive */
+@media (max-width: 1080px) {
+  #scope .sc-lims { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #scope .sc-use-foot > div { grid-template-columns: 1fr; gap: 6px; }
+  #scope .sc-use-foot dt { padding-top: 0; }
+  #scope .sc-mis { gap: 28px; }
+  #scope .sc-agg { justify-content: flex-start; }
+}
+@media (max-width: 760px) {
+  #scope .sc-lims { grid-template-columns: 1fr; gap: 14px; }
+  #scope .sc-uses { gap: 16px; }
+  #scope .sc-use { padding: 24px 22px 22px; }
+  #scope .sc-entry { padding: 20px 20px 18px; }
+  #scope .sc-cats-card { padding: 20px 18px 18px; }
+  #scope .sc-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #scope .sc-stats .stat { border-bottom: 0; }
+  #scope .sc-stats .stat + .stat { padding-left: 18px; }
+  #scope .sc-lim { padding: 20px 20px 18px; }
+  #scope .sc-future { padding: 18px 18px; gap: 12px; }
+}
+@media (max-width: 480px) {
+  #scope .sc-vs { gap: 6px; }
+  #scope .sc-v { padding: 12px 12px 11px; }
+  #scope .sc-v-n { font-size: 25px; }
+  #scope .sc-v-s { font-size: 12px; }
+  #scope .sc-neq { font-size: 21px; }
+}
+@media print {
+  #scope .chart svg.pre .sc-bar { transform: none; }
+  #scope .chart svg.pre .sc-val { opacity: 1; }
+}

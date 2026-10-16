@@ -1,5 +1,195 @@
 <section class="sec" id="results" aria-labelledby="results-title">
   <div class="wrap">
-    <div class="sec-head"><h2 id="results-title"><span class="sec-no">03 · Results</span>Placeholder for results</h2></div>
+    <div class="sec-head" data-reveal>
+      <h2 id="results-title"><span class="sec-no">03 · Results</span>More reproductions succeed, at lower cost</h2>
+      <p class="lede">Fresh Reproducer sessions receive the paper, the selected tasks, and either the raw codebase or its refined artifact. Across four models, refined artifacts raise mean success from <b>76.4%</b> to <b>92.6%</b>, narrow the cross-model spread from <b>21.6 to 3.9&nbsp;pp</b>, and reduce downstream API spending by <b>19.7%</b> on average.</p>
+    </div>
+
+    <!-- R1 · signature chart: the gain under five scorings (assets/js/results.js fills [data-chart]) -->
+    <div class="chart-card res-card" id="results-gain" data-reveal>
+      <div class="chart-head">
+        <div>
+          <h4 id="results-gain-title">Stress-test the gain</h4>
+          <p class="cap">Task success with the released code (Raw) and with its refined artifact (RRA), for each Reproducer model. Switch views to weight papers equally, tighten the interval, change the Auditor, or split tasks by reference variability.</p>
+        </div>
+        <span class="tag-note res-basis" data-basis>3-eval mean</span>
+      </div>
+      <div class="res-controls" data-js-only>
+        <div class="res-seg-wide" data-seg></div>
+        <div class="legend res-legend">
+          <span><i class="sw raw" aria-hidden="true"></i>Raw (released code)</span>
+          <span><i class="sw rra" aria-hidden="true"></i>Refined artifact (RRA)</span>
+          <span class="res-leg-sd" data-leg="sd"><i class="res-sw-sd" aria-hidden="true"></i>±1 SD</span>
+        </div>
+      </div>
+      <div class="chart res-chart" data-chart role="group" aria-labelledby="results-gain-title" aria-describedby="results-gain-cap" data-js-only></div>
+      <p class="res-modecap" id="results-gain-cap" aria-live="polite" data-js-only data-modecap>Mean over three evaluations (± SD). Success requires numerical compatibility and no confirmed audit violation. Gains range from +5.5&nbsp;pp (Opus&nbsp;5) to +23.2&nbsp;pp (Gemini 3.8 Flash).</p>
+      <details class="res-tv" open>
+        <summary>Main results table</summary>
+        <div class="tbl-scroll">
+          <table class="tbl res-tbl">
+            <caption>Main results on 36 test papers and 1,029 tasks: mean ± standard deviation over three evaluations. Success requires numerical compatibility and no confirmed audit violation. Gain is RRA minus Raw in percentage points; Red. is 100(Raw − RRA)/Raw, computed from the means. Tokens (B: billions) and API USD sum Reproducer sessions, including failed attempts; construction, auditing, and GPU costs are excluded.</caption>
+            <thead>
+              <tr class="grp"><th scope="col"></th><th scope="colgroup" colspan="3">Success (%)</th><th scope="colgroup" colspan="3">Tokens (B)</th><th scope="colgroup" colspan="3">API (USD)</th></tr>
+              <tr><th scope="col">Model</th><th class="n" scope="col">Raw</th><th class="n rra-col" scope="col">RRA</th><th class="n" scope="col">Gain</th><th class="n" scope="col">Raw</th><th class="n rra-col" scope="col">RRA</th><th class="n" scope="col">Red.</th><th class="n" scope="col">Raw</th><th class="n rra-col" scope="col">RRA</th><th class="n" scope="col">Red.</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Sonnet 4.6</th><td class="n">72.3 ± 1.1</td><td class="n rra-col"><b>91.6</b> ± 3.4</td><td class="n">+19.3</td><td class="n">8.48 ± 0.38</td><td class="n rra-col">6.80 ± 0.76</td><td class="n">19.8</td><td class="n">3,165 ± 142</td><td class="n rra-col">2,512 ± 286</td><td class="n">20.6</td></tr>
+              <tr><th scope="row">Sonnet 5</th><td class="n">76.5 ± 2.8</td><td class="n rra-col"><b>93.3</b> ± 1.4</td><td class="n">+16.8</td><td class="n">4.98 ± 0.55</td><td class="n rra-col">4.52 ± 0.24</td><td class="n">9.2</td><td class="n">1,726 ± 175</td><td class="n rra-col">1,317 ± 102</td><td class="n">23.7</td></tr>
+              <tr><th scope="row">Opus 5</th><td class="n">89.2 ± 1.2</td><td class="n rra-col"><b>94.7</b> ± 2.2</td><td class="n">+5.5</td><td class="n">3.01 ± 0.16</td><td class="n rra-col">2.82 ± 0.29</td><td class="n">6.3</td><td class="n">3,480 ± 165</td><td class="n rra-col">2,865 ± 312</td><td class="n">17.7</td></tr>
+              <tr><th scope="row">Gemini 3.8 Flash</th><td class="n">67.6 ± 1.9</td><td class="n rra-col"><b>90.8</b> ± 1.1</td><td class="n">+23.2</td><td class="n">2.24 ± 0.26</td><td class="n rra-col">1.83 ± 0.09</td><td class="n">18.3</td><td class="n">392 ± 41</td><td class="n rra-col">326 ± 16</td><td class="n">16.8</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <p class="caveat">Harnesses differ across vendors, so cross-model comparisons are descriptive.</p>
+    </div>
+    <p class="paper-figs res-figs" data-reveal data-js-only>Paper figures:
+      <button class="paper-fig" type="button" data-zoom="assets/img/fig/teaser-2400.webp" data-title="Paper figure: Preserving reproduction work for reuse" data-alt="Paper figure. (a) ReproBridge turns a paper and raw codebase into a refined reproducible artifact with refined code, environment, launchers, and a guide. (b) Mean reproduction success and (c) Reproducer API cost for four models, Raw as hollow circles and refined as filled circles.">Preserving reproduction work for reuse ↗</button>
+      <button class="paper-fig" type="button" data-zoom="assets/img/fig/paper_scatter-2400.webp" data-title="Paper figure: Paper-wise reproduction success in the first evaluation" data-alt="Paper figure. Four panels, one per model, with one point per retained paper comparing the share of tasks that succeed with Raw (horizontal axis) and with the refined artifact (vertical axis).">Paper-wise reproduction success in the first evaluation ↗</button>
+      <button class="paper-fig" type="button" data-zoom="assets/img/fig/variability-2400.webp" data-title="Paper figure: Gains across reference-variability levels" data-alt="Paper figure. Gain in percentage points for each model on stable (Cat. 1) and higher-variability (Cat. 2) tasks in the first evaluation.">Gains across reference-variability levels ↗</button>
+    </p>
+
+    <!-- R2 · downstream cost -->
+    <div class="chart-card res-card res-card-gap" id="results-spend" data-reveal>
+      <div class="chart-head">
+        <div>
+          <h4 id="results-spend-title">Reproducer spending</h4>
+          <p class="cap">Raw → refined artifact for each model, on one shared axis per metric. Refined artifacts use 6.3% to 19.8% fewer tokens and cut API spending by 16.8% to 23.7%. API savings are relative to each model's raw-code cost.</p>
+        </div>
+        <div class="res-head-tools">
+          <span class="tag-note">3-eval mean</span>
+          <div data-seg data-js-only></div>
+        </div>
+      </div>
+      <div class="chart res-chart" data-chart role="group" aria-labelledby="results-spend-title" data-js-only></div>
+      <p class="res-nojs-note" data-nojs-only>Token and API USD means (± SD) for each model are in the main results table above.</p>
+      <p class="caveat">Sums over downstream Reproducer sessions, including failed attempts, means over three evaluations. Construction, auditing, and GPU costs are excluded.</p>
+    </div>
+
+    <!-- R3 · ablation -->
+    <h3 class="sub" data-reveal>Each component contributes to reuse</h3>
+    <p class="sub-lede" data-reveal>Ordinary outputs are Opus&nbsp;5's raw-code execution directory with code, scripts, and logs retained and result files removed; they carry no standardized guide. The complete artifact outperforms ordinary outputs by 11.8&nbsp;pp, and removing any component lowers success.</p>
+    <div class="chart-card res-card" id="results-ablation" data-reveal>
+      <div class="chart-head">
+        <div>
+          <h4 id="results-ablation-title">Handoff and component ablations</h4>
+          <p class="cap">Success of fresh Sonnet&nbsp;5 sessions with each handoff. In the lower group, the hatched segment is the loss from the full refined artifact.</p>
+        </div>
+        <span class="tag-note">Sonnet 5 · 1 eval</span>
+      </div>
+      <div class="res-abl-controls" data-js-only>
+        <div class="chips" role="group" aria-label="Highlight a removed component" data-chips>
+          <button type="button" class="chip" aria-pressed="false" data-comp="Refined codebase" aria-label="Refined codebase"><i class="res-cdot" style="--c: var(--c-code)" aria-hidden="true"></i><span class="l-long">Refined codebase</span><span class="l-short" aria-hidden="true">Codebase</span></button>
+          <button type="button" class="chip" aria-pressed="false" data-comp="Environment setup" aria-label="Environment setup"><i class="res-cdot" style="--c: var(--c-env)" aria-hidden="true"></i><span class="l-long">Environment setup</span><span class="l-short" aria-hidden="true">Environment</span></button>
+          <button type="button" class="chip" aria-pressed="false" data-comp="Reproduction guide" aria-label="Reproduction guide"><i class="res-cdot" style="--c: var(--c-guide)" aria-hidden="true"></i><span class="l-long">Reproduction guide</span><span class="l-short" aria-hidden="true">Guide</span></button>
+          <button type="button" class="chip" aria-pressed="false" data-comp="Experiment launchers" aria-label="Experiment launchers"><i class="res-cdot" style="--c: var(--c-launch)" aria-hidden="true"></i><span class="l-long">Experiment launchers</span><span class="l-short" aria-hidden="true">Launchers</span></button>
+        </div>
+        <p class="res-abl-desc" aria-live="polite" data-desc><span class="res-abl-k">Removal protocol</span><span data-desc-text>Select a component to see how it was removed.</span></p>
+      </div>
+      <div class="chart res-chart" data-chart role="group" aria-labelledby="results-ablation-title" data-js-only></div>
+      <details class="res-tv" open>
+        <summary>Ablation table</summary>
+        <div class="tbl-scroll res-fit">
+          <table class="tbl res-tbl res-tbl-narrow">
+            <caption>Handoff and component ablations: Sonnet 5, 287 tasks, 12 papers, one evaluation. Loss is the drop from full RRA (pp).</caption>
+            <thead><tr><th scope="col">Handoff</th><th class="n" scope="col">Success (%)</th><th class="n" scope="col">Loss (pp)</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Raw code</th><td class="n">73.9</td><td class="n">—</td></tr>
+              <tr><th scope="row">Ordinary outputs</th><td class="n">81.2</td><td class="n">—</td></tr>
+              <tr class="hl"><th scope="row">Full RRA</th><td class="n best">93.0</td><td class="n">—</td></tr>
+              <tr class="res-tbl-sub"><th scope="colgroup" colspan="3">Full RRA without one component:</th></tr>
+              <tr><th scope="row"><span class="res-ind">Refined codebase</span></th><td class="n">87.8</td><td class="n">5.2</td></tr>
+              <tr><th scope="row"><span class="res-ind">Environment setup</span></th><td class="n">88.5</td><td class="n">4.5</td></tr>
+              <tr><th scope="row"><span class="res-ind">Reproduction guide</span></th><td class="n">89.2</td><td class="n">3.8</td></tr>
+              <tr><th scope="row"><span class="res-ind">Experiment launchers</span></th><td class="n">89.9</td><td class="n">3.1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <p class="caveat">Sonnet 5, 287 tasks from 12 randomly selected papers, one evaluation. Losses are conditional on the components that remain.</p>
+    </div>
+
+    <!-- R4 · external benchmark -->
+    <h3 class="sub" data-reveal>Beyond ReproBridge-Bench: CORE-Bench Hard</h3>
+    <p class="sub-lede" data-reveal>On 45 CORE-Bench Hard capsules, Sonnet&nbsp;5 constructs two handoffs, VERITAS's patched codebase and fix log, and a refined artifact; Sonnet&nbsp;4.5 then reproduces from raw code or either handoff. A capsule succeeds only if all its questions satisfy the benchmark's reference intervals (79 questions overall).</p>
+    <div class="chart-card res-card" id="results-core" data-reveal>
+      <div class="chart-head">
+        <div>
+          <h4 id="results-core-title">Artifact reuse on CORE-Bench Hard</h4>
+          <p class="cap">Overall capsule success, Reproducer API USD per successful capsule, and median Reproducer session duration, then success within computer (CS), medical (Med.), and social (Soc.) sciences.</p>
+        </div>
+        <div class="legend res-legend res-core-legend" data-js-only>
+          <span><i class="res-bsw raw" aria-hidden="true"></i>Raw</span>
+          <span><i class="res-bsw ver" aria-hidden="true"></i>VERITAS</span>
+          <span><i class="res-bsw rra" aria-hidden="true"></i>RRA</span>
+        </div>
+      </div>
+      <div class="res-core" data-chart data-js-only></div>
+      <div class="res-core-static" data-nojs-only>
+        <div class="tbl-scroll res-fit">
+          <table class="tbl res-tbl res-tbl-narrow">
+            <caption>(a) Overall</caption>
+            <thead><tr><th scope="col">Handoff</th><th class="n" scope="col">Success (%)</th><th class="n" scope="col">USD/success</th><th class="n" scope="col">Time (min)</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Raw</th><td class="n">62.2</td><td class="n">8.43</td><td class="n">33.0</td></tr>
+              <tr><th scope="row">VERITAS</th><td class="n">68.9</td><td class="n">6.78</td><td class="n">24.5</td></tr>
+              <tr class="hl"><th scope="row">RRA</th><td class="n best">73.3</td><td class="n best">4.34</td><td class="n best">14.4</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tbl-scroll res-fit">
+          <table class="tbl res-tbl res-tbl-narrow">
+            <caption>(b) Success by area (%); parentheses give capsule counts</caption>
+            <thead><tr><th scope="col">Handoff</th><th class="n" scope="col">CS (18)</th><th class="n" scope="col">Med. (13)</th><th class="n" scope="col">Soc. (14)</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Raw</th><td class="n">50.0</td><td class="n">76.9</td><td class="n">64.3</td></tr>
+              <tr><th scope="row">VERITAS</th><td class="n">61.1</td><td class="n best">84.6</td><td class="n">64.3</td></tr>
+              <tr class="hl"><th scope="row">RRA</th><td class="n best">66.7</td><td class="n best">84.6</td><td class="n best">71.4</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="res-take">Refined artifacts achieve the highest success, reduce median duration from 33 to 14 minutes, and lower spending per successful capsule from $8.43 to $4.34. VERITAS lies between raw and refined handoffs.</p>
+    </div>
+
+    <!-- R5 · reuse economics -->
+    <h3 class="sub" data-reveal>Reuse pays back construction</h3>
+    <p class="sub-lede" data-reveal>Constructing the 36 artifacts costs $5,026 in API usage ($139.61 per paper). At the mean downstream costs, break-even requires 8, 13, and 9 reuse rounds for Sonnet&nbsp;4.6, Sonnet&nbsp;5, and Opus&nbsp;5, saving $653, $409, and $615 per complete round.</p>
+    <div class="chart-card res-card" id="results-reuse" data-reveal>
+      <div class="chart-head">
+        <div>
+          <h4 id="results-reuse-title">Cumulative Reproducer API spending</h4>
+          <p class="cap">Raw reuse costs <i>n</i> times the mean raw-code round; refined reuse adds the $5,026 construction cost once, then <i>n</i> times the mean refined-artifact round. The paper reports this scenario for Sonnet&nbsp;4.6, Sonnet&nbsp;5, and Opus&nbsp;5.</p>
+        </div>
+        <div class="res-head-tools">
+          <span class="tag-note">Scenario · 3-eval means</span>
+          <div data-seg data-js-only></div>
+        </div>
+      </div>
+      <div class="legend res-legend res-reuse-legend" data-js-only>
+        <span><i class="res-lsw raw" aria-hidden="true"></i>Raw code, every round</span>
+        <span><i class="res-lsw rra" aria-hidden="true"></i>Refined artifact, construction + every round</span>
+        <span><i class="res-rsw pre" aria-hidden="true"></i>Construction not yet recovered</span>
+        <span><i class="res-rsw post" aria-hidden="true"></i>Net saving after break-even</span>
+      </div>
+      <div class="chart res-chart" data-chart role="group" aria-labelledby="results-reuse-title" data-js-only></div>
+      <div class="res-readout" data-readout data-js-only aria-live="polite"></div>
+      <details class="res-tv" open>
+        <summary>Break-even table</summary>
+        <div class="tbl-scroll res-fit">
+          <table class="tbl res-tbl res-tbl-narrow">
+            <caption>Mean Reproducer API USD per reuse round (36 papers) and the break-even count with a $5,026 construction cost; the continuous crossover is in parentheses.</caption>
+            <thead><tr><th scope="col">Model</th><th class="n" scope="col">Raw / round</th><th class="n" scope="col">RRA / round</th><th class="n" scope="col">Saving / round</th><th class="n" scope="col">Break-even (rounds)</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Sonnet 4.6</th><td class="n">3,165</td><td class="n">2,512</td><td class="n">653</td><td class="n"><b>8</b> (7.70)</td></tr>
+              <tr><th scope="row">Sonnet 5</th><td class="n">1,726</td><td class="n">1,317</td><td class="n">409</td><td class="n"><b>13</b> (12.29)</td></tr>
+              <tr><th scope="row">Opus 5</th><td class="n">3,480</td><td class="n">2,865</td><td class="n">615</td><td class="n"><b>9</b> (8.17)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <p class="caveat">Each round repeats all 36 papers. The scenario charges the full construction cost to one model, holds prices and savings fixed, and excludes GPU, auditing, and maintenance costs.</p>
+    </div>
   </div>
 </section>

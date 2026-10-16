@@ -1,5 +1,408 @@
 <section class="sec" id="artifact" aria-labelledby="artifact-title">
   <div class="wrap">
-    <div class="sec-head"><h2 id="artifact-title"><span class="sec-no">01 · Artifact</span>Placeholder for artifact</h2></div>
+    <div class="sec-head" data-reveal>
+      <h2 id="artifact-title"><span class="sec-no">01 · Artifact</span>Four components preserve execution knowledge</h2>
+      <p class="lede">A later reproducer needs to know what code to run, how to prepare its environment, how to obtain the requested measurement, and why particular choices were made. The <b>refined reproducible artifact (RRA)</b> addresses each need with one of four components.</p>
+    </div>
+
+    <!-- ============================================================ B1. component strip (teaser panel a, as HTML) -->
+    <div class="art-strip" data-reveal>
+      <div class="art-in">
+        <div class="art-in-row">
+          <span class="art-in-item">
+            <svg class="art-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h7.5l4 4v14h-11.5z"/><path d="M14 3v4h4M9.5 11.5h5M9.5 14.5h5M9.5 17.5h3.5"/></svg>
+            <span>Paper</span>
+          </span>
+          <span class="art-plus" aria-hidden="true">+</span>
+          <span class="art-in-item">
+            <svg class="art-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h7.5l4 4v14h-11.5z"/><path d="M14 3v4h4"/><path d="M10.5 11.5L8.5 14l2 2.5M13.5 11.5l2 2.5-2 2.5"/></svg>
+            <span>Raw codebase</span>
+          </span>
+        </div>
+      </div>
+      <span class="art-arrow raw" aria-hidden="true"></span>
+      <div class="art-bridge">
+        <svg class="art-arch" viewBox="0 0 120 40" aria-hidden="true">
+          <path class="arch" d="M14 31Q60 -1 106 31"/>
+          <path class="deck" d="M6 31.5h108"/>
+          <path class="hang" d="M28 31.5v-9.9M41 31.5v-16M54 31.5v-18.6M66 31.5v-18.6M79 31.5v-16M92 31.5v-9.9"/>
+        </svg>
+        <span class="art-bridge-name">ReproBridge</span>
+      </div>
+      <span class="art-arrow rra" aria-hidden="true"></span>
+      <div class="art-rra">
+        <p class="art-rra-head">Refined reproducible artifact (RRA)</p>
+        <div class="art-tiles" aria-label="Artifact components">
+          <a class="art-tile" href="#art-p-code" id="art-t-code" data-c="code">
+            <span class="art-tile-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h7.5l4 4v14h-11.5z"/><path d="M14 3v4h4"/><path d="M10.5 11.5L8.5 14l2 2.5M13.5 11.5l2 2.5-2 2.5"/></svg></span>
+            <span class="art-tile-name">Refined code</span>
+            <span class="art-tile-q">What code do I run?</span>
+          </a>
+          <a class="art-tile" href="#art-p-env" id="art-t-env" data-c="env">
+            <span class="art-tile-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg></span>
+            <span class="art-tile-name">Environment</span>
+            <span class="art-tile-q">How do I prepare the environment?</span>
+          </a>
+          <a class="art-tile" href="#art-p-launch" id="art-t-launch" data-c="launch">
+            <span class="art-tile-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M7 10l3 2.2L7 14.4M12.5 15h4.5"/></svg></span>
+            <span class="art-tile-name">Launchers</span>
+            <span class="art-tile-q">How do I obtain the requested measurement?</span>
+          </a>
+          <a class="art-tile" href="#art-p-guide" id="art-t-guide" data-c="guide">
+            <span class="art-tile-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.2C10 5.6 7 5.1 4 5.6v12.2c3-.5 6-.1 8 1.5 2-1.6 5-2 8-1.5V5.6c-3-.5-6 0-8 1.6z"/><path d="M12 7.2v12.1"/></svg></span>
+            <span class="art-tile-name">Guide</span>
+            <span class="art-tile-q">Why were these choices made?</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- one panel per component; artifact.js turns tiles + panels into tabs (without JS: a 2x2 grid) -->
+    <div class="art-panels" data-reveal>
+      <div class="art-panel" id="art-p-code" data-c="code">
+        <div class="ap-head">
+          <span class="ap-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h7.5l4 4v14h-11.5z"/><path d="M14 3v4h4"/><path d="M10.5 11.5L8.5 14l2 2.5M13.5 11.5l2 2.5-2 2.5"/></svg></span>
+          <div><h3 class="ap-title">Refined codebase</h3><p class="ap-q">What code do I run?</p></div>
+        </div>
+        <div class="ap-body">
+          <div class="ap-main">
+            <blockquote class="ap-def"><p>“The refined codebase repairs execution defects and supplies missing experiment support.”</p></blockquote>
+            <p class="ap-k">Where it lives</p>
+            <ul class="ap-paths"><li><code>src/</code><span>Derived source code</span></li></ul>
+            <p class="ap-k">Example <span class="ap-case">Effective Model Pruning</span></p>
+            <p class="ap-ex">The released loader silently labels all 10,000 TinyImageNet validation images as one class. During construction, ReproBridge adds a script organizing images by their true labels and a launcher check requiring prepared data. In paired Gemini 3.8 Flash runs, ResNet-18 validation loss changes from 8.898 on raw code to 2.288 with the refined artifact, close to the paper’s 2.303.</p>
+          </div>
+          <div class="ap-side">
+            <p class="ap-k">Without it</p>
+            <p class="ap-wo"><b>87.8%</b> success when the refined codebase is removed, <b>−5.2 pp</b> from the full artifact</p>
+            <div class="ap-chart" data-js-only></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="art-panel" id="art-p-env" data-c="env">
+        <div class="ap-head">
+          <span class="ap-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg></span>
+          <div><h3 class="ap-title">Environment setup</h3><p class="ap-q">How do I prepare the environment?</p></div>
+        </div>
+        <div class="ap-body">
+          <div class="ap-main">
+            <blockquote class="ap-def"><p>“Environment setup specifies compatible dependencies and data or checkpoint acquisition.”</p></blockquote>
+            <p class="ap-k">Where it lives</p>
+            <ul class="ap-paths"><li><code>Dockerfile</code><span>Preferred container setup</span></li><li><code>setup/</code><span>Environment lock, installation, and data scripts</span></li></ul>
+            <p class="ap-k">Example <span class="ap-case">WBMM</span></p>
+            <p class="ap-ex">For six COCO tasks, Sonnet 4.6’s raw attempt fails to install a compatible vision-library stack for H100. The refined artifact preserves the dependency versions, build prerequisite, and source-build route for the target architecture. The later session executes all six tasks without a code patch; its box and mask AP values agree numerically with the reported targets.</p>
+          </div>
+          <div class="ap-side">
+            <p class="ap-k">Without it</p>
+            <p class="ap-wo"><b>88.5%</b> success when environment setup is removed, <b>−4.5 pp</b> from the full artifact</p>
+            <div class="ap-chart" data-js-only></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="art-panel" id="art-p-launch" data-c="launch">
+        <div class="ap-head">
+          <span class="ap-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M7 10l3 2.2L7 14.4M12.5 15h4.5"/></svg></span>
+          <div><h3 class="ap-title">Experiment launchers</h3><p class="ap-q">How do I obtain the requested measurement?</p></div>
+        </div>
+        <div class="ap-body">
+          <div class="ap-main">
+            <blockquote class="ap-def"><p>“Experiment launchers connect tasks to configurations, execution scope, outputs, and measurement extraction, distinguishing scored runs from smoke tests.”</p></blockquote>
+            <p class="ap-k">Where it lives</p>
+            <ul class="ap-paths"><li><code>experiments/</code><span>Launchers and shared path setup</span></li></ul>
+            <p class="ap-k">Example <span class="ap-case">HELIX</span></p>
+            <p class="ap-ex">On raw code, Opus 5 restores the paper’s architecture but retains the shipped batch size and learning rate. Guide entry A6 identifies revision <code>9760b347</code>, whose architecture matches the paper configuration, as the source for batch size 8 and learning rate 5.75×10<sup>−4</sup>; the <code>--paper_config</code> launcher makes this choice executable. A later attempt produces numerically compatible MAEs for both illustrated tasks.</p>
+          </div>
+          <div class="ap-side">
+            <p class="ap-k">Without it</p>
+            <p class="ap-wo"><b>89.9%</b> success when experiment launchers are removed, <b>−3.1 pp</b> from the full artifact</p>
+            <div class="ap-chart" data-js-only></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="art-panel" id="art-p-guide" data-c="guide">
+        <div class="ap-head">
+          <span class="ap-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.2C10 5.6 7 5.1 4 5.6v12.2c3-.5 6-.1 8 1.5 2-1.6 5-2 8-1.5V5.6c-3-.5-6 0-8 1.6z"/><path d="M12 7.2v12.1"/></svg></span>
+          <div><h3 class="ap-title">Reproduction guide</h3><p class="ap-q">Why were these choices made?</p></div>
+        </div>
+        <div class="ap-body">
+          <div class="ap-main">
+            <blockquote class="ap-def"><p>“The reproduction guide, including its change record, explains settings, paper–code discrepancies, reporting statistics, and resource or numerical sensitivities.”</p></blockquote>
+            <p class="ap-k">Where it lives</p>
+            <ul class="ap-paths"><li><code>reproduction_guideline.md</code><span>Reproduction guide</span></li><li><code>change_log.md</code><span>Change record and open choices</span></li></ul>
+            <p class="ap-k">Example <span class="ap-case">Mixture of Concept Bottleneck Experts</span></p>
+            <p class="ap-ex">The paper leaves the reduction of multiple tree-edit distances unspecified, and Sonnet 5’s raw attempt sums the four distances, reporting 60 rather than 15. The refined artifact resolves this ambiguity by specifying the per-expression mean and supplying the collector; the later attempt reports 15.</p>
+          </div>
+          <div class="ap-side">
+            <p class="ap-k">Without it</p>
+            <p class="ap-wo"><b>89.2%</b> success when the reproduction guide is removed, <b>−3.8 pp</b> from the full artifact</p>
+            <div class="ap-chart" data-js-only></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ap-foot">
+      <p class="caveat">Ablation: Sonnet 5, 287 tasks, 12 papers, one evaluation; the full refined artifact reaches 93.0%. Code, environment, and launcher removals also delete descriptions of the removed component from the remaining documentation and scripts; the guide ablation removes the guide itself. Losses are conditional on the retained components. Examples are case studies from the first evaluation. Paths are the paper’s top-level entries; their grouping by component is ours.</p>
+      <a class="ap-more" href="#cases">More case studies <span aria-hidden="true">→</span></a>
+    </div>
+
+    <!-- ============================================================ B2. what is inside an artifact -->
+    <h3 class="sub" data-reveal>What is inside an artifact</h3>
+    <p class="sub-lede" data-reveal>The normalized refined artifact has seven top-level entries. Its guide connects instructions to their rationale through an ambiguity table, and the change record distinguishes execution fixes, correctness fixes, and convenience changes while retaining pitfalls and open choices.</p>
+    <div class="art-inside" data-reveal>
+      <div class="art-tree">
+        <div class="win-bar">
+          <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="win-name">refined artifact</span>
+          <span class="win-meta">7 top-level entries</span>
+        </div>
+        <ul class="tree" aria-label="Top-level entries of a normalized refined artifact">
+          <li data-c="code"><span class="tr-path"><i class="dot" aria-hidden="true"></i><code>src/</code><span class="sr-only">(component: refined code)</span></span><span class="tr-role">Derived source code</span></li>
+          <li data-c="env"><span class="tr-path"><i class="dot" aria-hidden="true"></i><code>Dockerfile</code><span class="sr-only">(component: environment)</span></span><span class="tr-role">Preferred container setup</span></li>
+          <li data-c="env"><span class="tr-path"><i class="dot" aria-hidden="true"></i><code>setup/</code><span class="sr-only">(component: environment)</span></span><span class="tr-role">Environment lock, installation, and data scripts</span></li>
+          <li data-c="launch"><span class="tr-path"><i class="dot" aria-hidden="true"></i><code>experiments/</code><span class="sr-only">(component: launchers)</span></span><span class="tr-role">Launchers and shared path setup</span></li>
+          <li data-c="guide"><span class="tr-path"><i class="dot" aria-hidden="true"></i><code>reproduction_guideline.md</code><span class="sr-only">(component: guide)</span></span><span class="tr-role">Reproduction guide</span></li>
+          <li data-c="guide"><span class="tr-path"><i class="dot" aria-hidden="true"></i><code>change_log.md</code><span class="sr-only">(component: guide)</span></span><span class="tr-role">Change record and open choices</span></li>
+          <li data-c="none"><span class="tr-path"><i class="dot" aria-hidden="true"></i><code>verify.sh</code><span class="sr-only">(not assigned to a component)</span></span><span class="tr-role">Package verification entry point</span></li>
+        </ul>
+        <p class="tree-key"><span><i class="dot c-code" aria-hidden="true"></i>refined code</span><span><i class="dot c-env" aria-hidden="true"></i>environment</span><span><i class="dot c-launch" aria-hidden="true"></i>launchers</span><span><i class="dot c-guide" aria-hidden="true"></i>guide</span><span><i class="dot c-none" aria-hidden="true"></i>not assigned to a component</span></p>
+        <p class="tree-note">Entries and roles as listed in the paper; the colour grouping by component is ours.</p>
+        <div class="tree-stats">
+          <div><b>932</b><span>ambiguity-table entries</span></div>
+          <div><b>482</b><span>launcher scripts, including those outside the retained scoring scope</span></div>
+          <p>across the 36 packaged repositories</p>
+        </div>
+      </div>
+
+      <div class="art-anat">
+        <div class="anat-head">
+          <h4>Anatomy of a guide entry</h4>
+          <span class="tag-note">Schematic</span>
+        </div>
+        <p class="anat-lede">Each ambiguity entry records its source location, the gap, the adopted resolution and rationale, sensitivity, and affected tasks.</p>
+        <div class="anat-rec" role="list" aria-label="Fields of the ambiguity table">
+          <div class="anat-row" role="listitem"><span class="anat-f">ID</span><i class="anat-bar" style="--w:22%" aria-hidden="true"></i></div>
+          <div class="anat-row" role="listitem"><span class="anat-f">type</span><i class="anat-bar" style="--w:38%" aria-hidden="true"></i></div>
+          <div class="anat-row" role="listitem"><span class="anat-f">location</span><i class="anat-bar" style="--w:62%" aria-hidden="true"></i></div>
+          <div class="anat-row" role="listitem"><span class="anat-f">gap</span><i class="anat-bar" style="--w:86%" aria-hidden="true"></i></div>
+          <div class="anat-row" role="listitem"><span class="anat-f">adopted resolution and reason</span><i class="anat-bar" style="--w:74%" aria-hidden="true"></i></div>
+          <div class="anat-row" role="listitem"><span class="anat-f">sensitivity</span><i class="anat-bar" style="--w:30%" aria-hidden="true"></i></div>
+          <div class="anat-row" role="listitem"><span class="anat-f">affected tasks</span><i class="anat-bar" style="--w:46%" aria-hidden="true"></i></div>
+        </div>
+        <p class="anat-k">The change record has six sections <code>change_log.md</code></p>
+        <ol class="anat-log">
+          <li>changes required to run</li>
+          <li>changes required for correctness</li>
+          <li>convenience changes</li>
+          <li>deliberately unchanged behavior</li>
+          <li>pitfalls</li>
+          <li>open choices</li>
+        </ol>
+        <p class="anat-note">Field and section names are the paper’s; the paper prints no complete entry, so none is shown.</p>
+      </div>
+    </div>
+
+    <!-- ============================================================ B3. inside a guide: SCIQL -->
+    <h3 class="sub" data-reveal>Inside a guide: SCIQL</h3>
+    <p class="sub-lede" data-reveal>The paper’s condensed guide for SCIQL keeps all twelve section headings in their original order. It links a renamed-package issue to a compatibility launcher and a minimum-episode check, preserving both an executable route and the reason for it.</p>
+    <div class="gd" data-reveal>
+      <div class="gd-win">
+        <div class="win-bar gd-bar">
+          <svg class="gd-file" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h7.5l4 4v14h-11.5z"/><path d="M14 3v4h4M9.5 11.5h5M9.5 14.5h5M9.5 17.5h3.5"/></svg>
+          <span class="win-name">reproduction_guideline.md</span>
+          <span class="win-meta">12 sections</span>
+        </div>
+        <div class="gd-doc" id="gd-doc" role="region" aria-label="reproduction_guideline.md for SCIQL, re-typed from the paper figure">
+          <p class="gd-h1"># Reproducing Table 1 of SCIQL</p>
+          <div class="gd-sec" id="gd-s1"><p class="gd-h">## What this is</p>
+            <p class="gd-li">- Table 1: style alignment for CBC, SCBC, and SCIQL.</p>
+            <p class="gd-li">- Released Circle2D and HalfCheetah datasets; code commit `5389c6e`.</p></div>
+          <div class="gd-sec" id="gd-s2"><p class="gd-h">## Hardware</p>
+            <p class="gd-li">- One GPU per repetition; this guide used NVIDIA H100 80 GB.</p></div>
+          <div class="gd-sec" id="gd-s3"><p class="gd-h">## Software</p>
+            <p class="gd-li">- Python 3.10; JAX 0.5.2; NumPy 2.2.3; PyTorch 2.5.1+cpu.</p>
+            <p class="gd-li">- JAX runs on the GPU; PyTorch is used for logging.</p></div>
+          <div class="gd-sec" id="gd-s4"><p class="gd-h">## Environment setup</p>
+            <p class="gd-fence">```bash</p>
+            <p class="gd-code">bash setup/01_environment.sh</p>
+            <p class="gd-code">source .venv/bin/activate</p>
+            <p class="gd-code">DATA_ROOT=/data bash setup/02_data.sh</p>
+            <p class="gd-fence">```</p></div>
+          <div class="gd-sec" id="gd-s5"><p class="gd-h">## Artifacts</p>
+            <p class="gd-li">- `datasets.zip`: SHA-256 checked; 1,000 episodes per Circle2D dataset.</p>
+            <p class="gd-li">- No released checkpoints; each experiment trains from scratch.</p></div>
+          <div class="gd-sec gd-hl-g" id="gd-s6"><p class="gd-h">## Experiments</p>
+            <p class="gd-li">- G15: SCIQL × circle2d-inplace-v0; one seed, all six style criteria.</p>
+            <p class="gd-fence">```bash</p>
+            <p class="gd-code">DATA_ROOT=/data OUTPUT_ROOT=/outputs bash experiments/run_G15.sh 0</p>
+            <p class="gd-fence">```</p></div>
+          <div class="gd-sec" id="gd-s7"><p class="gd-h">## Repetitions and variance</p>
+            <p class="gd-li">- Run index = seed; the paper reports a mean over five seeds.</p>
+            <p class="gd-li">- Use distinct seeds and retain every run, including low-scoring runs.</p></div>
+          <div class="gd-sec" id="gd-s8"><p class="gd-h">## Outputs and metrics</p>
+            <p class="gd-li">- `$OUTPUT_ROOT/G15/run0/metrics.json`, key: `alignment_x100`.</p>
+            <p class="gd-li">- Unweighted mean over labels, then criteria, multiplied by 100.</p></div>
+          <div class="gd-sec" id="gd-s9"><p class="gd-h">## Paths</p>
+            <p class="gd-li">- `DATA_ROOT`: datasets. `OUTPUT_ROOT`: new measurements and logs.</p>
+            <p class="gd-li">- `src/datasets/traj2d` links into `$DATA_ROOT/episodes/traj2d`.</p></div>
+          <div class="gd-sec gd-hl-y" id="gd-s10"><p class="gd-h">## Ambiguities and unspecified details</p>
+            <p class="gd-li">- A1: use unweighted aggregation; checked against Appendix Table 3.</p>
+            <p class="gd-li">- A3: released episodes refer to the old package name `style_bench`.</p>
+            <p class="gd-li">- Adopt aliases to `sciql.core.data` in `src/tools/sciql_launch.py`;</p>
+            <p class="gd-cont">retain the released episode classes.</p></div>
+          <div class="gd-sec gd-hl-r" id="gd-s11"><p class="gd-h">## Known pitfalls</p>
+            <p class="gd-li">- Symptom: exit 0 and a plausible CSV, despite loading no episodes.</p>
+            <p class="gd-li">- Cause: import errors are caught and skipped by the loader.</p>
+            <p class="gd-li">- Fix: use the compatibility launcher and keep `--min-episodes 1000`.</p>
+            <p class="gd-li">- Keep smoke outputs separate from full runs (`run&lt;i&gt;.smoke/`).</p></div>
+          <div class="gd-sec" id="gd-s12"><p class="gd-h">## What is not covered</p>
+            <p class="gd-li">- HumEnv: the released datasets and integration code are missing.</p>
+            <p class="gd-li">- Experiments outside Table 1.</p></div>
+        </div>
+        <div class="gd-more" data-js-only>
+          <span class="gd-more-hint">Scroll inside the file, or</span>
+          <button class="btn btn-sm gd-toggle" type="button" aria-expanded="false" aria-controls="gd-doc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            <span class="gd-toggle-label">Expand all twelve sections</span>
+          </button>
+        </div>
+      </div>
+
+      <aside class="gd-side" aria-label="Guide outline">
+        <p class="gd-side-k">Twelve sections</p>
+        <ol class="gd-toc">
+          <li><a href="#gd-s1">What this is</a></li>
+          <li><a href="#gd-s2">Hardware</a></li>
+          <li><a href="#gd-s3">Software</a></li>
+          <li><a href="#gd-s4">Environment setup</a></li>
+          <li><a href="#gd-s5">Artifacts</a></li>
+          <li class="hl-g"><a href="#gd-s6">Experiments</a></li>
+          <li><a href="#gd-s7">Repetitions and variance</a></li>
+          <li><a href="#gd-s8">Outputs and metrics</a></li>
+          <li><a href="#gd-s9">Paths</a></li>
+          <li class="hl-y"><a href="#gd-s10">Ambiguities and unspecified details</a></li>
+          <li class="hl-r"><a href="#gd-s11">Known pitfalls</a></li>
+          <li><a href="#gd-s12">What is not covered</a></li>
+        </ol>
+        <p class="gd-side-cap">The document records hardware and software prerequisites, data acquisition, launch commands, repetitions, output fields and aggregation rules, path conventions, ambiguities, known pitfalls, and unsupported scope. Commands and output keys specify how to produce and extract new measurements.</p>
+        <p class="gd-side-src">Re-typed verbatim from the paper figure <i>Inside a reproduction guide</i>, with its three highlighted sections.</p>
+        <button class="paper-fig" type="button" data-zoom="assets/img/fig/guide_appendix-2400.webp" data-title="Paper figure: Inside a reproduction guide">Paper figure: Inside a reproduction guide ↗</button>
+      </aside>
+    </div>
+
+    <figure class="fig art-fig" data-reveal><div class="fig-frame">
+      <img src="assets/img/fig/guide_components-1200.webp" srcset="assets/img/fig/guide_components-1200.webp 1200w, assets/img/fig/guide_components-2400.webp 2400w"
+           sizes="(max-width: 1180px) 100vw, 1116px" width="1200" height="488" loading="lazy" decoding="async"
+           alt="Paper figure. Left: the SCIQL reproduction guide with four sections expanded: Experiments (run_G15.sh; six criteria per seed, mean over five seeds), Outputs and metrics (alignment_x100 as unweighted means over labels, then criteria), Ambiguities (A3: alias style_bench to sciql.core.data), and Known pitfalls (enforce --min-episodes 1000; caught import errors let empty runs produce plausible CSVs). Right: Refined code (an alias in src/tools/sciql_launch.py applied before unpickling; aggregate_cell.py for Table 1 aggregation), Environment (JAX 0.5.2 on GPU, PyTorch CPU for logging; 01_environment.sh with 161 exact pins), and Launchers (run_G*.sh scripts and yaml configs feed run, collect, and aggregate steps that produce metrics.json).">
+      <button class="zoom-btn" type="button" data-zoom="assets/img/fig/guide_components-2400.webp" data-title="Paper figure: A refined artifact for SCIQL">Zoom</button>
+    </div><figcaption><b>A refined artifact for SCIQL.</b> Left: selected guide entries specify the six-criterion, five-seed protocol, unweighted aggregation, and checks for silently empty datasets. Right: an alias applied before unpickling preserves episode classes; CPU PyTorch avoids a cuDNN conflict with GPU JAX; launchers connect configurations to execution, output collection, and aggregation. The four components preserve executable steps and the reasons for them.</figcaption></figure>
+
+    <!-- ============================================================ B4. how ReproBridge builds it -->
+    <div class="art-build" id="construction" tabindex="-1">
+      <h3 class="sub" data-reveal>How ReproBridge builds it</h3>
+      <p class="sub-lede" data-reveal>Humans define the workflow, delivery standards, and protocols; agents perform all construction, review, and packaging. <i>Specify</i> fixes the intended experiment before execution; <i>Execute</i> establishes a working procedure and records measurements, repairs, and failures; <i>Preserve</i> packages that procedure and its rationale for reuse.</p>
+
+      <div class="cs" data-js-only data-reveal>
+        <div class="cs-flow">
+          <div class="cs-in">
+            <p class="cs-in-k">Inputs</p>
+            <div class="cs-in-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6.5 3h7.5l4 4v14h-11.5z"/><path d="M14 3v4h4M9.5 11.5h5M9.5 14.5h5M9.5 17.5h3.5"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M6.5 3h7.5l4 4v14h-11.5z"/><path d="M14 3v4h4"/><path d="M10.5 11.5L8.5 14l2 2.5M13.5 11.5l2 2.5-2 2.5"/></svg>
+            </div>
+            <p class="cs-in-l">Paper + code</p>
+          </div>
+          <span class="cs-arrow" aria-hidden="true"></span>
+          <div class="cs-stage" data-s="1">
+            <p class="cs-stage-h"><span class="cs-nb">1</span>Specify</p>
+            <button class="cs-role" type="button" data-role="intake" aria-pressed="false"><b>Intake</b><span>Map inputs and tasks</span></button>
+            <button class="cs-role" type="button" data-role="planner" aria-pressed="false"><b>Planner</b><span>Specify measurements</span></button>
+            <p class="cs-out">Task specifications</p>
+          </div>
+          <span class="cs-arrow" aria-hidden="true"></span>
+          <div class="cs-stage" data-s="2">
+            <p class="cs-stage-h"><span class="cs-nb">2</span>Execute</p>
+            <button class="cs-role" type="button" data-role="builder" aria-pressed="false"><b>Builder</b><span>Prepare the environment</span></button>
+            <button class="cs-role" type="button" data-role="reproducer" aria-pressed="false"><b>Reproducer</b><span>Execute and record</span></button>
+            <p class="cs-out">Execution evidence</p>
+          </div>
+          <span class="cs-arrow" aria-hidden="true"></span>
+          <div class="cs-stage" data-s="3">
+            <p class="cs-stage-h"><span class="cs-nb">3</span>Preserve</p>
+            <button class="cs-role" type="button" data-role="distiller" aria-pressed="false"><b>Distiller</b><span>Document decisions</span></button>
+            <button class="cs-role" type="button" data-role="packager" aria-pressed="false"><b>Packager</b><span>Verify the handoff</span></button>
+            <p class="cs-out">Reusable procedures</p>
+          </div>
+          <span class="cs-arrow" aria-hidden="true"></span>
+          <div class="cs-out-box">
+            <p class="cs-out-h">Refined artifact</p>
+            <ul>
+              <li data-c="code"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h7.5l4 4v14h-11.5z"/><path d="M14 3v4h4"/><path d="M10.5 11.5L8.5 14l2 2.5M13.5 11.5l2 2.5-2 2.5"/></svg>Refined code</li>
+              <li data-c="env"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg>Environment</li>
+              <li data-c="launch"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M7 10l3 2.2L7 14.4M12.5 15h4.5"/></svg>Launchers</li>
+              <li data-c="guide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.2C10 5.6 7 5.1 4 5.6v12.2c3-.5 6-.1 8 1.5 2-1.6 5-2 8-1.5V5.6c-3-.5-6 0-8 1.6z"/><path d="M12 7.2v12.1"/></svg>Guide</li>
+            </ul>
+          </div>
+          <div class="cs-links" aria-hidden="true"><i></i><i></i><i></i></div>
+          <button class="cs-role cs-rev" type="button" data-role="reviewer" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 2.6v5.2c0 4.3-3 7.2-7 8.7-4-1.5-7-4.4-7-8.7V5.6z"/><path d="M9 11.6l2.1 2.1 4-4.1"/></svg>
+            <b>Independent Reviewer</b>
+            <span class="cs-rev-t"><span>Inspect plans, runs, and the handoff</span><span>Request revisions and recheck</span></span>
+          </button>
+        </div>
+        <p class="cs-hint">Select a role to see its contract.</p>
+        <div class="cs-panel" id="cs-panel"></div>
+        <p class="sr-only" role="status" id="cs-status"></p>
+        <p class="caveat">A checkpoint reviewer is reused at different stages in separate contexts. The construction Reproducer is not the fresh downstream session used to evaluate reuse.</p>
+        <details class="cs-all">
+          <summary>All seven roles as a table</summary>
+        </details>
+      </div>
+
+      <!-- without JS: the paper figure and the full roles table (artifact.js also reads this table) -->
+      <div class="cs-static" data-nojs-only>
+        <figure class="fig"><div class="fig-frame">
+          <img src="assets/img/fig/construction_overview-1200.webp" srcset="assets/img/fig/construction_overview-1200.webp 1200w, assets/img/fig/construction_overview-2400.webp 2400w"
+               sizes="(max-width: 1180px) 100vw, 1116px" width="1200" height="368" loading="lazy" decoding="async"
+               alt="Paper figure: inputs (paper and code) flow through three stages, Specify (Intake, Planner), Execute (Builder, Reproducer), and Preserve (Distiller, Packager), into a refined artifact with refined code, environment, launchers, and a guide. An independent Reviewer below the stages inspects plans, runs, and the handoff, and requests revisions and rechecks.">
+        </div><figcaption><b>ReproBridge artifact construction.</b> Six roles form three stages: Specify (Intake, Planner), Execute (Builder, construction Reproducer), and Preserve (Distiller, Packager). Footers list stage outputs. Solid arrows show construction; dashed links show independent review and revision. The final handoff contains refined code, environment setup, launchers, and a guide. Downstream reproduction and auditing are separate evaluation steps.</figcaption></figure>
+        <div class="tbl-scroll cs-tbl">
+          <table class="tbl" id="cs-roles">
+            <caption>Construction skills: inputs, responsibility, and persistent outputs. A checkpoint reviewer is reused at different stages in separate contexts. The construction Reproducer is not the fresh downstream session used to evaluate reuse.</caption>
+            <thead><tr><th scope="col">Role</th><th scope="col">Input and responsibility</th><th scope="col">Output and check</th></tr></thead>
+            <tbody>
+              <tr data-role="intake"><th scope="row">Intake</th><td class="wrap-cell">Paper, pinned raw code, selected tasks; read and map the inputs</td><td class="wrap-cell">Input manifest, experiment groups, artifact availability, initial ambiguities</td></tr>
+              <tr data-role="planner"><th scope="row">Planner</th><td class="wrap-cell">Task mapping and ambiguities; specify the measurement before execution</td><td class="wrap-cell">Task specifications with source references, recorded choices, execution plans, draft launchers</td></tr>
+              <tr data-role="builder"><th scope="row">Builder</th><td class="wrap-cell">Dependency and artifact requirements; construct a working environment</td><td class="wrap-cell">Locked dependencies, setup and data scripts, container definition, smoke-test evidence</td></tr>
+              <tr data-role="reproducer"><th scope="row">Reproducer</th><td class="wrap-cell">Plans and verified setup; execute and record justified changes</td><td class="wrap-cell">File-backed measurements, code changes, repetition records, explicit failure reasons</td></tr>
+              <tr data-role="distiller"><th scope="row">Distiller</th><td class="wrap-cell">Execution evidence, repairs, and decisions; synthesize the handoff</td><td class="wrap-cell">Reproduction guide, change record, aggregation and variability guidance</td></tr>
+              <tr data-role="packager"><th scope="row">Packager</th><td class="wrap-cell">Code, setup, launchers, and documents; assemble a portable deliverable</td><td class="wrap-cell">Refined artifact and clean-shell verification evidence</td></tr>
+              <tr data-role="reviewer"><th scope="row">Reviewer</th><td class="wrap-cell">Plans, execution records, or completed artifact; challenge unsupported claims</td><td class="wrap-cell">Localized findings at planning, reproduction, and final handoff checkpoints</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="art-rules" data-reveal>
+        <div class="rule">
+          <span class="rule-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 3h7.5l4 4v14h-11.5z"/><path d="M14 3v4h4"/><path d="M9 13.6l2 2 4-4.2"/></svg></span>
+          <h4>Persistent evidence</h4>
+          <p>Each measurement links to an actual output file; blocked tasks retain an explicit failure reason; diagnostic runs stay separate from scored repetitions.</p>
+        </div>
+        <div class="rule">
+          <span class="rule-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 8.5h7.5l2.5 2.5v9.5H10z"/><path d="M14 14.6l-1.4 1.4 1.4 1.4M16.2 14.6l1.4 1.4-1.4 1.4"/><path class="fill" d="M4 3.5h7l2.5 2.5v9.5H4z"/><path d="M6.5 8.5h4.5M6.5 11h4.5M6.5 13.5h3"/></svg></span>
+          <h4>Paper over code</h4>
+          <p>When paper and code conflict, agents follow the paper’s setup and flag the discrepancy.</p>
+        </div>
+        <div class="rule">
+          <span class="rule-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="M7 9.5l3 2.4-3 2.4M12.5 15h4.5"/></svg></span>
+          <h4>Clean-shell delivery</h4>
+          <p>Supplied entry points are tested from a clean shell, including an inexpensive real repetition; human reference information is withheld throughout construction.</p>
+        </div>
+      </div>
+      <p class="art-cost" data-reveal><span class="art-cost-ic" aria-hidden="true"><svg viewBox="0 0 120 40"><path class="arch" d="M14 31Q60 -1 106 31"/><path class="deck" d="M6 31.5h108"/><path class="hang" d="M28 31.5v-9.9M41 31.5v-16M54 31.5v-18.6M66 31.5v-18.6M79 31.5v-16M92 31.5v-9.9"/></svg></span><span>Opus 5 constructs the refined artifacts for the main experiment. Constructing all 36 cost <b>$5,026</b> in API usage (<b>$139.61</b> per paper); GPU runtime is a separate expense. <a href="#results">When reuse pays it back →</a></span></p>
+    </div>
   </div>
 </section>

@@ -1,5 +1,110 @@
 <section class="sec" id="overview" aria-labelledby="overview-title">
   <div class="wrap">
-    <div class="sec-head"><h2 id="overview-title"><span class="sec-no">Overview</span>Placeholder for overview</h2></div>
+    <div class="sec-head" data-reveal>
+      <p class="eyebrow">Overview</p>
+      <h2 id="overview-title">Preserve what a reproduction recovers, then measure whether it&nbsp;helps</h2>
+      <p class="lede">ReproBridge has three parts. A standardized <b>refined reproducible artifact</b> preserves executable procedures and the reasons behind them. An <b>agent workflow</b> constructs these artifacts from a paper and its official repository. <b>ReproBridge-Bench</b> measures whether fresh coding-agent sessions reproduce experiments more reliably with them.</p>
+    </div>
+
+    <!-- Three pillars. overview.js draws the labelled flow lines between them (desktop: over and under the row;
+         narrow: through the gaps and down the left edge). Without JS the cards stand alone as a grid. -->
+    <div class="ov-pillars" data-reveal="fade">
+      <article class="ov-card" data-k="artifact" style="--d:0s">
+        <div class="ov-top"><span class="nb">01</span><span class="ov-kicker">Artifact</span></div>
+        <h3 class="ov-title">Refined reproducible artifact</h3>
+        <div class="ov-visual" aria-hidden="true">
+          <svg viewBox="0 0 260 150">
+            <rect class="m-frame" x="14" y="14" width="232" height="122" rx="12"/>
+            <path class="m-band" d="M14 26a12 12 0 0 1 12-12h208a12 12 0 0 1 12 12v10H14z"/>
+            <text class="m-cap m-cap-rra" x="130" y="29" text-anchor="middle">refined reproducible artifact</text>
+            <g class="m-tile c-code"><rect x="22" y="46" width="48" height="72" rx="8"/><path class="m-tband" d="M22 98h48v12a8 8 0 0 1-8 8H30a8 8 0 0 1-8-8z"/>
+              <g class="m-ic" transform="translate(35 59) scale(.92)"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M10.5 11.5L8.5 14l2 2.5M13.5 11.5l2 2.5-2 2.5"/></g>
+              <text class="m-tl" x="46" y="111.5" text-anchor="middle">code</text></g>
+            <g class="m-tile c-env"><rect x="78" y="46" width="48" height="72" rx="8"/><path class="m-tband" d="M78 98h48v12a8 8 0 0 1-8 8H86a8 8 0 0 1-8-8z"/>
+              <g class="m-ic" transform="translate(91 59) scale(.92)"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></g>
+              <text class="m-tl" x="102" y="111.5" text-anchor="middle">env</text></g>
+            <g class="m-tile c-launch"><rect x="134" y="46" width="48" height="72" rx="8"/><path class="m-tband" d="M134 98h48v12a8 8 0 0 1-8 8h-32a8 8 0 0 1-8-8z"/>
+              <g class="m-ic" transform="translate(147 59) scale(.92)"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M7 10l3 2.2L7 14.4M12.5 15h4.5"/></g>
+              <text class="m-tl" x="158" y="111.5" text-anchor="middle">launch</text></g>
+            <g class="m-tile c-guide"><rect x="190" y="46" width="48" height="72" rx="8"/><path class="m-tband" d="M190 98h48v12a8 8 0 0 1-8 8h-32a8 8 0 0 1-8-8z"/>
+              <g class="m-ic" transform="translate(203 59) scale(.92)"><path d="M12 7.2C10 5.6 7 5.1 4 5.6v12.2c3-.5 6-.1 8 1.5 2-1.6 5-2 8-1.5V5.6c-3-.5-6 0-8 1.6z"/><path d="M12 7.2v12.1"/></g>
+              <text class="m-tl" x="214" y="111.5" text-anchor="middle">guide</text></g>
+          </svg>
+        </div>
+        <p class="ov-copy">Four components: a refined codebase, environment setup, experiment launchers, and a reproduction guide. Together they preserve executable procedures and the reasons for their settings and repairs.</p>
+        <p class="ov-foot"><span class="nw"><b>4</b> components ·</span> <span class="nw"><b>932</b> ambiguity entries</span> <span class="nw">across <b>36</b> artifacts</span></p>
+        <a class="ov-link" href="#artifact">Explore the artifact <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="ov-card" data-k="workflow" style="--d:.12s">
+        <div class="ov-top"><span class="nb">02</span><span class="ov-kicker">Workflow</span></div>
+        <h3 class="ov-title">ReproBridge construction</h3>
+        <div class="ov-visual" aria-hidden="true">
+          <svg viewBox="0 0 260 150">
+            <g class="m-stage s-1"><rect x="10" y="24" width="70" height="56" rx="10"/><circle cx="45" cy="40" r="8"/><text class="m-num" x="45" y="43.4" text-anchor="middle">1</text><text class="m-sl" x="45" y="61" text-anchor="middle">Specify</text><circle class="m-role" cx="40" cy="71" r="2.2"/><circle class="m-role" cx="50" cy="71" r="2.2"/></g>
+            <g class="m-stage s-2"><rect x="95" y="24" width="70" height="56" rx="10"/><circle cx="130" cy="40" r="8"/><text class="m-num" x="130" y="43.4" text-anchor="middle">2</text><text class="m-sl" x="130" y="61" text-anchor="middle">Execute</text><circle class="m-role" cx="125" cy="71" r="2.2"/><circle class="m-role" cx="135" cy="71" r="2.2"/></g>
+            <g class="m-stage s-3"><rect x="180" y="24" width="70" height="56" rx="10"/><circle cx="215" cy="40" r="8"/><text class="m-num" x="215" y="43.4" text-anchor="middle">3</text><text class="m-sl" x="215" y="61" text-anchor="middle">Preserve</text><circle class="m-role" cx="210" cy="71" r="2.2"/><circle class="m-role" cx="220" cy="71" r="2.2"/></g>
+            <path class="m-arrow" d="M84.5 49l4 3-4 3M169.5 49l4 3-4 3"/>
+            <path class="m-link" d="M45 85v13M130 85v13M215 85v13"/>
+            <path class="m-link-tip" d="M42.5 87.5L45 84.5l2.5 3M42.5 95.5L45 98.5l2.5-3M127.5 87.5l2.5-3 2.5 3M127.5 95.5l2.5 3 2.5-3M212.5 87.5l2.5-3 2.5 3M212.5 95.5l2.5 3 2.5-3"/>
+            <rect class="m-rev" x="10" y="103" width="240" height="26" rx="13"/>
+            <path class="m-shield" d="M26 110.5l5.5 2v4c0 3.2-2.4 5.3-5.5 6.4-3.1-1.1-5.5-3.2-5.5-6.4v-4z"/>
+            <path class="m-shield-ck" d="M23.6 116.6l1.7 1.7 3.1-3.2"/>
+            <text class="m-cap m-cap-rev" x="40" y="119.4">independent reviewer</text>
+          </svg>
+        </div>
+        <p class="ov-copy">Six roles in three stages, plus an independent Reviewer. Humans define the workflow, delivery standards, and protocols; agents perform all construction, review, and packaging.</p>
+        <p class="ov-foot"><span class="nw"><b>6</b> roles + Reviewer ·</span> <span class="nw"><b>$139.61</b> API usage per paper</span></p>
+        <a class="ov-link" href="#construction">See how it is built <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="ov-card" data-k="bench" style="--d:.24s">
+        <div class="ov-top"><span class="nb">03</span><span class="ov-kicker">Benchmark</span></div>
+        <h3 class="ov-title">ReproBridge-Bench</h3>
+        <div class="ov-visual" aria-hidden="true">
+          <svg viewBox="0 0 260 150">
+            <text class="m-cap m-cap-rra" x="128" y="43" text-anchor="middle">compatibility interval</text>
+            <rect class="m-band-int" x="94" y="52" width="68" height="42" rx="5"/>
+            <path class="m-mean" d="M128 56v34"/>
+            <path class="m-drop" d="M94 94v13M162 94v13"/>
+            <path class="m-axis" d="M24 112h212"/>
+            <circle class="m-ref" cx="113" cy="112" r="3.4"/><circle class="m-ref" cx="122" cy="112" r="3.4"/><circle class="m-ref" cx="129" cy="112" r="3.4"/><circle class="m-ref" cx="135" cy="112" r="3.4"/><circle class="m-ref" cx="144" cy="112" r="3.4"/>
+            <text class="m-cap" x="128" y="132" text-anchor="middle">5 human-verified references</text>
+            <circle class="m-rra" cx="131" cy="69" r="6.5"/>
+            <text class="m-cap m-cap-rra" x="131" y="88" text-anchor="middle">inside</text>
+            <circle class="m-raw" cx="212" cy="69" r="6.5"/>
+            <text class="m-cap" x="212" y="88" text-anchor="middle">outside</text>
+          </svg>
+        </div>
+        <p class="ov-copy">1,029 tasks from 387 experiments across 36 papers, each anchored by five human-verified reference scores. A separate Auditor checks execution evidence, because matching numbers alone can conceal substituted measurements.</p>
+        <p class="ov-foot"><span class="nw"><b>1,029</b> tasks ·</span> <span class="nw"><b>5</b> references each ·</span> <span class="nw">audited</span></p>
+        <a class="ov-link" href="#benchmark">How success is scored <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
+    <p class="ov-note" data-reveal><span class="tag-note">Schematic</span><span>Card illustrations and flow lines explain the design; every number on the cards comes from the paper.</span></p>
+
+    <div class="stats ov-stats" data-reveal>
+      <div class="stat">
+        <div class="n"><span class="from">76.4% →</span>92.6%</div>
+        <div class="l">mean reproduction success across four models, Raw → refined artifact</div>
+        <span class="tag-note">3-eval mean</span>
+      </div>
+      <div class="stat">
+        <div class="n"><span class="from">21.6 →</span>3.9<small>pp</small></div>
+        <div class="l">cross-model success-rate spread</div>
+        <span class="tag-note">3-eval mean</span>
+      </div>
+      <div class="stat">
+        <div class="n">19.7%</div>
+        <div class="l">lower downstream API spending on average (16.8% to 23.7% per model)</div>
+        <span class="tag-note">3-eval mean</span>
+      </div>
+      <div class="stat">
+        <div class="n"><span class="ov-rec">813</span><small>vs</small> <span class="ov-rev">136</span></div>
+        <div class="l">raw failures recovered vs. raw successes lost (first evaluation)</div>
+        <span class="tag-note">Eval 1 · Codex</span>
+      </div>
+    </div>
+    <p class="caveat">Success and spending are means over three evaluations; recoveries and reversals come from the first evaluation. API spending covers downstream Reproducer sessions, including failed attempts; construction, auditing, and GPU costs are excluded.</p>
   </div>
 </section>

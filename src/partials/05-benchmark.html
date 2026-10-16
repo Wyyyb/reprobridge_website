@@ -1,5 +1,362 @@
 <section class="sec" id="benchmark" aria-labelledby="benchmark-title">
   <div class="wrap">
-    <div class="sec-head"><h2 id="benchmark-title"><span class="sec-no">02 · Benchmark</span>Placeholder for benchmark</h2></div>
+    <div class="sec-head" data-reveal>
+      <h2 id="benchmark-title"><span class="sec-no">02 · Benchmark</span>What counts as a&nbsp;reproduction</h2>
+      <p class="lede"><b>ReproBridge-Bench</b> provides 1,029 tasks from 387 experiments across 36 papers. Each task is anchored by five human-verified reference observations. A result succeeds only if it is numerically compatible with them and survives an independent execution-integrity audit.</p>
+    </div>
+
+    <!-- ============================================================ B1 selection + verification -->
+    <h3 class="sub" data-reveal>From 742 papers to 1,029 tasks</h3>
+    <p class="sub-lede" data-reveal>The collection targets main experimental results with accessible official implementations. A <em>task</em> is one own-method measurement in a main table, identified by dataset, metric, reporting statistic, and location; baselines, stand-alone ablations, figures, and appendix-only results are excluded. An <em>experiment</em> can emit several task scores.</p>
+
+    <div class="bm-b1">
+      <div class="bm-card" data-reveal>
+        <div class="bm-card-head">
+          <div>
+            <h4>Selection</h4>
+            <p class="cap">From the sampling manifest to the retained test papers and their tasks.</p>
+          </div>
+          <span class="bm-scale" data-js-only>bar length ∝ √count</span>
+        </div>
+        <div class="bm-fn" id="bm-funnel" data-js-only></div>
+        <ol class="bm-fn-fallback" data-nojs-only>
+          <li><b>742</b> ICML 2026 Spotlight papers</li>
+          <li><b>241</b> with code and non-purely-theoretical content</li>
+          <li><b>50</b> randomly sampled</li>
+          <li><b>36</b> retained test papers (excluded: 6 artifact or code availability · 4 compute requirements · 4 closed-model access)</li>
+        </ol>
+        <div class="bm-tasks">
+          <div class="bm-tasks-cell">
+            <span class="bm-tasks-n">1,463</span>
+            <span class="bm-tasks-l">curated tasks<br>from 502 experiments</span>
+          </div>
+          <span class="bm-tasks-arrow" aria-hidden="true"><svg viewBox="0 0 40 12" width="40" height="12"><path d="M1 6h34M30 1.5l5 4.5-5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div class="bm-tasks-cell is-final">
+            <span class="bm-tasks-n">1,029</span>
+            <span class="bm-tasks-l">verified tasks (70.3%)<br>spanning 387 experiments</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bm-card" data-reveal>
+        <div class="bm-card-head">
+          <div>
+            <h4>Reference verification</h4>
+            <p class="cap">Counts and shares cover all 1,463 curated tasks from 36 papers.</p>
+          </div>
+          <span class="tag-note">All 1,463 curated tasks</span>
+        </div>
+        <div class="bm-vb" id="bm-vbar" data-js-only></div>
+        <ol class="bm-cats" id="bm-cats">
+          <li data-cat="1"><span class="bm-cat-sw" aria-hidden="true">1</span><span class="bm-cat-t"><b>Reproduced: stable</b><span>Compatible reference, low variability</span></span><span class="bm-cat-n">701</span><span class="bm-cat-p">47.9%</span></li>
+          <li data-cat="2"><span class="bm-cat-sw" aria-hidden="true">2</span><span class="bm-cat-t"><b>Reproduced: variable</b><span>Compatible reference, higher variability</span></span><span class="bm-cat-n">328</span><span class="bm-cat-p">22.4%</span></li>
+          <li data-cat="3"><span class="bm-cat-sw" aria-hidden="true">3</span><span class="bm-cat-t"><b>Numerical mismatch</b><span>Executed, but numerically incompatible</span></span><span class="bm-cat-n">183</span><span class="bm-cat-p">12.5%</span></li>
+          <li data-cat="4"><span class="bm-cat-sw" aria-hidden="true">4</span><span class="bm-cat-t"><b>Execution blocked</b><span>Missing artifacts, dependencies, or code defects</span></span><span class="bm-cat-n">186</span><span class="bm-cat-p">12.7%</span></li>
+          <li data-cat="5"><span class="bm-cat-sw" aria-hidden="true">5</span><span class="bm-cat-t"><b>Resource/access limit</b><span>Compute capacity or restricted access</span></span><span class="bm-cat-n">65</span><span class="bm-cat-p">4.4%</span></li>
+        </ol>
+        <p class="bm-note">Categories 1 and 2 have verified reference measurements compatible with the published score and differ at the 10% relative-variation threshold; together they supply the 1,029 downstream tasks. Categories 3–5 distinguish numerical disagreement, execution blockers, and resource/access limits.</p>
+      </div>
+    </div>
+    <p class="caveat" data-reveal>Verification outcomes for the 36 retained papers under fixed reference rules; like the evaluation itself, they are not a conference-wide reproduction rate.</p>
+
+    <!-- ============================================================ B2 five runs, one interval -->
+    <h3 class="sub" data-reveal>Five runs, one interval</h3>
+    <p class="sub-lede" data-reveal>Five human reproducers on separate servers start from the same pinned raw commit, with separate execution directories and coding-agent sessions. Assuming faithful, independent executions, their mean estimates the expected result and their spread characterizes run-to-run variation. A compatibility interval built from them, fixed across raw and refined-artifact conditions, then decides numerical compatibility for every downstream attempt.</p>
+
+    <ol class="bm-rules" data-reveal>
+      <li><span class="bm-rule-k">Independent</span><p>Separate servers, directories, and coding-agent sessions from one pinned commit; no reuse of another participant's scripts, measurements, refined artifacts, or downstream traces.</p></li>
+      <li><span class="bm-rule-k">Human-checked</span><p>Coding-agent assistance is permitted, but humans inspect the scripts, configurations, edits, and measurement extraction actually used.</p></li>
+      <li><span class="bm-rule-k">Pre-committed</span><p>Unspecified repetition and seed choices are fixed before inspecting scores; procedures are not tuned, nor valid measurements repeated, until they approach the published value.</p></li>
+      <li><span class="bm-rule-k">One statistic</span><p>Each observation measures the specified task statistic: a multi-seed mean or best-of-<i>N</i> statistic is one observation, not interchangeable with single-seed scores.</p></li>
+    </ol>
+
+    <div class="bm-b2">
+      <div class="bm-fcard" data-reveal>
+        <span class="bm-kicker">Compatibility interval</span>
+        <div class="bm-math bm-eq" role="math" aria-label="I of q equals the closed interval from x-bar minus r to x-bar plus r, where r is the larger of t with (1 plus q) over 2 and 4 degrees of freedom, times s, times the square root of 1 plus one fifth; and 0.01 times the absolute value of x-bar.">
+          <div class="bm-eq-row" aria-hidden="true"><span class="bm-eq-l"><i>I</i><sup>(<i>q</i>)</sup></span><span class="bm-eq-op">=</span><span class="bm-eq-r">[&thinsp;<span class="ov">x</span> − <i>r</i>,&ensp;<span class="ov">x</span> + <i>r</i>&thinsp;]</span></div>
+          <div class="bm-eq-row" aria-hidden="true"><span class="bm-eq-l"><i>r</i></span><span class="bm-eq-op">=</span><span class="bm-eq-r">max<span class="bm-br">{</span><span class="bm-term bm-term-t"><i>t</i><sub>(1+<i>q</i>)/2,&thinsp;4</sub>&thinsp;<i>s</i>&thinsp;<span class="bm-sqrt"><span class="bm-sqrt-sign">√</span><span class="bm-sqrt-arg">1 + <span class="bm-frac"><span>1</span><span>5</span></span></span></span></span>,&ensp;<span class="bm-term bm-term-f">0.01&thinsp;|<span class="ov">x</span>|</span><span class="bm-br">}</span></span></div>
+        </div>
+        <dl class="bm-defs">
+          <div><dt class="bm-math"><span class="ov">x</span>, <i>s</i></dt><dd>Mean and sample standard deviation of the five reference observations.</dd></div>
+          <div><dt class="bm-math"><i>q</i></dt><dd>0.95 by default (<i>t</i> ≈ 2.78); 0.80 for the stricter check (<i>t</i> ≈ 1.53).</dd></div>
+          <div><dt class="bm-math">√(1 + ⅕)</dt><dd>Accommodates both uncertainty in the reference mean and variation in the new observation; without the floor, this is a Student-<i>t</i> prediction interval.</dd></div>
+          <div><dt class="bm-math">0.01&thinsp;|<span class="ov">x</span>|</dt><dd>The explicit 1% tolerance floor, active on 197 retained tasks.</dd></div>
+          <div><dt>Two-sided</dt><dd>A score beyond either bound fails, including one that improves on the published value. The 586 lower-is-better and 443 higher-is-better measurements use the same rule.</dd></div>
+        </dl>
+        <div class="bm-vrule">
+          <span class="bm-kicker">Reference variability</span>
+          <div class="bm-math bm-eq-sm" role="math" aria-label="V equals 100 times the maximum minus the minimum reference observation, divided by the absolute published score p."><span aria-hidden="true"><i>V</i> = 100 · (max<sub><i>i</i></sub> <i>x<sub>i</sub></i> − min<sub><i>i</i></sub> <i>x<sub>i</sub></i>) / |<i>p</i>|</span></div>
+          <p>A task enters the evaluation set only if the published score <i>p</i> lies in <i>I</i><sup>(.95)</sup>. Stable tasks (Cat. 1) have <i>V</i> ≤ 10; higher-variability tasks (Cat. 2) exceed it.</p>
+        </div>
+      </div>
+
+      <div class="bm-try" id="bm-try" data-js-only data-reveal>
+        <div class="bm-try-head">
+          <div class="bm-try-title"><span class="bm-kicker">Try the rule</span><span class="tag-note">Illustrative values</span></div>
+          <button class="btn btn-sm bm-reset" type="button">Reset</button>
+        </div>
+        <div class="bm-try-top">
+          <div class="bm-verdict" data-state="ok">
+            <div class="bm-verdict-word"><span class="bm-vdot" aria-hidden="true"></span><span class="bm-vw">Compatible</span></div>
+          </div>
+          <div class="bm-q" id="bm-q"></div>
+          <p class="bm-vreason"></p>
+        </div>
+        <div class="bm-line" id="bm-line"></div>
+        <div class="bm-calc" aria-hidden="true"></div>
+        <div class="bm-reads">
+          <div class="bm-read">
+            <span class="bm-read-k">Scoring <i>Y</i> · <span class="bm-read-q">q = 0.95</span></span>
+            <div class="bm-read-rows"></div>
+          </div>
+          <div class="bm-read bm-read-task">
+            <span class="bm-read-k">Verifying the task · always <i>I</i><sup>(.95)</sup></span>
+            <div class="bm-read-rows"></div>
+          </div>
+        </div>
+        <p class="bm-try-hint">Drag the five references, the published score <i>p</i>, or the new result <i>Y</i>, or focus a marker and use the arrow keys (Page Up/Down for steps of 1). Tight references switch on the 1% floor; <i>q</i> = 0.80 tightens the interval for scoring only.</p>
+        <p class="sr-only" aria-live="polite" id="bm-live"></p>
+      </div>
+    </div>
+    <p class="caveat" data-reveal>Five reference observations are a protocol choice, not a guarantee of adequate uncertainty estimation. Numerical compatibility does not certify scientific validity or complete fidelity to the stated experiment.</p>
+
+    <div class="bm-err" data-reveal>
+      <div class="bm-err-main">
+        <span class="bm-kicker">Measurement model</span>
+        <div class="bm-math bm-eq-big" role="math" aria-label="Y equals mu plus D plus epsilon"><span aria-hidden="true"><i>Y</i> = <i>μ</i> + <i>D</i> + <i>ε</i></span></div>
+        <dl class="bm-err-terms">
+          <div><dt class="bm-math"><i>μ</i></dt><dd>The expected value of the specified statistic when the experiment is faithfully executed. The published score is one observation, not an error-free value of <i>μ</i>.</dd></div>
+          <div><dt class="bm-math"><i>D</i></dt><dd>The shift in expectation from execution choices departing from the specified experiment.</dd></div>
+          <div><dt class="bm-math"><i>ε</i></dt><dd>Zero-mean variation conditional on those choices.</dd></div>
+        </dl>
+        <p class="bm-err-key">Repeated measurements can reduce uncertainty about the mean of a fixed procedure, but cannot correct a consistently misexecuted procedure. <b>ReproBridge aims to reduce |<i>D</i>| by preserving procedures and decisions for faithful execution, while <i>ε</i> remains.</b></p>
+      </div>
+      <figure class="bm-err-fig">
+        <svg class="bm-err-svg" viewBox="0 0 400 200" role="img" aria-label="Schematic: runs of a faithful procedure scatter around mu; runs of a consistently misexecuted procedure scatter just as tightly around mu plus D, so repeating them does not remove the shift D.">
+          <line class="bm-es-axis" x1="16" y1="168" x2="384" y2="168"/>
+          <line class="bm-es-mu" x1="128" y1="34" x2="128" y2="168"/>
+          <text class="bm-es-lbl" x="128" y="188" text-anchor="middle">μ</text>
+          <text class="bm-es-lbl" x="268" y="188" text-anchor="middle">μ + D</text>
+          <line class="bm-es-tick" x1="268" y1="160" x2="268" y2="168"/>
+          <text class="bm-es-k" x="20" y="62">faithful (<tspan font-style="italic">D</tspan> = 0)</text>
+          <g class="bm-es-dots">
+            <circle cx="106" cy="76" r="5.5"/><circle cx="121" cy="76" r="5.5"/><circle cx="131" cy="76" r="5.5"/><circle cx="139" cy="76" r="5.5"/><circle cx="152" cy="76" r="5.5"/>
+          </g>
+          <path class="bm-es-eps" d="M101 92v6h56v-6"/>
+          <text class="bm-es-small" x="129" y="112" text-anchor="middle">ε</text>
+          <text class="bm-es-k" x="20" y="134">misexecuted</text>
+          <g class="bm-es-dots bm-es-off">
+            <circle cx="246" cy="142" r="5.5"/><circle cx="259" cy="142" r="5.5"/><circle cx="270" cy="142" r="5.5"/><circle cx="279" cy="142" r="5.5"/><circle cx="292" cy="142" r="5.5"/>
+          </g>
+          <path class="bm-es-d" d="M131 44H262"/>
+          <path class="bm-es-d-head" d="M256 39.5l7 4.5-7 4.5"/>
+          <text class="bm-es-dl" x="196" y="36" text-anchor="middle"><tspan font-style="italic">D</tspan>: repeated runs cannot correct it</text>
+        </svg>
+        <figcaption><span class="tag-note">Schematic</span> The paper uses this model to organize the design and interpret results, not to report measured bias or variance components.</figcaption>
+      </figure>
+    </div>
+
+    <!-- ============================================================ B3 scope + information access -->
+    <h3 class="sub" data-reveal>Scope and information access</h3>
+    <p class="sub-lede" data-reveal>Sonnet 4.6, Sonnet 5, Opus 5, and Gemini 3.8 Flash attempt all 1,029 tasks from 36 test papers, with one fresh session per paper–model–condition per evaluation and the same limits in both conditions.</p>
+
+    <div class="bm-mix" data-reveal>
+      <div class="bm-split">
+        <span class="bm-split-k">Task type</span>
+        <div class="bm-split-nums"><span><b>631</b> full-procedure</span><span><b>398</b> evaluation-only</span></div>
+        <div class="bm-split-bar" aria-hidden="true"><i style="flex-grow:631"></i><i style="flex-grow:398"></i></div>
+        <p>Evaluating an explicitly permitted official checkpoint does not require repeating its training; evaluation alone cannot establish completion of a training task.</p>
+      </div>
+      <div class="bm-split">
+        <span class="bm-split-k">Compute</span>
+        <div class="bm-split-nums"><span><b>730</b> GPU</span><span><b>299</b> CPU-only</span></div>
+        <div class="bm-split-bar" aria-hidden="true"><i style="flex-grow:730"></i><i style="flex-grow:299"></i></div>
+        <p>Of the 36 papers, 28 are GPU papers and eight are CPU-only papers.</p>
+      </div>
+      <div class="bm-split">
+        <span class="bm-split-k">Metric direction</span>
+        <div class="bm-split-nums"><span><b>586</b> lower-is-better</span><span><b>443</b> higher-is-better</span></div>
+        <div class="bm-split-bar" aria-hidden="true"><i style="flex-grow:586"></i><i style="flex-grow:443"></i></div>
+        <p>All assessed by the same two-sided compatibility rule.</p>
+      </div>
+    </div>
+
+    <div class="stats bm-stats" data-reveal>
+      <div class="stat"><div class="n">24<small>h</small></div><div class="l">wall-clock limit per paper, raw code and refined artifact alike</div></div>
+      <div class="stat"><div class="n">8</div><div class="l">H100-80GB GPUs for GPU experiments</div></div>
+      <div class="stat"><div class="n">4</div><div class="l">Reproducers: Sonnet 4.6, Sonnet 5, Opus 5, Gemini 3.8 Flash</div></div>
+      <div class="stat"><div class="n">3</div><div class="l">evaluations, each with fresh sessions</div></div>
+    </div>
+
+    <div class="bm-access" data-reveal>
+      <div class="bm-acc bm-acc-in">
+        <div class="bm-acc-top"><span class="note-title">Each fresh Reproducer session receives</span><span class="bm-acc-tag">Session</span></div>
+        <ul>
+          <li><svg class="bm-ic bm-ic-in" viewBox="0 0 18 18" aria-hidden="true"><path d="M5 9.4l2.6 2.6L13 6.6"/></svg>The paper, with its published targets visible</li>
+          <li><svg class="bm-ic bm-ic-in" viewBox="0 0 18 18" aria-hidden="true"><path d="M5 9.4l2.6 2.6L13 6.6"/></svg>The selected tasks</li>
+          <li><svg class="bm-ic bm-ic-in" viewBox="0 0 18 18" aria-hidden="true"><path d="M5 9.4l2.6 2.6L13 6.6"/></svg>Either the raw codebase or its refined artifact</li>
+        </ul>
+      </div>
+      <div class="bm-acc bm-acc-out">
+        <div class="bm-acc-top"><span class="note-title">Withheld</span><span class="bm-lock" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg></span></div>
+        <ul>
+          <li><svg class="bm-ic bm-ic-out" viewBox="0 0 18 18" aria-hidden="true"><path d="M5.5 9h7"/></svg>Construction conversations</li>
+          <li><svg class="bm-ic bm-ic-out" viewBox="0 0 18 18" aria-hidden="true"><path d="M5.5 9h7"/></svg>Hidden reference observations</li>
+          <li><svg class="bm-ic bm-ic-out" viewBox="0 0 18 18" aria-hidden="true"><path d="M5.5 9h7"/></svg>The alternative condition, and other agents' run directories</li>
+        </ul>
+      </div>
+    </div>
+    <p class="bm-access-foot" data-reveal>Task categories and numerical thresholds are applied outside the Reproducer session. An allowed checkpoint may serve as input; a shipped score file never counts as a measurement.</p>
+    <p class="caveat" data-reveal>Harnesses differ across vendors, so cross-model comparisons are descriptive.</p>
+
+    <!-- ============================================================ B4 audit -->
+    <h3 class="sub" data-reveal>An audit behind every match</h3>
+    <p class="sub-lede" data-reveal>Matching numbers alone can conceal substituted measurements. An independent Auditor traces each reported value to its output location, execution record, and generating script, and provides no feedback to the Reproducer.</p>
+
+    <div class="bm-audit" data-reveal>
+      <div class="bm-trace">
+        <span class="bm-kicker">Evidence chain</span>
+        <ol class="bm-chain">
+          <li>reported value</li>
+          <li>output location</li>
+          <li>execution record</li>
+          <li>generating script</li>
+        </ol>
+        <p class="cap">Ledger timestamps check execution and extraction order; available script and output hashes verify that the inspected files match the recorded versions.</p>
+      </div>
+      <ol class="bm-pipe">
+        <li><span class="bm-pipe-n">1</span><b>Submitted result</b><span>New measurements and execution evidence</span></li>
+        <li><span class="bm-pipe-n">2</span><b>Mechanical screening</b><span>Identifies leads; unresolved leads need recorded dispositions</span></li>
+        <li class="is-find"><span class="bm-pipe-n">3</span><b>Finder</b><span>Inspects executed code and records; proposes localized violations</span></li>
+        <li class="is-refute"><span class="bm-pipe-n">4</span><b>Refuter</b><span>Tries to overturn each proposed invalidation</span></li>
+        <li class="is-cond"><span class="bm-pipe-n">5</span><b>Panel</b><span>Only if the evidence remains contested</span></li>
+        <li class="is-end"><span class="bm-pipe-n">6</span><b>Verdict</b><span>Unsubstantiated findings remain uncertain</span></li>
+      </ol>
+    </div>
+
+    <div class="bm-b4" data-reveal>
+      <div class="bm-classes">
+        <h4 class="bm-h4">Five eligible violation classes</h4>
+        <ol>
+          <li><span class="nb">1</span>Copying a value without measuring it</li>
+          <li><span class="nb">2</span>Substituting the measurement instrument</li>
+          <li><span class="nb">3</span>Altering an operand used by the intended formula</li>
+          <li><span class="nb">4</span>Choosing the reported outcome conditional on observed values</li>
+          <li><span class="nb">5</span>Computing the wrong statistic</li>
+        </ol>
+        <p class="bm-classes-foot">The Auditor cross-checks executed code, logs, and extracted values to locate copied measurements, altered outputs, or substituted computations.</p>
+      </div>
+      <div class="bm-crits">
+        <div class="bm-crit is-req">
+          <span class="note-title">Invalidation requires all three</span>
+          <ul>
+            <li>An eligible violation supported by localized evidence</li>
+            <li>A material effect on the measurement</li>
+            <li>A failed refutation</li>
+          </ul>
+        </div>
+        <div class="bm-crit is-not">
+          <span class="note-title">Not enough on its own</span>
+          <ul class="bm-not">
+            <li>A numerical mismatch</li>
+            <li>A crashed run</li>
+            <li>A hardware difference</li>
+            <li>Suspicion without a localized artifact</li>
+          </ul>
+          <p>None of these automatically meets the conditions. Paper–code discrepancies are assessed against the same criteria.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bm-success" data-reveal>
+      <span class="bm-kicker">Task success</span>
+      <div class="bm-success-eq">
+        <span class="bm-pill">Result lies in the fixed compatibility interval</span>
+        <span class="bm-op">and</span>
+        <span class="bm-pill">Not invalidated by the primary Auditor (Codex)</span>
+        <span class="bm-op" aria-hidden="true">=</span>
+        <span class="bm-pill is-ok">Success</span>
+      </div>
+      <p>Missing or incompatible results fail. Uncertain audit findings do not count as invalidations.</p>
+    </div>
+
+    <figure class="bm-case" data-reveal>
+      <div class="bm-case-body">
+        <div class="bm-case-head"><span class="bm-case-id">WBMM · timing</span><span class="tag rra">Refined-artifact tasks</span></div>
+        <blockquote>Reports replaced measured epoch durations with full-dataset projections, including 32.5 seconds reported as 206 seconds, and files were edited after process exit.</blockquote>
+        <p class="bm-case-key">The measured durations also satisfied the numerical intervals, so execution evidence, not the number, revealed the substitution.</p>
+      </div>
+      <div class="bm-case-side">
+        <table class="bm-case-tbl">
+          <caption>Epoch time, seconds</caption>
+          <thead><tr><th scope="col">Task</th><th scope="col">Execution record</th><th scope="col">Submitted</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">T028</th><td>≈ 32.5</td><td>206</td></tr>
+            <tr><th scope="row">T033</th><td>≈ 53</td><td>335</td></tr>
+            <tr><th scope="row">T038</th><td>≈ 92</td><td>579</td></tr>
+          </tbody>
+        </table>
+        <figcaption class="cap">Submitted values projected subset timings to a 2,502-iteration epoch; reviewed records show file edits 8–17 minutes after process exit.</figcaption>
+      </div>
+    </figure>
+
+    <!-- ============================================================ B5 human review of the Auditors -->
+    <h3 class="sub" data-reveal>Checking the Auditors against human review</h3>
+    <p class="sub-lede" data-reveal>Two human reviewers cross-verified all 409 selected tasks from eight randomly selected papers under both Raw and refined-artifact conditions, 818 outcomes in total, including outcomes neither Auditor flagged.</p>
+    <div class="bm-hp" data-reveal>
+      <span class="bm-hp-k">Reviewed papers · tasks</span>
+      <ul class="bm-hp-list">
+        <li><button type="button" class="bm-hp-btn" data-paper="7" disabled>ExactFANOVA <span>82</span></button></li>
+        <li><button type="button" class="bm-hp-btn" data-paper="66" disabled>Learning Randomized Reductions <span>38</span></button></li>
+        <li><button type="button" class="bm-hp-btn" data-paper="69" disabled>ATLAS <span>82</span></button></li>
+        <li><button type="button" class="bm-hp-btn" data-paper="126" disabled>MindOmni <span>53</span></button></li>
+        <li><button type="button" class="bm-hp-btn" data-paper="141" disabled>POET-X <span>57</span></button></li>
+        <li><button type="button" class="bm-hp-btn" data-paper="187" disabled>SlaClip <span>30</span></button></li>
+        <li><button type="button" class="bm-hp-btn" data-paper="230" disabled>Weak-and-Strong Verification <span>9</span></button></li>
+        <li><button type="button" class="bm-hp-btn" data-paper="238" disabled>WBMM <span>58</span></button></li>
+      </ul>
+    </div>
+
+    <div class="bm-cm-card" data-reveal>
+      <div class="bm-card-head">
+        <div>
+          <h4>Audit judgments against human verification</h4>
+          <p class="cap">Each 409-outcome matrix has human invalid/valid rows and Auditor flag/pass columns. Both Auditors are scored against the same human labels.</p>
+        </div>
+        <span class="tag-note">Single evaluation</span>
+      </div>
+      <div class="bm-cms" id="bm-cms" data-js-only></div>
+      <div class="tbl-scroll" data-nojs-only>
+        <table class="tbl">
+          <thead><tr><th scope="col">Matrix</th><th class="n" scope="col">TP</th><th class="n" scope="col">FN</th><th class="n" scope="col">FP</th><th class="n" scope="col">TN</th><th class="n" scope="col">Precision</th><th class="n" scope="col">Recall</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Raw · Codex</th><td class="n">26</td><td class="n">7</td><td class="n">3</td><td class="n">373</td><td class="n">89.7%</td><td class="n">78.8%</td></tr>
+            <tr><th scope="row">Raw · Claude</th><td class="n">20</td><td class="n">13</td><td class="n">4</td><td class="n">372</td><td class="n">83.3%</td><td class="n">60.6%</td></tr>
+            <tr><th scope="row">RRA · Codex</th><td class="n">5</td><td class="n">1</td><td class="n">1</td><td class="n">402</td><td class="n">83.3%</td><td class="n">83.3%</td></tr>
+            <tr><th scope="row">RRA · Claude</th><td class="n">4</td><td class="n">2</td><td class="n">0</td><td class="n">403</td><td class="n">100.0%</td><td class="n">66.7%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="bm-cm-key" aria-hidden="true" data-js-only>
+        <span><i class="k-tp"></i>TP detected invalid</span><span><i class="k-fn"></i>FN missed invalid</span><span><i class="k-fp"></i>FP flagged valid</span><span><i class="k-tn"></i>TN accepted valid</span>
+      </div>
+    </div>
+
+    <div class="bm-hs" data-reveal>
+      <div class="bm-pr" role="table" aria-label="Precision and recall on all 818 outcomes against the shared human labels">
+        <div class="bm-pr-row bm-pr-head" role="row"><span role="columnheader">All 818 outcomes</span><span role="columnheader">Precision</span><span role="columnheader">Recall</span></div>
+        <div class="bm-pr-row" role="row"><span role="rowheader">Codex <small>primary</small></span><span role="cell"><b>88.6%</b><i class="bm-meter" style="--v:88.6" aria-hidden="true"></i></span><span role="cell"><b>79.5%</b><i class="bm-meter" style="--v:79.5" aria-hidden="true"></i></span></div>
+        <div class="bm-pr-row" role="row"><span role="rowheader">Claude <small>comparison</small></span><span role="cell"><b>85.7%</b><i class="bm-meter" style="--v:85.7" aria-hidden="true"></i></span><span role="cell"><b>61.5%</b><i class="bm-meter" style="--v:61.5" aria-hidden="true"></i></span></div>
+      </div>
+      <ul class="bm-facts">
+        <li><b>39</b><span>invalid outcomes in the shared labels: 33 with Raw, six with the refined artifact</span></li>
+        <li><b>8 <small>vs</small> 15</b><span>missed by Codex and by Claude; Codex detects seven more at the same false-positive count</span></li>
+        <li><b>4 <small>of</small> 779</b><span>valid outcomes falsely flagged by each Auditor (0.5%)</span></li>
+      </ul>
+    </div>
+    <p class="bm-hs-proc" data-reveal>Each reviewer traces the measurement to primary execution evidence, records an initial judgment, and cross-checks the other's assessment before they agree on the final label.</p>
+    <p class="caveat" data-reveal>Selection is at the paper level; task outcomes within a paper can share execution evidence and are not independent draws. Automated audits miss some violations, as these counts show.</p>
+    <p class="paper-figs" data-reveal><button class="paper-fig" type="button" data-zoom="assets/img/fig/audit_validation-2400.webp" data-title="Paper figure: Audit judgments against human verification" data-alt="Four confusion matrices of audit judgments against human verification: Raw Codex 26, 7, 3, 373; Raw Claude 20, 13, 4, 372; RRA Codex 5, 1, 1, 402; RRA Claude 4, 2, 0, 403.">Paper figure: Audit judgments against human verification ↗</button></p>
   </div>
 </section>

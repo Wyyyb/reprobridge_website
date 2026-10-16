@@ -1,5 +1,157 @@
 <section class="sec" id="scope" aria-labelledby="scope-title">
   <div class="wrap">
-    <div class="sec-head"><h2 id="scope-title"><span class="sec-no">06 · Scope</span>Placeholder for scope</h2></div>
+    <div class="sec-head" data-reveal>
+      <h2 id="scope-title"><span class="sec-no">06 · Scope</span>Intended use, and what the results do not show</h2>
+      <p class="lede">Reproduction success depends jointly on artifact quality and reproducer ability. ReproBridge is primarily intended as a reproducibility check before a paper is submitted and its artifacts are released, and the same format lets third-party reproducers preserve their work to lower the cost of later attempts.</p>
+    </div>
+
+    <!-- A1. Two intended uses (sections/7_discussion.tex, "Use before submission and by later reproducers") -->
+    <div class="grid2 sc-uses">
+      <article class="sc-use is-primary" data-reveal>
+        <div class="sc-use-top">
+          <span class="sc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14.5l2.2 2.2 4.3-4.6"/></svg></span>
+          <span class="kicker">Primary use · Authors</span>
+        </div>
+        <h3 class="sc-use-title">Before submission</h3>
+        <p>The primary intended use is for authors to apply ReproBridge as a reproducibility check before submitting a paper and releasing its artifacts. Executing the paper's specified setup can expose missing details, execution barriers, and paper–code inconsistencies, giving authors concrete issues to inspect and correct.</p>
+        <dl class="sc-use-foot">
+          <div><dt>Can expose</dt><dd><span class="tag">Missing details</span><span class="tag">Execution barriers</span><span class="tag">Paper–code inconsistencies</span></dd></div>
+        </dl>
+      </article>
+      <article class="sc-use" data-reveal>
+        <div class="sc-use-top">
+          <span class="sc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.5l3 3-3 3"/><path d="M4 11.5v-2a4 4 0 0 1 4-4h12"/><path d="M7 21.5l-3-3 3-3"/><path d="M20 12.5v2a4 4 0 0 1-4 4H4"/></svg></span>
+          <span class="kicker">Reuse · Third parties</span>
+        </div>
+        <h3 class="sc-use-title">For later reproducers</h3>
+        <p>Third-party reproducers can preserve their work in the same format to lower the cost of later attempts. A human reader can use the setup route and launchers to execute experiments, then inspect the guide and change record to assess the settings and repairs.</p>
+        <dl class="sc-use-foot">
+          <div><dt>Execute with</dt><dd><span class="tag env">Setup route</span><span class="tag launch">Launchers</span></dd></div>
+          <div><dt>Then inspect</dt><dd><span class="tag guide">Guide</span><span class="tag guide">Change record</span></dd></div>
+        </dl>
+      </article>
+    </div>
+    <p class="caveat sc-uses-caveat" data-reveal>Our experiments measure reuse by coding agents.</p>
+
+    <!-- A2. Paper-code misalignment (7_discussion.tex "Paper--code misalignment"; appendix "Separate alignment analysis") -->
+    <h3 class="sub" data-reveal>Paper–code misalignment</h3>
+    <p class="sub-lede" data-reveal>When the paper and released code conflict, ReproBridge strictly follows the paper's setup and flags the discrepancy with source locations and affected tasks. Such records help authors check consistency between their manuscript and implementation before submission.</p>
+
+    <div class="split top sc-mis">
+      <figure class="sc-entry" data-reveal>
+        <div class="sc-entry-head">
+          <span class="tag guide">Guide · ambiguity entry A1</span>
+          <span class="tag-note">Illustrative</span>
+        </div>
+        <p class="sc-entry-paper">Manifold-Aware Perturbations</p>
+        <p class="sc-entry-param">Learning rate</p>
+        <div class="sc-vs">
+          <div class="sc-v">
+            <span class="sc-v-k">Paper</span>
+            <span class="sc-v-n">10<sup>−4</sup></span>
+            <span class="sc-v-s">Stated in the paper</span>
+          </div>
+          <span class="sc-neq" aria-hidden="true">≠</span>
+          <div class="sc-v">
+            <span class="sc-v-k">Released code</span>
+            <span class="sc-v-n">10<sup>−3</sup></span>
+            <span class="sc-v-s">Driver, training scripts, and 171 committed manifests</span>
+          </div>
+        </div>
+        <div class="sc-entry-sens"><span class="sc-foot-l">Sensitivity</span><span class="tag gold">High</span></div>
+        <figcaption>The Manifold-Aware Perturbations guide identifies a learning rate of 10<sup>−4</sup> in the paper versus 10<sup>−3</sup> in the released code, a concrete inconsistency for authors to inspect and resolve before submission. The resulting change in final accuracy cannot be inferred from that factor alone.</figcaption>
+      </figure>
+
+      <div class="sc-agg" data-reveal>
+        <div class="stats sc-stats">
+          <div class="stat"><div class="n">238</div><div class="l">in-scope contradiction findings</div></div>
+          <div class="stat"><div class="n">669</div><div class="l">distinct selected tasks touched</div></div>
+        </div>
+        <p class="sc-agg-text">A separate agent-assisted static analysis compares selected paper results with their raw implementations. A contradiction requires an explicit paper statement and conflicting implemented behavior; absent implementations and choices on which the paper is silent are recorded separately.</p>
+        <div class="sc-split" id="scope-split" data-js-only></div>
+        <p class="cap" data-nojs-only>Of 293 recorded findings, 238 are in scope for contradiction analysis; 44 absent-implementation records and 11 paper-silent records are kept separate.</p>
+      </div>
+    </div>
+
+    <div class="chart-card sc-cats-card" data-reveal>
+      <div class="chart-head">
+        <div>
+          <h4>Contradiction findings by recorded category</h4>
+          <p class="cap">In-scope contradiction findings by recorded category, with the papers and distinct tasks each category touches. Scope is determined from evidence, not category names. <span class="tag-note">Agent-reviewed records</span></p>
+        </div>
+      </div>
+      <div class="chart" id="scope-cats" data-js-only></div>
+      <div class="tbl-scroll" data-nojs-only>
+        <table class="tbl">
+          <caption class="sr-only">Static paper–code contradiction findings by recorded category (no totals: papers and tasks overlap between rows).</caption>
+          <thead><tr><th scope="col">Category</th><th scope="col" class="n">Findings</th><th scope="col" class="n">Papers</th><th scope="col" class="n">Distinct tasks</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Hyperparameters</th><td class="n">41</td><td class="n">26</td><td class="n">287</td></tr>
+            <tr><th scope="row">Objective</th><td class="n">41</td><td class="n">22</td><td class="n">400</td></tr>
+            <tr><th scope="row">Data</th><td class="n">40</td><td class="n">20</td><td class="n">298</td></tr>
+            <tr><th scope="row">Architecture</th><td class="n">33</td><td class="n">18</td><td class="n">209</td></tr>
+            <tr><th scope="row">Evaluation procedure</th><td class="n">30</td><td class="n">20</td><td class="n">261</td></tr>
+            <tr><th scope="row">Training procedure</th><td class="n">22</td><td class="n">16</td><td class="n">176</td></tr>
+            <tr><th scope="row">Metric</th><td class="n">21</td><td class="n">13</td><td class="n">112</td></tr>
+            <tr><th scope="row">Baseline implementation</th><td class="n">5</td><td class="n">3</td><td class="n">4</td></tr>
+            <tr><th scope="row">Divergent implementation choices</th><td class="n">3</td><td class="n">3</td><td class="n">15</td></tr>
+            <tr><th scope="row">Scale / hardware</th><td class="n">2</td><td class="n">2</td><td class="n">25</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="caveat">Agent-reviewed records. Tasks and papers overlap across categories and must not be summed. These findings are possible sources of execution deviation, not human-validated error rates or explanations of the measured gains; their effects on measured performance require controlled comparisons. They were not supplied to the evaluated Reproducers.</p>
+    </div>
+
+    <!-- A3. Limitations (7_discussion.tex "Limitations"), in the paper's order and wording -->
+    <h3 class="sub" data-reveal>What these results do not show</h3>
+    <p class="sub-lede" data-reveal>The limitations stated in the paper's discussion, each linked to the part of this page it qualifies.</p>
+
+    <div class="grid3 sc-lims">
+      <article class="sc-lim" data-reveal>
+        <div class="sc-lim-top"><span class="sc-lim-no">01</span><svg class="sc-lim-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 4.5h17l-6.6 7.8v6l-3.8 1.9v-7.9z"/></svg></div>
+        <h4>Conditional evaluation</h4>
+        <p>The evaluation conditions on retained papers, fixed reference regions, and the tested agents; it is not a conference-wide reproduction rate. Five reference observations are a protocol choice, not a guarantee of adequate uncertainty estimation.</p>
+        <p class="sc-lim-ev">The 36 papers were retained from a random sample of 50 of the 241 ICML 2026 Spotlights with code and non-purely-theoretical content.</p>
+        <a class="sc-lim-link" href="#benchmark"><span class="sr-only">Related section: </span>02 · Benchmark<span aria-hidden="true"> ↑</span></a>
+      </article>
+      <article class="sc-lim" data-reveal>
+        <div class="sc-lim-top"><span class="sc-lim-no">02</span><svg class="sc-lim-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke-dasharray="2.6 2.9"/><path d="M8.3 12.2l2.5 2.5 4.9-5.2"/></svg></div>
+        <h4>Compatibility is not validity</h4>
+        <p>Numerical compatibility does not certify scientific validity or complete fidelity to the stated experiment, and refined artifacts can preserve incorrect assumptions.</p>
+        <p class="sc-lim-ev">Success requires numerical compatibility and no confirmed audit violation.</p>
+        <a class="sc-lim-link" href="#benchmark"><span class="sr-only">Related section: </span>02 · Benchmark<span aria-hidden="true"> ↑</span></a>
+      </article>
+      <article class="sc-lim" data-reveal>
+        <div class="sc-lim-top"><span class="sc-lim-no">03</span><svg class="sc-lim-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.3 15.3l5.2 5.2"/><path d="M7.8 10.5h5.4"/></svg></div>
+        <h4>Imperfect audits</h4>
+        <p>Automated audits miss some violations, as quantified against human verification.</p>
+        <p class="sc-lim-ev">Of the 39 invalid outcomes identified in human review of 818 outcomes, Codex misses eight and Claude misses 15.</p>
+        <a class="sc-lim-link" href="#benchmark"><span class="sr-only">Related section: </span>02 · Benchmark<span aria-hidden="true"> ↑</span></a>
+      </article>
+      <article class="sc-lim" data-reveal>
+        <div class="sc-lim-top"><span class="sc-lim-no">04</span><svg class="sc-lim-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13.5a4.5 4.5 0 0 0 6.8.5l2.7-2.7a4.5 4.5 0 0 0-6.4-6.4l-1.5 1.5"/><path d="M14 10.5a4.5 4.5 0 0 0-6.8-.5l-2.7 2.7a4.5 4.5 0 0 0 6.4 6.4l1.5-1.5"/></svg></div>
+        <h4>Workflow and handoff together</h4>
+        <p>Ordinary outputs and refined artifacts come from separate runs with comparable upstream resource use, so the comparison evaluates the construction workflow and resulting handoff together; it does not isolate the effect of reorganizing identical outputs. Component ablations measure losses conditional on the remaining materials.</p>
+        <a class="sc-lim-link" href="#results"><span class="sr-only">Related section: </span>03 · Results<span aria-hidden="true"> ↑</span></a>
+      </article>
+      <article class="sc-lim" data-reveal>
+        <div class="sc-lim-top"><span class="sc-lim-no">05</span><svg class="sc-lim-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 13.3l-6.9 6.9a1.9 1.9 0 0 1-2.7 0L3.5 13.1V3.5h9.6l7.1 7.1a1.9 1.9 0 0 1 0 2.7z"/><circle cx="8" cy="8" r="1.2"/></svg></div>
+        <h4>Descriptive annotations</h4>
+        <p>Case annotations and variability strata describe patterns rather than isolate causal effects.</p>
+        <p class="sc-lim-ev">Explanations for recovered outcomes come from an agent-assisted case review of 101 model–paper pairs; their counts are not independent causal measurements.</p>
+        <a class="sc-lim-link" href="#cases"><span class="sr-only">Related section: </span>05 · Cases<span aria-hidden="true"> ↑</span></a>
+      </article>
+      <article class="sc-lim" data-reveal>
+        <div class="sc-lim-top"><span class="sc-lim-no">06</span><svg class="sc-lim-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 15.6A9 9 0 1 1 8.4 3.7"/><path d="M21 12a9 9 0 0 0-9-9v9z"/></svg></div>
+        <h4>Partial cost accounting</h4>
+        <p>API savings concern downstream Reproducer sessions. Construction, independent verification, GPU execution, maintenance, and human review have separate costs; reuse estimates assume fixed prices and savings. Human time savings and comprehension require a separate study.</p>
+        <a class="sc-lim-link" href="#results"><span class="sr-only">Related section: </span>03 · Results<span aria-hidden="true"> ↑</span></a>
+      </article>
+    </div>
+
+    <div class="sc-future" data-reveal>
+      <span class="sc-future-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <p><span class="note-title">Future work</span>Evaluate reuse by human researchers, and measure the full costs of constructing, verifying, and maintaining artifacts across repeated attempts.</p>
+    </div>
   </div>
 </section>

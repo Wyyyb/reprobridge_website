@@ -1,5 +1,43 @@
+<!-- Walkthrough (#story): one real reproduction, HELIX, in five steps. The list below is the readable fallback and
+     the captions. story.js pins it beside a stage that redraws per step (desktop, motion allowed), or adds a still of
+     each step's scene (reduced motion, short or narrow viewports). Sources: appendix "Recovering omitted
+     configuration: HELIX"; main text "Recovered configurations become executable: HELIX"; paper inventory row 40
+     (first evaluation, Codex auditing); RB_DATA.helix. The repository timeline is schematic. -->
 <section class="sec" id="story" aria-labelledby="story-title">
-  <div class="wrap">
-    <div class="sec-head"><h2 id="story-title"><span class="sec-no">Walkthrough</span>Placeholder for story</h2></div>
+  <div class="story-track">
+    <div class="story-sticky">
+      <div class="wrap story-grid">
+        <div class="story-copy">
+          <p class="eyebrow">A real reproduction · HELIX</p>
+          <h2 id="story-title" class="story-title">Recovered once, reused after</h2>
+          <a class="story-skip" href="#overview">Skip the walkthrough <span aria-hidden="true">↓</span></a>
+          <ol class="story-steps">
+            <li class="story-step" data-step="0">
+              <h3 class="story-step-k">01 · The task</h3>
+              <p>HELIX, a time-series imputation paper, reports mean absolute error. ReproBridge-Bench turns each selected main-table result into a task anchored by five human-verified reference observations. A new result counts only if it lands inside the task's compatibility interval, <b>[0.12524, 0.13448]</b> for T004 and <b>[0.38442, 0.43878]</b> for T006, and passes an independent execution audit.</p>
+            </li>
+            <li class="story-step" data-step="1">
+              <h3 class="story-step-k">02 · A capable guess</h3>
+              <p>Opus 5, the strongest raw-code reproducer in the evaluation, starts from the paper and the released code. It restores the paper's architecture but keeps the shipped batch size of <b>32</b> and a learning rate of about <b>6.29×10<sup>−4</sup></b>.</p>
+            </li>
+            <li class="story-step" data-step="2">
+              <h3 class="story-step-k">03 · Outside the interval</h3>
+              <p>Both runs finish, but neither MAE is compatible: <b class="t-raw">0.15265</b> for T004 and <b class="t-raw">0.50527</b> for T006, each above its interval. Success now hinges on a detail the release leaves implicit.</p>
+            </li>
+            <li class="story-step" data-step="3">
+              <h3 class="story-step-k">04 · Recover and record</h3>
+              <p>During construction, guide entry A6 identifies repository revision <code>9760b347</code>, whose architecture matches the paper configuration, as the source for <b>batch size 8</b> and <b>learning rate 5.75×10<sup>−4</sup></b>. The guide records the repository history and architectural match as the rationale; the <code>--paper_config</code> launcher makes the choice executable.</p>
+            </li>
+            <li class="story-step" data-step="4">
+              <h3 class="story-step-k">05 · A fresh session reuses it</h3>
+              <p>A later Opus 5 session receives the refined artifact, never the construction conversation. Its MAEs, <b class="t-rra">0.12986</b> for T004 and <b class="t-rra">0.41160</b> for T006, both fall inside their intervals. On HELIX, Opus 5 succeeds on <b>4 of 9</b> tasks with raw code and <b>9 of 9</b> with the refined artifact.</p>
+            </li>
+          </ol>
+          <p class="story-note">Built from the paper's HELIX worked example: recorded MAEs and compatibility intervals (first evaluation, Codex auditing). The repository timeline is schematic.</p>
+        </div>
+        <div class="story-stage" data-js-only></div>
+      </div>
+    </div>
   </div>
+  <p class="sr-only story-live" aria-live="polite" aria-atomic="true"></p>
 </section>
