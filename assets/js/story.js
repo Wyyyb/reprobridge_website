@@ -48,7 +48,7 @@
     F.model + ' on the raw codebase restores the paper architecture but keeps the shipped batch size ' + F.bsRaw + ' and learning rate ' + F.lrRaw + '.',
     'Raw-code MAEs: ' + T0.id + ' ' + f5(T0.raw) + ', ' + side(T0, T0.raw) + ' ' + iv(T0) + '; ' + T1.id + ' ' + f5(T1.raw) + ', ' + side(T1, T1.raw) + ' ' + iv(T1) + '.',
     'Construction: guide entry ' + F.entry + ' identifies revision ' + F.rev + ', whose architecture matches the paper, as the source for batch size ' + F.bsRra + ' and learning rate ' + F.lrRra + '; the ' + F.launcher + ' launcher makes the choice executable. The repository timeline is schematic.',
-    'A fresh ' + F.model + ' session with the refined artifact: ' + T0.id + ' ' + f5(T0.rra) + ' and ' + T1.id + ' ' + f5(T1.rra) + ', ' + (inside(T0, T0.rra) && inside(T1, T1.rra) ? 'both inside their intervals.' : 'see intervals above.') +
+    'A later session with the refined artifact: ' + T0.id + ' ' + f5(T0.rra) + ' and ' + T1.id + ' ' + f5(T1.rra) + ', ' + (inside(T0, T0.rra) && inside(T1, T1.rra) ? 'both inside their intervals.' : 'see intervals above.') +
       (INV ? ' On HELIX, ' + F.model + ' succeeds on ' + INV.raw + ' of ' + INV.n + ' tasks with raw code and ' + INV.rra + ' of ' + INV.n + ' with the refined artifact.' : '')
   ];
   var KICK = steps.map(function (li) { var k = li.querySelector('.story-step-k'); return k ? k.textContent.replace(/\s+/g, ' ').trim() : ''; });
@@ -107,7 +107,7 @@
     var svg = S('svg', { class: 'st-svg' + (nar ? ' is-nar' : ''), role: 'img', focusable: 'false', viewBox: '0 0 ' + W + ' 100' });
     canvas.appendChild(svg);
     mount.appendChild(canvas);
-    var reg = [], notes = [];
+    var reg = [], notes = [], adoptY = 0;
 
     function st(el, s, o) {
       o = o || {};
@@ -120,7 +120,7 @@
       return st(el, s, { d: d, tf: s.split('').map(function (c) { return c === '-' ? 'translate(0px, 7px)' : 'translate(0px, 0px)'; }) });
     }
     function note(text, x, y, s, anchor) {
-      var el = H('span', { class: 'tag-note st-note' + (anchor === 'end' ? ' is-end' : ''), text: text });
+      var el = H('span', { class: 'tag-note st-note' + (anchor === 'end' ? ' is-end' : ''), 'aria-hidden': 'true', text: text });   // the svg label says it too
       canvas.appendChild(el);
       notes.push({ el: el, x: x, y: y, s: s, anchor: anchor });
     }
@@ -144,7 +144,7 @@
       var cy = nar ? y0 + 60 : y0 + 24, ch = 26;
       [['ooo--', 'raw', 'Raw codebase · ' + F.model, 'ring'],
        ['---o-', 'con', 'Construction', 'arc'],
-       ['----o', 'rra', 'Refined artifact · fresh ' + F.model + ' session', 'dot']].forEach(function (c) {
+       ['----o', 'rra', 'Refined artifact · fresh session', 'dot']].forEach(function (c) {
         var cg = S('g', { class: 's-sess ' + c[1] }, g);
         var r = S('rect', { y: cy, height: ch, rx: ch / 2, class: 's-sess-bg' }, cg);
         var t = txt(cg, 0, cy + 17.2, c[2], 's-sess-t');
@@ -283,9 +283,9 @@
       cy = cy + 34 + flow(g, x + 16, cy + 34, w - 32, out, 'out');
       return cy + 14 - y;
     }
-    function cons(g, x, y, w, live) {
+    function cons(g, x, y, w) {
       txt(g, x + 16, y + 26, 'REPOSITORY HISTORY', 's-k');
-      note('Schematic timeline', x + w - 14, y + 22, live ? '---o-' : 'ooooo', 'end');
+      note('Schematic timeline', x + w - 14, y + 22, '---o-', 'end');
       S('line', { x1: x + 16, x2: x + w - 16, y1: y + 38, y2: y + 38, class: 's-rule' }, g);
       /* schematic history: unlabeled commits, except the revision the guide cites */
       var ty = y + 68, l0 = x + 26, l1 = x + w - 26, n = 9, key = 3, kx = l0 + key * (l1 - l0) / (n - 1);
@@ -294,17 +294,17 @@
       S('line', { x1: l1, x2: x + w - 12, y1: ty, y2: ty, class: 's-tl s-tl-fade' }, g);
       for (var i = 0; i < n; i++) {
         if (i === key) continue;
-        st(S('circle', { cx: l0 + i * (l1 - l0) / (n - 1), cy: ty, r: 3.6, class: 's-tl-dot' }, g), live ? '---oo' : 'ooooo', { d: .18 + i * .035 });
+        st(S('circle', { cx: l0 + i * (l1 - l0) / (n - 1), cy: ty, r: 3.6, class: 's-tl-dot' }, g), '---o-', { d: .18 + i * .035 });
       }
       st(S('circle', { cx: kx, cy: ty, r: 9, class: 's-pulse' }, g), '---o-', { d: .5 });
-      st(S('circle', { cx: kx, cy: ty, r: 9, class: 's-halo' }, g), '---od', { d: .34 });
-      st(S('circle', { cx: kx, cy: ty, r: 4.6, class: 's-key' }, g), '---oo', { d: .3 });
-      st(txt(g, kx, ty - 14, F.rev, 's-rev', 'middle'), '---oo', { d: .4 });
+      st(S('circle', { cx: kx, cy: ty, r: 9, class: 's-halo' }, g), '---o-', { d: .34 });
+      st(S('circle', { cx: kx, cy: ty, r: 4.6, class: 's-key' }, g), '---o-', { d: .3 });
+      st(txt(g, kx, ty - 14, F.rev, 's-rev', 'middle'), '---o-', { d: .4 });
       /* the guide entry that cites it */
       var bx = x + 10, bw = w - 20, by = ty + 20;
-      st(S('line', { x1: kx, x2: kx, y1: ty + 10, y2: by - 3, class: 's-cite' }, g), '---od', { d: .48 });
+      st(S('line', { x1: kx, x2: kx, y1: ty + 10, y2: by - 3, class: 's-cite' }, g), '---o-', { d: .48 });
       var box = S('g', {}, g);
-      rise(box, '---oo', .52);
+      rise(box, '---o-', .52);
       var rect = S('rect', { x: bx, y: by, width: bw, height: 10, rx: 9, class: 's-entry' }, box);
       txt(box, bx + 12, by + 18, 'GUIDE · AMBIGUITY ENTRY ' + F.entry, 's-k s-k-guide');
       var lx = bx + 12, ry = by + 37, rowsA6 = [
@@ -315,22 +315,27 @@
       var vx = lx + Math.max.apply(null, labs.map(function (l) { return tw(l, est(l.textContent, 8.5) * 1.25); })) + 9, vw = bx + bw - 10 - vx;
       rowsA6.forEach(function (r, i) {
         labs[i].setAttribute('y', ry);
+        if (i === 1) adoptY = ry - 3.5;   // the configuration arrow points from this row
         var nl = wrap(box, vx, ry, r[1], 's-p s-p-ink', vw, 14);
         ry += nl * 14 + 5;
       });
       rect.setAttribute('height', (ry - by + 4).toFixed(1));
       /* the launcher that makes the choice executable */
       var ly = ry + 14, lg = S('g', { class: 's-launch' }, g);
-      rise(lg, '---oh', .66);
+      rise(lg, '---o-', .66);
       var lr = S('rect', { x: bx, y: ly, height: 24, rx: 12, class: 's-launch-bg' }, lg);
       var lt = txt(lg, bx + 26, ly + 16.2, F.launcher, 's-launch-t');
-      var lw = Math.round(tw(lt, est(F.launcher, 11)) + 38);
+      var lw = Math.round(tw(lt, est(F.launcher, 11)) + 36);
       lr.setAttribute('width', lw);
       icon(lg, 'play', bx + 14, ly + 12);
-      var capX = bx + lw + 10, room = x + w - 14 - capX;
-      var caps = ['launcher · makes the choice executable', 'launcher · makes it executable', 'makes the choice executable'];
-      var cap = txt(lg, capX, ly + 16, caps[0], 's-p');
-      for (var c = 1; c < caps.length && tw(cap, est(cap.textContent, 11)) > room; c++) cap.textContent = caps[c];
+      var capX = bx + lw + 10, room = x + w - 8 - capX;
+      var cap = txt(lg, capX, ly + 16, 'launcher · makes the choice executable', 's-p');
+      if (tw(cap, est(cap.textContent, 11)) > room) {   // two short lines beside the chip instead
+        lg.removeChild(cap);
+        txt(lg, capX, ly + 9.5, 'LAUNCHER', 's-k2');
+        cap = txt(lg, capX, ly + 21.5, 'makes the choice executable', 's-p');
+        if (tw(cap, est(cap.textContent, 11)) > room) cap.textContent = 'makes it executable';
+      }
       return ly + 24 + 14 - y;
     }
 
@@ -346,7 +351,7 @@
       var rc = card(right, rx, top, rw, 10);
       [['o----', function (pg) { return crit(pg, rx, top, rw); }],
        ['-oo--', function (pg) { return inputs(pg, rx, top, rw, 'raw'); }],
-       ['---o-', function (pg) { return cons(pg, rx, top, rw, true); }],
+       ['---o-', function (pg) { return cons(pg, rx, top, rw); }],
        ['----o', function (pg) { return inputs(pg, rx, top, rw, 'rra'); }]].forEach(function (p) {
         var pg = S('g', {}, right);
         h = Math.max(h, p[1](pg));
@@ -354,7 +359,7 @@
       });
       lc.setAttribute('height', h); rc.setAttribute('height', h);   // both cards share the tallest panel's height
       /* step 4: the entry's adopted values flow into the configuration */
-      var ay = top + 150;
+      var ay = Math.round(adoptY || top + 150) + .5;
       st(S('path', { d: 'M' + (rx - 4) + ' ' + ay + 'H' + (P + lw + 6) + 'M' + (P + lw + 11) + ' ' + (ay - 4) + 'L' + (P + lw + 6) + ' ' + ay + 'L' + (P + lw + 11) + ' ' + (ay + 4), class: 's-feed' }, g), '---o-', { d: .7 });
       return 16 + h;
     }
@@ -372,7 +377,7 @@
       cfg: function (y) { return zCard(y, function (g, x, t, w) { return config(g, x, t, w, false); }); },
       crit: function (y) { return zCard(y, crit); },
       inraw: function (y) { return zCard(y, function (g, x, t, w) { return inputs(g, x, t, w, 'raw'); }); },
-      cons: function (y) { return zCard(y, function (g, x, t, w) { return cons(g, x, t, w, false); }); },
+      cons: function (y) { return zCard(y, cons); },
       inrra: function (y) { return zCard(y, function (g, x, t, w) { return inputs(g, x, t, w, 'rra'); }); }
     };
     var y = 0;
@@ -385,7 +390,6 @@
       else n.el.style.left = (n.x / W * 100).toFixed(3) + '%';
     });
 
-    var cur = -1;
     function set(i, instant) {
       if (instant) svg.classList.add('no-anim');
       reg.forEach(function (r) {
@@ -402,12 +406,11 @@
       notes.forEach(function (n) { n.el.classList.toggle('on', n.s.charAt(i) !== '-'); });
       svg.setAttribute('aria-label', LABEL[i]);
       svg.setAttribute('data-step', i);
-      cur = i;
       if (instant) { void svg.getBoundingClientRect(); requestAnimationFrame(function () { svg.classList.remove('no-anim'); }); }
     }
     function fit() { var w = canvas.clientWidth; if (w) canvas.style.setProperty('--k', (w / W).toFixed(4)); }
     fit();
-    return { set: set, fit: fit, canvas: canvas, W: W, H: Ht, step: function () { return cur; } };
+    return { set: set, fit: fit, W: W, H: Ht };
   }
 
   /* ---------------------------------------------------------------- stage footer (HTML: legend, then the result) */
@@ -434,9 +437,11 @@
   }
 
   /* ---------------------------------------------------------------- live: pinned, one step at a time */
-  function navH() { return parseFloat(C.css('--nav-h')) || 60; }
   function goLive() {
-    var alive = true, active = -1, raf = 0, annT = 0, scene = null;
+    var alive = true, active = -1, raf = 0, annT = 0, scene = null, nh = 60;
+    function navH() { return nh; }
+    function readNav() { nh = parseFloat(C.css('--nav-h')) || 60; }
+    readNav();
     sec.classList.add('is-live');
     /* kickers become buttons that scroll to their step */
     var btns = steps.map(function (li, i) {
@@ -480,7 +485,7 @@
       if (i !== active) activate(i, active < 0, p >= 0 && p <= 1);
     }
     function onScroll() { if (!raf) raf = requestAnimationFrame(update); }
-    function onResize() { if (scene) scene.fit(); onScroll(); }
+    function onResize() { readNav(); if (scene) scene.fit(); onScroll(); }
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onResize, { passive: true });
     var ro = 'ResizeObserver' in window ? new ResizeObserver(function () { if (scene) scene.fit(); }) : null;

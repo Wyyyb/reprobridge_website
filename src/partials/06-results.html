@@ -1,7 +1,7 @@
 <section class="sec" id="results" aria-labelledby="results-title">
   <div class="wrap">
     <div class="sec-head" data-reveal>
-      <h2 id="results-title"><span class="sec-no">03 · Results</span>More reproductions succeed, at lower cost</h2>
+      <h2 id="results-title"><span class="sec-no">03 · Results</span>More reproductions succeed, at lower downstream cost</h2>
       <p class="lede">Fresh Reproducer sessions receive the paper, the selected tasks, and either the raw codebase or its refined artifact. Across four models, refined artifacts raise mean success from <b>76.4%</b> to <b>92.6%</b>, narrow the cross-model spread from <b>21.6 to 3.9&nbsp;pp</b>, and reduce downstream API spending by <b>19.7%</b> on average.</p>
     </div>
 
@@ -107,12 +107,12 @@
           </table>
         </div>
       </details>
-      <p class="caveat">Sonnet 5, 287 tasks from 12 randomly selected papers, one evaluation. Losses are conditional on the components that remain.</p>
+      <p class="caveat">Sonnet 5, 287 tasks from 12 randomly selected papers, one evaluation. Losses are conditional on the components that remain. Ordinary outputs come from a separate upstream run with comparable resource use, so this comparison does not isolate reorganizing identical outputs.</p>
     </div>
 
     <!-- R4 · external benchmark -->
     <h3 class="sub" data-reveal>Beyond ReproBridge-Bench: CORE-Bench Hard</h3>
-    <p class="sub-lede" data-reveal>On 45 CORE-Bench Hard capsules, Sonnet&nbsp;5 constructs two handoffs, VERITAS's patched codebase and fix log, and a refined artifact; Sonnet&nbsp;4.5 then reproduces from raw code or either handoff. A capsule succeeds only if all its questions satisfy the benchmark's reference intervals (79 questions overall).</p>
+    <p class="sub-lede" data-reveal>On 45 CORE-Bench Hard capsules, Sonnet&nbsp;5 constructs two handoffs: VERITAS's patched codebase and fix log, and a refined artifact; Sonnet&nbsp;4.5 then reproduces from raw code or either handoff. A capsule succeeds only if all its questions satisfy the benchmark's reference intervals (79 questions overall).</p>
     <div class="chart-card res-card" id="results-core" data-reveal>
       <div class="chart-head">
         <div>
@@ -154,12 +154,12 @@
     </div>
 
     <!-- R5 · reuse economics -->
-    <h3 class="sub" data-reveal>Reuse pays back construction</h3>
+    <h3 class="sub" data-reveal>Reuse can offset construction API cost</h3>
     <p class="sub-lede" data-reveal>Constructing the 36 artifacts costs $5,026 in API usage ($139.61 per paper). At the mean downstream costs, break-even requires 8, 13, and 9 reuse rounds for Sonnet&nbsp;4.6, Sonnet&nbsp;5, and Opus&nbsp;5, saving $653, $409, and $615 per complete round.</p>
     <div class="chart-card res-card" id="results-reuse" data-reveal>
       <div class="chart-head">
         <div>
-          <h4 id="results-reuse-title">Cumulative Reproducer API spending</h4>
+          <h4 id="results-reuse-title">Cumulative API spending (construction + Reproducer)</h4>
           <p class="cap">Raw reuse costs <i>n</i> times the mean raw-code round; refined reuse adds the $5,026 construction cost once, then <i>n</i> times the mean refined-artifact round. The paper reports this scenario for Sonnet&nbsp;4.6, Sonnet&nbsp;5, and Opus&nbsp;5.</p>
         </div>
         <div class="res-head-tools">

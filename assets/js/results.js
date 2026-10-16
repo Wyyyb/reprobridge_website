@@ -5,7 +5,7 @@
  *  2. Reproducer spending: the same dumbbell engine, API USD | Tokens (B).
  *  3. Handoff and component ablations: bars with hatched losses and component chips.
  *  4. CORE-Bench Hard: three metric panels and success by area (HTML bars).
- *  5. Reuse break-even: cumulative Reproducer API USD per model, with a crosshair.
+ *  5. Reuse break-even: cumulative API USD (construction + Reproducer) per model, with a crosshair.
  * Every number comes from window.RB_DATA. Derived values (scenario totals) appear only in tooltips, labelled. */
 (function () {
   'use strict';
@@ -600,7 +600,7 @@
         var c = MAIN[m.key][V.key];
         rows[m.key + ':0'] = {
           raw: c.raw, rra: c.rra, rawText: V.val(c.raw), rraText: V.val(c.rra), pill: MINUS + f1(c.red) + '%',
-          aria: m.name + ', ' + V.what.toLowerCase() + ': Raw ' + V.val(c.raw) + V.unit + ', refined artifact ' + V.val(c.rra) + V.unit + ', ' + f1(c.red) + '% lower.',
+          aria: m.name + ', ' + (V.what.indexOf('API') === 0 ? V.what : V.what.toLowerCase()) + ': Raw ' + V.val(c.raw) + V.unit + ', refined artifact ' + V.val(c.rra) + V.unit + ', ' + f1(c.red) + '% lower.',
           tip: function () {
             return tipHTML(m.name + ' · ' + V.what, [
               { k: 'raw', l: 'Raw', v: V.val(c.raw) + V.unit + ' ± ' + V.sd(c.raw_sd) },
@@ -890,7 +890,7 @@
     var beTag = S('g', { class: 'res-be-tag', 'aria-hidden': 'true' }, svg), beRect = S('rect', { rx: 10, height: 20, y: -10 }, beTag),
         beText = S('text', { 'text-anchor': 'middle', dy: '0.35em' }, beTag);
     var hit = S('rect', { class: 'res-hit-plot', tabindex: '0', role: 'slider', 'aria-orientation': 'horizontal',
-      'aria-valuemin': '0', 'aria-valuemax': String(NMAX), 'aria-label': 'Reuse rounds: read the cumulative Reproducer API spending' }, svg);
+      'aria-valuemin': '0', 'aria-valuemax': String(NMAX), 'aria-label': 'Reuse rounds: read cumulative API spending (construction + Reproducer)' }, svg);
     if (ro) { ro.id = ro.id || 'results-reuse-readout'; hit.setAttribute('aria-describedby', ro.id); }
     var ring = S('rect', { class: 'res-plot-ring', rx: 8 }, svg);
 
@@ -922,7 +922,7 @@
         if (major) { var tt = S('g', { class: 'tick' }, gAxis); S('text', { x: x, y: by + 19, 'text-anchor': 'middle', text: String(n) }, tt); }
       }
       S('text', { class: 'res-axis-t', x: (g.l + W - g.r) / 2, y: g.H - 6, 'text-anchor': 'middle', text: 'Reuse rounds (each repeats all ' + NPAPERS + ' papers)' }, gAxis);
-      S('text', { class: 'res-axis-t', x: g.l - 10, y: 12, 'text-anchor': 'start', text: 'Cumulative Reproducer API USD' }, gAxis);
+      S('text', { class: 'res-axis-t', x: g.l - 10, y: 12, 'text-anchor': 'start', text: 'Cumulative API USD' }, gAxis);
       /* the construction cost marks the refined line's start on the y axis */
       var yb = g.sy(BUILD);
       S('line', { class: 'res-anno-tick', x1: g.l - 5, x2: g.l, y1: yb, y2: yb }, gAxis);
@@ -1011,7 +1011,7 @@
     function aria() {
       var b = BE[current];
       if (hit.getAttribute('aria-valuenow') === null) hit.setAttribute('aria-valuenow', String(b.rounds));
-      hit.setAttribute('aria-label', name(current) + ', reuse rounds: use the arrow keys to read cumulative Reproducer API spending by round.');
+      hit.setAttribute('aria-label', name(current) + ', reuse rounds: use the arrow keys to read cumulative API spending (construction + Reproducer) by round.');
     }
     function apply(m, animate) {
       current = m;

@@ -232,7 +232,7 @@
       G.clipL = svgEl('path', { class: 'bm-clip', 'aria-hidden': 'true' }, svg);
       G.clipR = svgEl('path', { class: 'bm-clip', 'aria-hidden': 'true' }, svg);
       svgEl('line', { class: 'bm-axis', x1: L.padL, x2: L.W - L.padR, y1: L.axisY, y2: L.axisY }, svg);
-      var laneDefs = [['refs', 'Reference runs', 'x₁ … x₅'], ['p', 'Published score', 'p'], ['y', 'New result', 'Y']];
+      var laneDefs = [['refs', 'Reference observations', 'x₁ … x₅'], ['p', 'Published score', 'p'], ['y', 'New result', 'Y']];
       laneDefs.forEach(function (d) {
         var y = L.lanes[d[0]];
         svgEl('line', { class: 'bm-lane', x1: L.padL, x2: L.W - L.padR, y1: y, y2: y, 'aria-hidden': 'true' }, svg);

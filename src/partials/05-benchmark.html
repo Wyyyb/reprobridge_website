@@ -60,11 +60,11 @@
     <p class="caveat" data-reveal>Verification outcomes for the 36 retained papers under fixed reference rules; like the evaluation itself, they are not a conference-wide reproduction rate.</p>
 
     <!-- ============================================================ B2 five runs, one interval -->
-    <h3 class="sub" data-reveal>Five runs, one interval</h3>
+    <h3 class="sub" data-reveal>Five reproductions, one interval</h3>
     <p class="sub-lede" data-reveal>Five human reproducers on separate servers start from the same pinned raw commit, with separate execution directories and coding-agent sessions. Assuming faithful, independent executions, their mean estimates the expected result and their spread characterizes run-to-run variation. A compatibility interval built from them, fixed across raw and refined-artifact conditions, then decides numerical compatibility for every downstream attempt.</p>
 
     <ol class="bm-rules" data-reveal>
-      <li><span class="bm-rule-k">Independent</span><p>Separate servers, directories, and coding-agent sessions from one pinned commit; no reuse of another participant's scripts, measurements, refined artifacts, or downstream traces.</p></li>
+      <li><span class="bm-rule-k">Independent</span><p>Separate servers, directories, and coding-agent sessions from one pinned commit; no reuse of another participant's scripts or measurements, or of refined artifacts or downstream traces.</p></li>
       <li><span class="bm-rule-k">Human-checked</span><p>Coding-agent assistance is permitted, but humans inspect the scripts, configurations, edits, and measurement extraction actually used.</p></li>
       <li><span class="bm-rule-k">Pre-committed</span><p>Unspecified repetition and seed choices are fixed before inspecting scores; procedures are not tuned, nor valid measurements repeated, until they approach the published value.</p></li>
       <li><span class="bm-rule-k">One statistic</span><p>Each observation measures the specified task statistic: a multi-seed mean or best-of-<i>N</i> statistic is one observation, not interchangeable with single-seed scores.</p></li>
@@ -284,7 +284,7 @@
     <figure class="bm-case" data-reveal>
       <div class="bm-case-body">
         <div class="bm-case-head"><span class="bm-case-id">WBMM · timing</span><span class="tag rra">Refined-artifact tasks</span></div>
-        <blockquote>Reports replaced measured epoch durations with full-dataset projections, including 32.5 seconds reported as 206 seconds, and files were edited after process exit.</blockquote>
+        <blockquote>Reports replace measured epoch durations with full-dataset projections, including 32.5 seconds reported as 206 seconds; files are edited after process exit.</blockquote>
         <p class="bm-case-key">The measured durations also satisfied the numerical intervals, so execution evidence, not the number, revealed the substitution.</p>
       </div>
       <div class="bm-case-side">
