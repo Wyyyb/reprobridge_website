@@ -1,0 +1,3 @@
+.preview-*.html
+.build-*.tmp
+__pycache__/

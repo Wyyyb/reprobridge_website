@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ReproBridge: Building Reproducibility into ML Research Artifacts</title>
+<meta name="description" content="ReproBridge preserves the procedures and decisions recovered during ML reproduction as a refined reproducible artifact: refined code, environment setup, experiment launchers, and a reproduction guide. On ReproBridge-Bench (1,029 tasks, 36 papers), refined artifacts raise mean success of four coding agents from 76.4% to 92.6% and cut downstream API spending by 19.7%.">
+<meta property="og:title" content="ReproBridge: Building Reproducibility into ML Research Artifacts">
+<meta property="og:description" content="Preserving recovered procedures raises mean reproduction success from 76.4% to 92.6% across four coding agents on 1,029 tasks from 36 ICML 2026 papers, with 19.7% lower downstream API spending.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wyyyb.github.io/reprobridge_website/">
+<meta property="og:image" content="https://wyyyb.github.io/reprobridge_website/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wyyyb.github.io/reprobridge_website/assets/img/og.png">
+<link rel="canonical" href="https://wyyyb.github.io/reprobridge_website/">
+<!-- pre-release: reachable by link but kept out of search results; delete this line at launch -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400..700&family=Google+Sans+Flex:opsz,wght@6..144,400..700&display=swap">
+<script>(function(){document.documentElement.classList.add('js');try{var t=localStorage.getItem('rb-theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0D1418');}}catch(e){}})();</script>
+<link rel="stylesheet" href="assets/css/base.css?v=5c7d7a92a1">
+<link rel="stylesheet" href="assets/css/hero.css?v=db35d10324">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ===== 00-nav.html ===== -->
+<nav class="top" aria-label="Site">
+  <div class="row">
+    <a class="brand" href="#top" aria-label="ReproBridge, back to top">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#2C7360"/><path d="M6 21Q16 6 26 21" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><path d="M4.5 21.4h23" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><path d="M11 15.6v5.6M16 13.7v7.5M21 15.6v5.6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" opacity=".78"/></svg>
+      <span>Repro<b>Bridge</b></span>
+    </a>
+    <div class="nav-links">
+      <a href="#artifact">Artifact</a>
+      <a href="#benchmark">Benchmark</a>
+      <a href="#results">Results</a>
+      <a href="#papers" class="opt">Papers</a>
+      <a href="#cases">Cases</a>
+      <a href="#cite" class="opt">Cite</a>
+    </div>
+    <div class="nav-tools">
+      <span class="btn btn-sm btn-accent is-soon" aria-disabled="true" title="The paper will be linked here once it is public">Paper <span class="soon">Soon</span></span>
+      <button class="icon-btn theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<nav class="rail" aria-label="Sections">
+  <a href="#story"><b>▸</b><span>Walkthrough</span></a>
+  <a href="#overview"><b>·</b><span>Overview</span></a>
+  <a href="#artifact"><b>01</b><span>Artifact</span></a>
+  <a href="#benchmark"><b>02</b><span>Benchmark</span></a>
+  <a href="#results"><b>03</b><span>Results</span></a>
+  <a href="#papers"><b>04</b><span>Papers</span></a>
+  <a href="#cases"><b>05</b><span>Cases</span></a>
+  <a href="#scope"><b>06</b><span>Scope</span></a>
+  <a href="#cite"><b>·</b><span>Release &amp; cite</span></a>
+</nav>
+<main id="main">
+
+<!-- ===== 01-hero.html ===== -->
+<header class="hero" id="top">
+  <canvas class="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-lanes" aria-hidden="true"></div>
+  <svg class="hero-static" viewBox="0 0 640 300" aria-hidden="true" data-nojs-only>
+    <g fill="none" stroke-linecap="round">
+      <path d="M190 170Q320 50 450 170" stroke="#D9B776" stroke-width="2"/>
+      <path d="M176 170h288" stroke="#D9B776" stroke-width="2"/>
+      <path d="M230 170v-47M268 170v-73M320 170v-90M372 170v-73M410 170v-47" stroke="#D9B776" stroke-width="1.2" opacity=".6"/>
+      <path d="M464 170C520 170 540 128 600 128" stroke="#527AA0" stroke-width="1.5"/>
+      <path d="M464 170C520 170 540 156 600 156" stroke="#397F70" stroke-width="1.5"/>
+      <path d="M464 170C520 170 540 184 600 184" stroke="#AA803C" stroke-width="1.5"/>
+      <path d="M464 170C520 170 540 212 600 212" stroke="#82718C" stroke-width="1.5"/>
+      <g stroke="#A3B1BC" stroke-width="2" opacity=".55"><path d="M20 120l14 -3M48 196l16 2M70 150l12 4M96 228l10 -4M118 104l15 3M138 176l13 0M30 250l12 -5M150 140l14 2"/></g>
+    </g>
+  </svg>
+  <div class="wrap hero-inner">
+    <p class="eyebrow hero-eyebrow">36 papers · 1,029 tasks · four coding agents</p>
+    <h1 class="hero-title"><span class="w w1">Repro</span><span class="w w2">Bridge</span></h1>
+    <p class="hero-tagline">Building Reproducibility into<br> ML Research Artifacts</p>
+    <div class="authors">
+      <span class="au">Yubo Wang<sup>1,2</sup></span>
+      <span class="au">Rui Meng<sup>2</sup></span>
+      <span class="au">Jaehyun Nam<sup>2</sup></span>
+      <span class="au">Tomas Pfister<sup>2</sup></span>
+      <span class="au">Jinsung Yoon<sup>2</sup></span>
+    </div>
+    <div class="affils"><span><sup>1</sup>University of Waterloo</span><span><sup>2</sup>Google</span></div>
+    <div class="hero-btns">
+      <!-- TODO at release: turn each of these into a link and drop its "Soon" badge -->
+      <span class="btn btn-dark is-soon" aria-disabled="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+        Paper <span class="soon">Soon</span></span>
+      <span class="btn is-soon" aria-disabled="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        arXiv <span class="soon">Soon</span></span>
+      <span class="btn is-soon" aria-disabled="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>
+        Code <span class="soon">Soon</span></span>
+      <span class="btn is-soon" aria-disabled="true" title="ReproBridge-Bench">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6.5c0 1.6 3.4 2.8 7.5 2.8s7.5-1.2 7.5-2.8V5.5M4.5 12v6.5c0 1.6 3.4 2.8 7.5 2.8s7.5-1.2 7.5-2.8V12"/></svg>
+        Dataset <span class="soon">Soon</span></span>
+    </div>
+    <p class="hero-lede">Reproducing an ML experiment often requires recovering details that its paper and released code leave implicit, and even a successful attempt can leave those decisions buried in conversations or shell histories. <b>ReproBridge</b> preserves them as a <b>refined reproducible artifact</b>: refined code, environment setup, experiment launchers, and a reproduction guide. Across four coding agents on 1,029 tasks, refined artifacts raise mean reproduction success from <b>76.4%</b> to <b>92.6%</b> and reduce downstream API spending by <b>19.7%</b> on average.</p>
+    <a class="hero-cue" href="#story"><span>Watch a detail get recovered</span><span class="cue-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
+  </div>
+  <p class="hero-caption" aria-hidden="true"><span class="tag-note">Schematic</span><span>Scattered steps cross the bridge into four components</span></p>
+</header>
+
+<!-- ===== 02-story.html ===== -->
+<section class="sec" id="story" aria-labelledby="story-title">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="story-title"><span class="sec-no">Walkthrough</span>Placeholder for story</h2></div>
+  </div>
+</section>
+
+<!-- ===== 03-overview.html ===== -->
+<section class="sec" id="overview" aria-labelledby="overview-title">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="overview-title"><span class="sec-no">Overview</span>Placeholder for overview</h2></div>
+  </div>
+</section>
+
+<!-- ===== 04-artifact.html ===== -->
+<section class="sec" id="artifact" aria-labelledby="artifact-title">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="artifact-title"><span class="sec-no">01 · Artifact</span>Placeholder for artifact</h2></div>
+  </div>
+</section>
+
+<!-- ===== 05-benchmark.html ===== -->
+<section class="sec" id="benchmark" aria-labelledby="benchmark-title">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="benchmark-title"><span class="sec-no">02 · Benchmark</span>Placeholder for benchmark</h2></div>
+  </div>
+</section>
+
+<!-- ===== 06-results.html ===== -->
+<section class="sec" id="results" aria-labelledby="results-title">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="results-title"><span class="sec-no">03 · Results</span>Placeholder for results</h2></div>
+  </div>
+</section>
+
+<!-- ===== 07-papers.html ===== -->
+<section class="sec" id="papers" aria-labelledby="papers-title">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="papers-title"><span class="sec-no">04 · Papers</span>Placeholder for papers</h2></div>
+  </div>
+</section>
+
+<!-- ===== 08-cases.html ===== -->
+<section class="sec" id="cases" aria-labelledby="cases-title">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="cases-title"><span class="sec-no">05 · Cases</span>Placeholder for cases</h2></div>
+  </div>
+</section>
+
+<!-- ===== 09-scope.html ===== -->
+<section class="sec" id="scope" aria-labelledby="scope-title">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="scope-title"><span class="sec-no">06 · Scope</span>Placeholder for scope</h2></div>
+  </div>
+</section>
+
+<!-- ===== 10-release.html ===== -->
+<section class="sec" id="release" aria-labelledby="release-title">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="release-title"><span class="sec-no">Release</span>Placeholder for release</h2><div id="cite"></div></div>
+  </div>
+</section>
+
+<!-- ===== 99-footer.html ===== -->
+</main>
+<footer class="foot">
+  <div class="wrap row">
+    <p style="margin:0"><span class="brand-sm">Repro<b>Bridge</b></span> · University of Waterloo · Google</p>
+    <p style="margin:0"><a href="#top">Back to top ↑</a></p>
+  </div>
+</footer>
+<div class="tip" id="rb-tip" role="tooltip" hidden></div>
+<dialog class="lightbox" id="rb-lightbox" aria-label="Figure viewer">
+  <form method="dialog" class="lightbox-bar"><span class="lightbox-title"></span><button class="lightbox-close" aria-label="Close figure viewer">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></form>
+  <div class="lightbox-body"><img alt=""></div>
+</dialog>
+<script src="assets/js/data.js?v=77f70944f6"></script>
+<script src="assets/js/charts.js?v=27eb2d6332"></script>
+<script src="assets/js/site.js?v=414b5aae79"></script>
+<script src="assets/js/hero.js?v=c92bf72b18"></script>
+</body>
+</html>

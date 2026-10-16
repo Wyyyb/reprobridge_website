@@ -1,0 +1,72 @@
+/* Hero: wordmark, authors, buttons, lede, and the bridge canvas (assets/js/hero.js). */
+#top.hero {
+  position: relative; overflow: hidden;
+  min-height: min(980px, 100svh);
+  padding: calc(var(--nav-h) + 72px) 0 112px;
+  display: flex; align-items: center;
+}
+#top .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+html:not(.js) #top .hero-canvas { display: none; }
+#top .hero-static { position: absolute; right: 2%; top: 50%; width: min(46vw, 640px); transform: translateY(-50%); z-index: 0; opacity: .9; }
+#top .hero-lanes { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+#top .hero-lanes span {
+  position: absolute; transform: translateY(-50%); white-space: nowrap;
+  font-family: var(--mono); font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--lane, var(--ink-3)); opacity: 0; transition: opacity .8s var(--ease) .4s;
+}
+#top .hero-lanes.ready span { opacity: .95; }
+#top .hero-inner { position: relative; z-index: 2; width: 100%; }
+#top .hero-inner > * { max-width: 620px; }
+#top .hero-eyebrow { margin-bottom: 22px; }
+#top .hero-title {
+  display: flex; flex-wrap: wrap; max-width: none;
+  font-size: clamp(64px, 9.6vw, 132px); font-weight: 560; letter-spacing: -.048em; line-height: .96; margin: 0 0 18px -.04em;
+}
+#top .hero-title .w { display: inline-block; }
+#top .hero-title .w2 { color: var(--rra); }
+html.js #top .hero-title .w { opacity: 0; transform: translateY(28%); animation: rb-rise .95s var(--ease-out) forwards; }
+html.js #top .hero-title .w2 { animation-delay: .12s; }
+@keyframes rb-rise { to { opacity: 1; transform: none; } }
+#top .hero-tagline { font-size: clamp(24px, 2.6vw, 34px); font-weight: 420; letter-spacing: -.02em; line-height: 1.2; color: var(--ink-2); margin: 0 0 30px; }
+#top .authors { display: flex; flex-wrap: wrap; gap: 4px 0; font-size: 16.5px; font-weight: 520; color: var(--ink); }
+#top .authors .au { white-space: nowrap; }
+#top .authors .au + .au::before { content: ""; display: inline-block; width: 1px; height: 14px; background: var(--line-2); margin: 0 12px; vertical-align: -1px; }
+#top .authors sup { color: var(--rra-ink); font-weight: 600; margin-left: 1px; }
+#top .affils { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 8px 0 30px; font-size: 14.5px; color: var(--ink-3); }
+#top .affils sup { color: var(--rra-ink); font-weight: 600; margin-right: 2px; }
+#top .hero-btns { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 30px; max-width: 680px; }
+#top .hero-lede {
+  font-size: clamp(16.5px, 1.3vw, 18px); line-height: 1.62; color: var(--ink-2); margin: 0 0 34px;
+  padding-left: 18px; border-left: 2px solid var(--line-2); max-width: 600px;
+}
+#top .hero-lede b { color: var(--ink); font-weight: 620; }
+#top .hero-cue {
+  display: inline-flex; align-items: center; gap: 12px; text-decoration: none;
+  font-family: var(--mono); font-size: 11.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3);
+}
+#top .hero-cue:hover { color: var(--ink); }
+#top .cue-ic { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line-2); display: grid; place-items: center; }
+#top .cue-ic svg { width: 14px; height: 14px; }
+@media (prefers-reduced-motion: no-preference) { #top .cue-ic svg { animation: rb-nudge 2.4s var(--ease) infinite; } }
+@keyframes rb-nudge { 0%, 70%, 100% { transform: none; } 82% { transform: translateY(3px); } }
+#top .hero-caption {
+  position: absolute; right: 28px; bottom: 30px; z-index: 2; margin: 0;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3);
+}
+
+@media (max-width: 1080px) {
+  #top.hero { min-height: 0; padding: calc(var(--nav-h) + 48px) 0 300px; display: block; }
+  #top .hero-inner > * { max-width: 680px; }
+  #top .hero-static { top: auto; bottom: 30px; right: 50%; transform: translateX(50%); width: min(92vw, 560px); }
+  #top .hero-caption { right: auto; left: var(--gutter); bottom: 22px; }
+}
+@media (max-width: 760px) {
+  #top.hero { padding-bottom: 250px; }
+  #top .hero-title { font-size: clamp(54px, 16vw, 80px); }
+  #top .authors { font-size: 15.5px; }
+  #top .authors .au + .au::before { margin: 0 9px; }
+  #top .hero-btns .btn { padding: 9px 14px; font-size: 14px; }
+  #top .hero-lanes span { font-size: 10px; letter-spacing: .06em; }
+  #top .hero-caption span:last-child { display: none; }
+}

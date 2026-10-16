@@ -1,0 +1,703 @@
+{
+ "_note": "Paper metadata for the coverage explorer. Families/subdomains, figure labels and order follow the paper's coverage figure (figures/domains.pdf) and its source data; names prefer the paper's own text; titles from reprobridge_bench_50_papers.bib.",
+ "families": [
+  {
+   "key": "general",
+   "label": "General ML & theory",
+   "figure_label": "General ML & theory",
+   "color": "#4EB4A9",
+   "subdomains": [
+    "general_1",
+    "general_2",
+    "general_3",
+    "general_4"
+   ]
+  },
+  {
+   "key": "deep",
+   "label": "Deep learning",
+   "figure_label": "Deep learning",
+   "color": "#8590E1",
+   "subdomains": [
+    "deep_1",
+    "deep_2",
+    "deep_3",
+    "deep_4"
+   ]
+  },
+  {
+   "key": "systems",
+   "label": "ML systems & optimization",
+   "figure_label": "ML systems & optim.",
+   "color": "#7A9AD3",
+   "subdomains": [
+    "systems_1",
+    "systems_2",
+    "systems_3"
+   ]
+  },
+  {
+   "key": "prob",
+   "label": "Probabilistic methods",
+   "figure_label": "Prob. ML",
+   "color": "#D0A173",
+   "subdomains": [
+    "prob_1",
+    "prob_2"
+   ]
+  },
+  {
+   "key": "rl",
+   "label": "Reinforcement learning & robotics",
+   "figure_label": "RL & robotics",
+   "color": "#AAD35A",
+   "subdomains": [
+    "rl_1",
+    "rl_2"
+   ]
+  },
+  {
+   "key": "trustworthy",
+   "label": "Trustworthy ML",
+   "figure_label": "Trustworthy ML",
+   "color": "#AB8EC5",
+   "subdomains": [
+    "trustworthy_1",
+    "trustworthy_2",
+    "trustworthy_3",
+    "trustworthy_4"
+   ]
+  },
+  {
+   "key": "evaluation",
+   "label": "Evaluation",
+   "figure_label": "Eval.",
+   "color": "#E78F76",
+   "subdomains": [
+    "evaluation_1"
+   ]
+  },
+  {
+   "key": "applications",
+   "label": "Application-driven ML",
+   "figure_label": "Applied ML",
+   "color": "#E2B353",
+   "subdomains": [
+    "applications_1",
+    "applications_2"
+   ]
+  }
+ ],
+ "subdomains": [
+  {
+   "key": "general_1",
+   "family": "general",
+   "label": "Time-series learning",
+   "figure_label": "Time series",
+   "paper_ids": [
+    1,
+    40
+   ]
+  },
+  {
+   "key": "general_2",
+   "family": "general",
+   "label": "Graph learning",
+   "figure_label": "Graphs",
+   "paper_ids": [
+    149
+   ]
+  },
+  {
+   "key": "general_3",
+   "family": "general",
+   "label": "Data valuation and selection",
+   "figure_label": "Data value",
+   "paper_ids": [
+    223
+   ]
+  },
+  {
+   "key": "general_4",
+   "family": "general",
+   "label": "Learning and decision theory",
+   "figure_label": "Learning / decisions",
+   "paper_ids": [
+    66,
+    230
+   ]
+  },
+  {
+   "key": "deep_1",
+   "family": "deep",
+   "label": "Generative models",
+   "figure_label": "Generative models",
+   "paper_ids": [
+    35,
+    71,
+    95,
+    96,
+    129
+   ]
+  },
+  {
+   "key": "deep_2",
+   "family": "deep",
+   "label": "Spiking neural networks",
+   "figure_label": "Spiking nets",
+   "paper_ids": [
+    116
+   ]
+  },
+  {
+   "key": "deep_3",
+   "family": "deep",
+   "label": "Multimodal architectures",
+   "figure_label": "Multimodal",
+   "paper_ids": [
+    84
+   ]
+  },
+  {
+   "key": "deep_4",
+   "family": "deep",
+   "label": "Language-model reasoning",
+   "figure_label": "LM reasoning",
+   "paper_ids": [
+    145
+   ]
+  },
+  {
+   "key": "systems_1",
+   "family": "systems",
+   "label": "Efficient training and optimization",
+   "figure_label": "Efficient training",
+   "paper_ids": [
+    81,
+    141
+   ]
+  },
+  {
+   "key": "systems_2",
+   "family": "systems",
+   "label": "Model and context compression",
+   "figure_label": "Compression",
+   "paper_ids": [
+    121,
+    136
+   ]
+  },
+  {
+   "key": "systems_3",
+   "family": "systems",
+   "label": "GPU kernels",
+   "figure_label": "GPU kernels",
+   "paper_ids": [
+    113,
+    238
+   ]
+  },
+  {
+   "key": "prob_1",
+   "family": "prob",
+   "label": "Monte Carlo sampling",
+   "figure_label": "Monte Carlo",
+   "paper_ids": [
+    112
+   ]
+  },
+  {
+   "key": "prob_2",
+   "family": "prob",
+   "label": "Diffusion bridges",
+   "figure_label": "Diff. bridges",
+   "paper_ids": [
+    50
+   ]
+  },
+  {
+   "key": "rl_1",
+   "family": "rl",
+   "label": "Policy learning and control",
+   "figure_label": "Policy learning",
+   "paper_ids": [
+    2,
+    58
+   ]
+  },
+  {
+   "key": "rl_2",
+   "family": "rl",
+   "label": "Robotic policies",
+   "figure_label": "Robotics",
+   "paper_ids": [
+    134
+   ]
+  },
+  {
+   "key": "trustworthy_1",
+   "family": "trustworthy",
+   "label": "Interpretability",
+   "figure_label": "Interpretability",
+   "paper_ids": [
+    7,
+    20,
+    90,
+    135
+   ]
+  },
+  {
+   "key": "trustworthy_2",
+   "family": "trustworthy",
+   "label": "Verification and robustness",
+   "figure_label": "Verification",
+   "paper_ids": [
+    124
+   ]
+  },
+  {
+   "key": "trustworthy_3",
+   "family": "trustworthy",
+   "label": "Safety and privacy",
+   "figure_label": "Safety / privacy",
+   "paper_ids": [
+    24,
+    187
+   ]
+  },
+  {
+   "key": "trustworthy_4",
+   "family": "trustworthy",
+   "label": "Causal discovery",
+   "figure_label": "Causality",
+   "paper_ids": [
+    169
+   ]
+  },
+  {
+   "key": "evaluation_1",
+   "family": "evaluation",
+   "label": "Adaptive model evaluation",
+   "figure_label": "Adaptive",
+   "paper_ids": [
+    69
+   ]
+  },
+  {
+   "key": "applications_1",
+   "family": "applications",
+   "label": "Neuroscience",
+   "figure_label": "Neuroscience",
+   "paper_ids": [
+    126
+   ]
+  },
+  {
+   "key": "applications_2",
+   "family": "applications",
+   "label": "Healthcare and survival analysis",
+   "figure_label": "Survival",
+   "paper_ids": [
+    198
+   ]
+  }
+ ],
+ "papers": [
+  {
+   "id": 1,
+   "cite_key": "li2026text",
+   "name": "TESS",
+   "name_source": "paper-text",
+   "figure_alias": "TESS",
+   "title": "From Text to Forecasts: Bridging Modality Gap with Temporal Evolution Semantic Space",
+   "first_author": "Lehui Li",
+   "family": "general",
+   "subdomain": "general_1"
+  },
+  {
+   "id": 2,
+   "cite_key": "petitbois2026offline",
+   "name": "SCIQL",
+   "name_source": "paper-text",
+   "figure_alias": "SCIQL",
+   "title": "Offline Reinforcement Learning of High-Quality Behaviors Under Robust Style Alignment",
+   "first_author": "Mathieu Petitbois",
+   "family": "rl",
+   "subdomain": "rl_1"
+  },
+  {
+   "id": 7,
+   "cite_key": "ferrere2026exact",
+   "name": "ExactFANOVA",
+   "name_source": "paper-text",
+   "figure_alias": "ExactFANOVA",
+   "title": "Exact Functional ANOVA Decomposition for Categorical Inputs Models",
+   "first_author": "Baptiste Ferrere",
+   "family": "trustworthy",
+   "subdomain": "trustworthy_1"
+  },
+  {
+   "id": 20,
+   "cite_key": "zhou2026distributional",
+   "name": "EnergyDPS",
+   "name_source": "paper-text",
+   "figure_alias": "EnergyDPS",
+   "title": "A Distributional View for Visual Mechanistic Interpretability: KL-Minimal Soft-Constraint Principle",
+   "first_author": "Guancheng Zhou",
+   "family": "trustworthy",
+   "subdomain": "trustworthy_1"
+  },
+  {
+   "id": 24,
+   "cite_key": "angell2026estimating",
+   "name": "LM Tail Risk",
+   "name_source": "figure-data",
+   "figure_alias": "LM Tail Risk",
+   "title": "Estimating Tail Risks in Language Model Output Distributions",
+   "first_author": "Rico Angell",
+   "family": "trustworthy",
+   "subdomain": "trustworthy_3"
+  },
+  {
+   "id": 35,
+   "cite_key": "li2026initialization",
+   "name": "DivIn",
+   "name_source": "figure-data",
+   "figure_alias": "DivIn",
+   "title": "Initialization is Half the Battle: Generating Diverse Images from a Guidance Potential Posterior",
+   "first_author": "Xiang Li",
+   "family": "deep",
+   "subdomain": "deep_1"
+  },
+  {
+   "id": 40,
+   "cite_key": "zhang2026helix",
+   "name": "HELIX",
+   "name_source": "paper-text",
+   "figure_alias": "HELIX",
+   "title": "HELIX: Hybrid Encoding with Learnable Identity and Cross-dimensional Synthesis for Time Series Imputation",
+   "first_author": "Fengming Zhang",
+   "family": "general",
+   "subdomain": "general_1"
+  },
+  {
+   "id": 50,
+   "cite_key": "howard2026control",
+   "name": "Control Consistency Bridges",
+   "name_source": "figure-data (paper table prints ControlConsistencyBridges)",
+   "figure_alias": "Control Consistency Bridges",
+   "title": "Control Consistency Losses for Diffusion Bridges",
+   "first_author": "Samuel Howard",
+   "family": "prob",
+   "subdomain": "prob_2"
+  },
+  {
+   "id": 58,
+   "cite_key": "huber2026chebyshev",
+   "name": "Chebyshev Policies",
+   "name_source": "figure-data",
+   "figure_alias": "Chebyshev Policies",
+   "title": "Chebyshev Policies and the Mountain Car Problem: Reinforcement Learning for Low-Dimensional Control Tasks",
+   "first_author": "Stefan Huber",
+   "family": "rl",
+   "subdomain": "rl_1"
+  },
+  {
+   "id": 66,
+   "cite_key": "erata2026learning",
+   "name": "Learning Randomized Reductions",
+   "name_source": "paper-text",
+   "figure_alias": "Bitween",
+   "title": "Learning Randomized Reductions",
+   "first_author": "Ferhat Erata",
+   "family": "general",
+   "subdomain": "general_4"
+  },
+  {
+   "id": 69,
+   "cite_key": "li2026adaptive",
+   "name": "ATLAS",
+   "name_source": "paper-text",
+   "figure_alias": "ATLAS",
+   "title": "Adaptive Testing for LLM Evaluation: A Psychometric Alternative to Static Benchmarks",
+   "first_author": "Peiyu Li",
+   "family": "evaluation",
+   "subdomain": "evaluation_1"
+  },
+  {
+   "id": 71,
+   "cite_key": "liu2026balancing",
+   "name": "XDLM",
+   "name_source": "figure-data",
+   "figure_alias": "XDLM",
+   "title": "Balancing Understanding and Generation in Discrete Diffusion Models",
+   "first_author": "Yue Liu",
+   "family": "deep",
+   "subdomain": "deep_1"
+  },
+  {
+   "id": 81,
+   "cite_key": "ortiz2026flashoptim",
+   "name": "FlashOptim",
+   "name_source": "paper-text",
+   "figure_alias": "FlashOptim",
+   "title": "FlashOptim: Memory Efficient Optimizers for Large-Scale Training",
+   "first_author": "Jose Javier Gonzalez Ortiz",
+   "family": "systems",
+   "subdomain": "systems_1"
+  },
+  {
+   "id": 84,
+   "cite_key": "kowsher2026lime",
+   "name": "LiME",
+   "name_source": "paper-text",
+   "figure_alias": "LiME",
+   "title": "LiME: Lightweight Mixture of Experts for Efficient Multimodal Multi-task Learning",
+   "first_author": "Md Kowsher",
+   "family": "deep",
+   "subdomain": "deep_3"
+  },
+  {
+   "id": 90,
+   "cite_key": "rosa2026guaranteed",
+   "name": "Compositional Explanations",
+   "name_source": "figure-data",
+   "figure_alias": "Compositional Explanations",
+   "title": "Guaranteed Optimal Compositional Explanations for Neurons",
+   "first_author": "Biagio La Rosa",
+   "family": "trustworthy",
+   "subdomain": "trustworthy_1"
+  },
+  {
+   "id": 95,
+   "cite_key": "keegan2026manifoldaware",
+   "name": "Manifold-Aware Perturbations",
+   "name_source": "paper-text",
+   "figure_alias": "Manifold-Aware Perturbations",
+   "title": "Manifold-Aware Perturbations for Constrained Generative Modeling",
+   "first_author": "Katherine Keegan",
+   "family": "deep",
+   "subdomain": "deep_1"
+  },
+  {
+   "id": 96,
+   "cite_key": "xue2026anyorder",
+   "name": "Any-Order GPT",
+   "name_source": "figure-data",
+   "figure_alias": "Any-Order GPT",
+   "title": "Any-Order GPT as Masked Diffusion Model: Decoupling Formulation and Architecture",
+   "first_author": "Shuchen Xue",
+   "family": "deep",
+   "subdomain": "deep_1"
+  },
+  {
+   "id": 112,
+   "cite_key": "yuan2026markov",
+   "name": "AuxiliaryMCMC",
+   "name_source": "paper-text",
+   "figure_alias": "AuxiliaryMCMC",
+   "title": "Markov Chain Monte Carlo without Evaluating the Target: an Auxiliary Variable Approach",
+   "first_author": "Wei Yuan",
+   "family": "prob",
+   "subdomain": "prob_1"
+  },
+  {
+   "id": 113,
+   "cite_key": "macko2026delta4",
+   "name": "DELTA4",
+   "name_source": "figure-data",
+   "figure_alias": "DELTA4",
+   "title": "DELTA4: Sparse Matrix-Vector Multiplication for Low Sparsity",
+   "first_author": "Vladimír Macko",
+   "family": "systems",
+   "subdomain": "systems_3"
+  },
+  {
+   "id": 116,
+   "cite_key": "che2026efficiently",
+   "name": "ETTFS",
+   "name_source": "paper-text",
+   "figure_alias": "ETTFS",
+   "title": "Efficiently Training Time-to-First-Spike Spiking Neural Networks from Scratch",
+   "first_author": "Kaiwei Che",
+   "family": "deep",
+   "subdomain": "deep_2"
+  },
+  {
+   "id": 121,
+   "cite_key": "wang2026effective",
+   "name": "Effective Model Pruning",
+   "name_source": "paper-text",
+   "figure_alias": "Effective Model Pruning",
+   "title": "Effective Model Pruning: Measuring the Redundancy of Model Components",
+   "first_author": "Yixuan Wang",
+   "family": "systems",
+   "subdomain": "systems_2"
+  },
+  {
+   "id": 124,
+   "cite_key": "martens2026ocspace",
+   "name": "OC-space",
+   "name_source": "figure-data",
+   "figure_alias": "OC-space",
+   "title": "OC-space: a Unifying Perspective on Verification of Tree Ensembles",
+   "first_author": "Timo Martens",
+   "family": "trustworthy",
+   "subdomain": "trustworthy_2"
+  },
+  {
+   "id": 126,
+   "cite_key": "lu2026mindomni",
+   "name": "MindOmni",
+   "name_source": "paper-text",
+   "figure_alias": "Mind-Omni",
+   "title": "Mind-Omni: A Unified Multi-Task Framework for Brain-Vision-Language Modeling via Discrete Diffusion",
+   "first_author": "Yizhuo Lu",
+   "family": "applications",
+   "subdomain": "applications_1"
+  },
+  {
+   "id": 129,
+   "cite_key": "li2026kineticenergy",
+   "name": "KPE/KTS",
+   "name_source": "figure-data (paper table prints KPEKTS)",
+   "figure_alias": "KPE/KTS",
+   "title": "A Kinetic-Energy Perspective of Flow Matching",
+   "first_author": "Ziyun Li",
+   "family": "deep",
+   "subdomain": "deep_1"
+  },
+  {
+   "id": 134,
+   "cite_key": "liu2026last0",
+   "name": "LaST0",
+   "name_source": "figure-data",
+   "figure_alias": "LaST0",
+   "title": "LaST₀: Latent Spatio-Temporal Chain-of-Thought for Robotic Vision-Language-Action Model",
+   "first_author": "Zhuoyang Liu",
+   "family": "rl",
+   "subdomain": "rl_2"
+  },
+  {
+   "id": 135,
+   "cite_key": "santis2026mixture",
+   "name": "Mixture of Concept Bottleneck Experts",
+   "name_source": "paper-text",
+   "figure_alias": "M-CBE",
+   "title": "Mixture of Concept Bottleneck Experts",
+   "first_author": "Francesco De Santis",
+   "family": "trustworthy",
+   "subdomain": "trustworthy_1"
+  },
+  {
+   "id": 136,
+   "cite_key": "zabergja2026endtoend",
+   "name": "TACO",
+   "name_source": "figure-data",
+   "figure_alias": "TACO",
+   "title": "End-to-End Compression for Tabular Foundation Models",
+   "first_author": "Guri Zabërgja",
+   "family": "systems",
+   "subdomain": "systems_2"
+  },
+  {
+   "id": 141,
+   "cite_key": "qiu2026poetx",
+   "name": "POET-X",
+   "name_source": "paper-text",
+   "figure_alias": "POET-X",
+   "title": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
+   "first_author": "Zeju Qiu",
+   "family": "systems",
+   "subdomain": "systems_1"
+  },
+  {
+   "id": 145,
+   "cite_key": "zeng2026ponderlm2",
+   "name": "PonderLM-2",
+   "name_source": "figure-data",
+   "figure_alias": "PonderLM-2",
+   "title": "PonderLM-2: Pretraining LLM with Latent Thoughts in Continuous Space",
+   "first_author": "Boyi Zeng",
+   "family": "deep",
+   "subdomain": "deep_4"
+  },
+  {
+   "id": 149,
+   "cite_key": "wen2026progressive",
+   "name": "PSAHS",
+   "name_source": "paper-text",
+   "figure_alias": "PSAHS",
+   "title": "Progressive Graph Structure Adjustment for Homophily Shift Adaptation",
+   "first_author": "Hongwei Wen",
+   "family": "general",
+   "subdomain": "general_2"
+  },
+  {
+   "id": 169,
+   "cite_key": "tusoni2026robust",
+   "name": "PLACy",
+   "name_source": "paper-text",
+   "figure_alias": "PLACy",
+   "title": "Robust Causal Discovery in Real-World Time Series with Power-Laws",
+   "first_author": "Matteo Tusoni",
+   "family": "trustworthy",
+   "subdomain": "trustworthy_4"
+  },
+  {
+   "id": 187,
+   "cite_key": "zou2026slaclip",
+   "name": "SlaClip",
+   "name_source": "paper-text",
+   "figure_alias": "SlaClip",
+   "title": "SlaClip: Gradient Norm Slacks can be Indicator for Adaptive Clipping in DP-SGD",
+   "first_author": "Shuyan Zou",
+   "family": "trustworthy",
+   "subdomain": "trustworthy_3"
+  },
+  {
+   "id": 198,
+   "cite_key": "brockschmidt2026survdiff",
+   "name": "SurvDiff",
+   "name_source": "paper-text",
+   "figure_alias": "SurvDiff",
+   "title": "SurvDiff: A Diffusion Model for Generating Synthetic Data in Survival Analysis",
+   "first_author": "Marie Brockschmidt",
+   "family": "applications",
+   "subdomain": "applications_2"
+  },
+  {
+   "id": 223,
+   "cite_key": "chi2026unifying",
+   "name": "Sequential Data Valuation",
+   "name_source": "figure-data",
+   "figure_alias": "Sequential Data Valuation",
+   "title": "Unifying and Optimizing Data Values for Selection via Sequential Decision-Making",
+   "first_author": "Frank Hongliang Chi",
+   "family": "general",
+   "subdomain": "general_3"
+  },
+  {
+   "id": 230,
+   "cite_key": "kiyani2026trust",
+   "name": "Weak-and-Strong Verification",
+   "name_source": "paper-text",
+   "figure_alias": "Weak/Strong Verification",
+   "title": "When to Trust the Cheap Check: Weak and Strong Verification for Reasoning",
+   "first_author": "Shayan Kiyani",
+   "family": "general",
+   "subdomain": "general_4"
+  },
+  {
+   "id": 238,
+   "cite_key": "song2026wbmm",
+   "name": "WBMM",
+   "name_source": "paper-text",
+   "figure_alias": "WBMM",
+   "title": "WBMM: Windowed Batch Matrix Multiplication for Efficient Large Receptive Field Convolution",
+   "first_author": "Wan Song",
+   "family": "systems",
+   "subdomain": "systems_3"
+  }
+ ]
+}
