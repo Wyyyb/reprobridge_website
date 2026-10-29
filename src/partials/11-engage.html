@@ -1,0 +1,38 @@
+<!-- Engage (#engage): anonymous page views and likes, counted with the free Abacus counting API
+     (abacus.jasoncameron.dev). engage.js counts one view per browser session on wyyyb.github.io (a dev counter
+     elsewhere; add ?nocount or localStorage rb-nocount=1 to exclude yourself) and sends one like per tap, with a
+     live-stream style burst. Without JS only the invitation shows. -->
+<section class="sec engage" id="engage" aria-labelledby="engage-title">
+  <div class="wrap">
+    <div class="eg-card" data-reveal>
+      <div class="eg-copy">
+        <p class="eyebrow">Thanks for reading</p>
+        <h2 id="engage-title">Enjoyed ReproBridge? <span>Leave a like.</span></h2>
+        <p class="eg-sub">Tap as often as you like; every tap counts. Views and likes are counted anonymously, without cookies.</p>
+      </div>
+      <div class="eg-panel" data-js-only>
+        <div class="eg-stats">
+          <div class="eg-stat">
+            <span class="eg-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+            <span class="eg-n" id="eg-views">—</span>
+            <span class="eg-l">views</span>
+          </div>
+          <div class="eg-stat eg-stat-likes">
+            <span class="eg-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.7S3.5 15.6 3.5 9.3A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 8.5 2.9c0 6.3-8.5 11.4-8.5 11.4z"/></svg></span>
+            <span class="eg-n" id="eg-likes">—</span>
+            <span class="eg-l">likes <span class="eg-live" hidden><i aria-hidden="true"></i>live</span></span>
+          </div>
+        </div>
+        <div class="eg-action">
+          <span class="eg-combo" aria-hidden="true"></span>
+          <button class="eg-like" type="button" aria-label="Like ReproBridge (each tap adds one like)">
+            <span class="eg-like-ring" aria-hidden="true"></span>
+            <svg class="eg-like-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.7S3.5 15.6 3.5 9.3A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 8.5 2.9c0 6.3-8.5 11.4-8.5 11.4z" fill="currentColor"/></svg>
+            <span class="eg-like-t">Like</span>
+          </button>
+          <p class="eg-you" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

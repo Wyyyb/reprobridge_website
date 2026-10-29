@@ -23,14 +23,15 @@
 <script>(function(){document.documentElement.classList.add('js');try{var t=localStorage.getItem('rb-theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0D1418');}}catch(e){}})();</script>
 <link rel="stylesheet" href="assets/css/base.css?v=1437474575">
 <link rel="stylesheet" href="assets/css/hero.css?v=db35d10324">
-<link rel="stylesheet" href="assets/css/story.css?v=58f3977626">
+<link rel="stylesheet" href="assets/css/story.css?v=e9fa8e5216">
 <link rel="stylesheet" href="assets/css/overview.css?v=87c02c2b07">
 <link rel="stylesheet" href="assets/css/artifact.css?v=0bd3b0b027">
 <link rel="stylesheet" href="assets/css/benchmark.css?v=5f141c34c3">
 <link rel="stylesheet" href="assets/css/results.css?v=be74992681">
-<link rel="stylesheet" href="assets/css/papers.css?v=a72172e476">
+<link rel="stylesheet" href="assets/css/papers.css?v=1fa9ce9a72">
 <link rel="stylesheet" href="assets/css/cases.css?v=207149bbe3">
 <link rel="stylesheet" href="assets/css/scope.css?v=9b93fbe5e8">
+<link rel="stylesheet" href="assets/css/engage.css?v=54190ecb60">
 <link rel="stylesheet" href="assets/css/release.css?v=f5666f183f">
 </head>
 <body>
@@ -61,6 +62,7 @@
   </div>
 </nav>
 <nav class="rail" aria-label="Sections">
+  <a href="#coverage"><b>·</b><span>Coverage</span></a>
   <a href="#story"><b>▸</b><span>Walkthrough</span></a>
   <a href="#overview"><b>·</b><span>Overview</span></a>
   <a href="#artifact"><b>01</b><span>Artifact</span></a>
@@ -117,12 +119,117 @@
         Dataset <span class="soon">Soon</span></span>
     </div>
     <p class="hero-lede">Reproducing an ML experiment often requires recovering details that its paper and released code leave implicit, and even a successful attempt can leave those decisions buried in conversations or shell histories. <b>ReproBridge</b> preserves them as a <b>refined reproducible artifact</b>: refined code, environment setup, experiment launchers, and a reproduction guide. Across four coding agents on 1,029 tasks, refined artifacts raise mean reproduction success from <b>76.4%</b> to <b>92.6%</b> and reduce downstream API spending by <b>19.7%</b> on average.</p>
-    <a class="hero-cue" href="#story"><span>Watch a detail get recovered</span><span class="cue-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
+    <a class="hero-cue" href="#coverage"><span>See where the gains land</span><span class="cue-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
   </div>
   <p class="hero-caption" aria-hidden="true"><span class="tag-note">Schematic</span><span>Scattered steps cross the bridge into four components</span></p>
 </header>
 
-<!-- ===== 02-story.html ===== -->
+<!-- ===== 02-coverage.html ===== -->
+<!-- Coverage (#coverage): the paper's coverage figure, re-created interactively from RB_DATA.papers.
+     Rendered and driven by assets/js/papers.js (shared with #papers); styles in assets/css/papers.css (.pp-scope). -->
+<section class="sec pp-scope" id="coverage" aria-labelledby="coverage-title">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <h2 id="coverage-title"><span class="sec-no">ReproBridge-Bench at a glance</span>Where the gains land</h2>
+      <p class="lede">ReproBridge-Bench draws its 36 test papers from ICML 2026 Spotlights across eight topic families and 22 subdomains. Every outer mark is one paper–model pair from the first evaluation: green bars show how much the refined artifact raises success over the released code; red and grey ticks mark decreases and ties.</p>
+    </div>
+
+    <!-- P1 · coverage and gains: the paper's coverage figure, re-created from RB_DATA.papers (assets/js/papers.js) -->
+    <div class="chart-card pp-card pp-cov" id="papers-coverage" data-reveal>
+      <div class="chart-head">
+        <div>
+          <h4>Research coverage and gains</h4>
+          <p class="cap">Eight ICML-adapted topic families and 22 subdomains across the 36 test papers; each paper is assigned once by its primary contribution. Outer marks show 144 paper–model pairs from the first evaluation with Codex auditing. <span class="tag-note">Eval 1 · Codex</span></p>
+        </div>
+        <div class="pp-jump" data-js-only>
+          <label for="pp-jump">Jump to a paper</label>
+          <span class="pp-select"><select id="pp-jump">
+            <option value="96">Any-Order GPT</option>
+            <option value="69">ATLAS</option>
+            <option value="112">AuxiliaryMCMC</option>
+            <option value="58">Chebyshev Policies</option>
+            <option value="90">Compositional Explanations</option>
+            <option value="50">Control Consistency Bridges</option>
+            <option value="113">DELTA4</option>
+            <option value="35">DivIn</option>
+            <option value="121">Effective Model Pruning</option>
+            <option value="20">EnergyDPS</option>
+            <option value="116">ETTFS</option>
+            <option value="7">ExactFANOVA</option>
+            <option value="81">FlashOptim</option>
+            <option value="40" selected>HELIX</option>
+            <option value="129">KPE/KTS</option>
+            <option value="134">LaST0</option>
+            <option value="66">Learning Randomized Reductions</option>
+            <option value="84">LiME</option>
+            <option value="24">LM Tail Risk</option>
+            <option value="95">Manifold-Aware Perturbations</option>
+            <option value="126">MindOmni</option>
+            <option value="135">Mixture of Concept Bottleneck Experts</option>
+            <option value="124">OC-space</option>
+            <option value="169">PLACy</option>
+            <option value="141">POET-X</option>
+            <option value="145">PonderLM-2</option>
+            <option value="149">PSAHS</option>
+            <option value="2">SCIQL</option>
+            <option value="223">Sequential Data Valuation</option>
+            <option value="187">SlaClip</option>
+            <option value="198">SurvDiff</option>
+            <option value="136">TACO</option>
+            <option value="1">TESS</option>
+            <option value="238">WBMM</option>
+            <option value="230">Weak-and-Strong Verification</option>
+            <option value="71">XDLM</option>
+          </select></span>
+        </div>
+      </div>
+      <div class="pp-legend" role="group" aria-label="Gain bins, counted in paper–model pairs. Press a bin to highlight its marks." data-js-only>
+        <button type="button" class="pp-bin" data-bin="dec" aria-pressed="false"><i class="gchip gb-dec" aria-hidden="true"></i><span class="pp-bin-l">Decrease</span><span class="pp-bin-n">18</span></button>
+        <button type="button" class="pp-bin" data-bin="tie" aria-pressed="false"><i class="gchip gb-tie" aria-hidden="true"></i><span class="pp-bin-l">Unchanged</span><span class="pp-bin-n">37</span></button>
+        <button type="button" class="pp-bin" data-bin="b0" aria-pressed="false"><i class="gchip gb-b0" aria-hidden="true"></i><span class="pp-bin-l">0–10 pp</span><span class="pp-bin-n">19</span></button>
+        <button type="button" class="pp-bin" data-bin="b10" aria-pressed="false"><i class="gchip gb-b10" aria-hidden="true"></i><span class="pp-bin-l">10–25 pp</span><span class="pp-bin-n">26</span></button>
+        <button type="button" class="pp-bin" data-bin="b25" aria-pressed="false"><i class="gchip gb-b25" aria-hidden="true"></i><span class="pp-bin-l">25–50 pp</span><span class="pp-bin-n">24</span></button>
+        <button type="button" class="pp-bin" data-bin="b50" aria-pressed="false"><i class="gchip gb-b50" aria-hidden="true"></i><span class="pp-bin-l">&gt;50 pp</span><span class="pp-bin-n">20</span></button>
+      </div>
+      <div class="pp-body" data-js-only>
+        <p class="cap pp-read">Each paper’s four marks run clockwise: Sonnet 4.6, Sonnet 5, Opus 5, Gemini 3.8 Flash. Green bars encode the RRA-minus-Raw success gain in pp from the blue zero ring, with dashed circles at 25, 50 and 100 pp; red and grey ticks mark decreases and ties without encoding magnitude. Legend counts are pairs; positive bins are (a, b].</p>
+        <div class="chart pp-sun" id="papers-sunburst"></div>
+        <div class="pp-detail" role="region" aria-label="Paper details">
+          <div class="pp-d-info">
+          <div class="pp-d-top"><span class="pp-d-state"><i aria-hidden="true"></i><span>Selected paper</span></span><span class="pp-d-pills"><span class="pp-d-n"><b class="pp-d-tasks">9</b> tasks</span><span class="pp-d-id">ID 40</span></span></div>
+          <h5 class="pp-d-name">HELIX</h5>
+          <p class="pp-d-title">HELIX: Hybrid Encoding with Learnable Identity and Cross-dimensional Synthesis for Time Series Imputation</p>
+          <p class="pp-d-author">Fengming Zhang et al.</p>
+          <p class="pp-d-area"><i class="pp-fdot fam-general" aria-hidden="true"></i><span class="pp-d-fam">General ML &amp; theory</span><span class="pp-d-sub">Time-series learning</span></p>
+          </div>
+          <div class="pp-d-data">
+          <div class="pp-d-rows-head"><span>Successful tasks, Raw → RRA</span><span>Gain</span></div>
+          <ul class="pp-d-rows">
+            <li class="pp-d-row"><span class="pp-d-model">Sonnet 4.6</span><span class="pp-d-count">6 of 9 → 9 of 9</span><span class="pp-d-gain"><i class="gchip gb-b25" aria-hidden="true"></i>+33.3 pp</span><span class="pp-d-bars" aria-hidden="true"><i class="b raw" style="--w:66.7%"></i><i class="b rra" style="--w:100.0%"></i></span></li>
+            <li class="pp-d-row"><span class="pp-d-model">Sonnet 5</span><span class="pp-d-count">8 of 9 → 9 of 9</span><span class="pp-d-gain"><i class="gchip gb-b10" aria-hidden="true"></i>+11.1 pp</span><span class="pp-d-bars" aria-hidden="true"><i class="b raw" style="--w:88.9%"></i><i class="b rra" style="--w:100.0%"></i></span></li>
+            <li class="pp-d-row"><span class="pp-d-model">Opus 5</span><span class="pp-d-count">4 of 9 → 9 of 9</span><span class="pp-d-gain"><i class="gchip gb-b50" aria-hidden="true"></i>+55.6 pp</span><span class="pp-d-bars" aria-hidden="true"><i class="b raw" style="--w:44.4%"></i><i class="b rra" style="--w:100.0%"></i></span></li>
+            <li class="pp-d-row"><span class="pp-d-model">Gemini 3.8 Flash</span><span class="pp-d-count">5 of 9 → 6 of 9</span><span class="pp-d-gain"><i class="gchip gb-b10" aria-hidden="true"></i>+11.1 pp</span><span class="pp-d-bars" aria-hidden="true"><i class="b raw" style="--w:55.6%"></i><i class="b rra" style="--w:66.7%"></i></span></li>
+          </ul>
+          <p class="pp-d-foot"><span class="tag-note">Derived from counts</span><span>Gain = 100 × (RRA − Raw) ÷ tasks. <span class="pp-d-key"><i class="b raw" aria-hidden="true"></i>Raw <i class="b rra" aria-hidden="true"></i>RRA</span></span></p>
+          </div>
+        </div>
+      </div>
+      <figure class="fig pp-fallback" data-nojs-only><div class="fig-frame">
+        <img src="assets/img/fig/domains_companion-1200.webp" srcset="assets/img/fig/domains_companion-1200.webp 1200w, assets/img/fig/domains_companion-2400.webp 2400w" sizes="(max-width: 1180px) 100vw, 1116px" width="1200" height="844" loading="lazy" decoding="async" alt="The paper's coverage figure. (a) Sunburst of the 36 test papers: an inner ring of eight topic families and a middle ring of 22 subdomains, with sector angles proportional to paper counts, surrounded by a blue zero ring and four outer marks per paper showing the gain of the refined artifact over Raw for Sonnet 4.6, Sonnet 5, Opus 5 and Gemini 3.8 Flash. (b) Paper selection: 742 ICML Spotlights, 241 eligible papers with official code, 50 randomly sampled, 36 retained. (c) Verified task scope: 1,029 tasks from 387 experiments; 631 full-procedure and 398 evaluation-only; 730 GPU and 299 CPU-only.">
+        <button class="zoom-btn" type="button" data-zoom="assets/img/fig/domains_companion-2400.webp" data-title="Paper figure: Research coverage and benchmark composition">Zoom</button>
+      </div><figcaption><b>Research coverage and benchmark composition.</b> (a) Eight ICML-adapted topic families and 22 subdomains cover 36 papers; sector angles encode paper counts. Outer marks show 144 paper–model pairs from the first evaluation with Codex auditing. Each paper’s four clockwise marks follow Sonnet 4.6, Sonnet 5, Opus 5, and Gemini 3.8 Flash. Green bars encode RRA-minus-Raw gains from the blue zero ring; dashed rings mark 25, 50, and 100 pp. Red/grey ticks indicate decreases/ties without magnitude. Legend counts are pairs; positive bins are (a, b]. (b) Paper selection. (c) Procedure and hardware are separate partitions of the same 1,029 verified tasks.</figcaption></figure>
+      <div class="chart-foot" data-js-only>
+        <p class="pp-hint">Hover or tap a paper’s marks to inspect it. Keyboard: Tab into the chart, step clockwise with the arrow keys, press Enter to select.</p>
+        <button class="paper-fig" type="button" data-zoom="assets/img/fig/domains_companion-2400.webp" data-title="Paper figure: Research coverage and benchmark composition">Paper figure: Research coverage and benchmark composition ↗</button>
+      </div>
+      <p class="sr-only" aria-live="polite" id="pp-live"></p>
+    </div>
+
+    <p class="cov-next" data-reveal><span>HELIX, selected above, is the reproduction the walkthrough follows next.</span> <a href="#story">Follow HELIX through one reproduction <span aria-hidden="true">↓</span></a></p>
+  </div>
+</section>
+
+<!-- ===== 03-story.html ===== -->
 <!-- Walkthrough (#story): one real reproduction, HELIX, in five steps. The list below is the readable fallback and
      the captions. story.js pins it beside a stage that redraws per step (desktop, motion allowed), or adds a still of
      each step's scene (reduced motion, short or narrow viewports). Sources: appendix "Recovering omitted
@@ -167,7 +274,7 @@
   <p class="sr-only story-live" aria-live="polite" aria-atomic="true"></p>
 </section>
 
-<!-- ===== 03-overview.html ===== -->
+<!-- ===== 04-overview.html ===== -->
 <section class="sec" id="overview" aria-labelledby="overview-title">
   <div class="wrap">
     <div class="sec-head" data-reveal>
@@ -279,7 +386,7 @@
   </div>
 </section>
 
-<!-- ===== 04-artifact.html ===== -->
+<!-- ===== 05-artifact.html ===== -->
 <section class="sec" id="artifact" aria-labelledby="artifact-title">
   <div class="wrap">
     <div class="sec-head" data-reveal>
@@ -689,7 +796,7 @@
   </div>
 </section>
 
-<!-- ===== 05-benchmark.html ===== -->
+<!-- ===== 06-benchmark.html ===== -->
 <section class="sec" id="benchmark" aria-labelledby="benchmark-title">
   <div class="wrap">
     <div class="sec-head" data-reveal>
@@ -1053,7 +1160,7 @@
   </div>
 </section>
 
-<!-- ===== 06-results.html ===== -->
+<!-- ===== 07-results.html ===== -->
 <section class="sec" id="results" aria-labelledby="results-title">
   <div class="wrap">
     <div class="sec-head" data-reveal>
@@ -1250,103 +1357,12 @@
   </div>
 </section>
 
-<!-- ===== 07-papers.html ===== -->
-<section class="sec" id="papers" aria-labelledby="papers-title">
+<!-- ===== 08-papers.html ===== -->
+<section class="sec pp-scope" id="papers" aria-labelledby="papers-title">
   <div class="wrap">
     <div class="sec-head" data-reveal>
       <h2 id="papers-title"><span class="sec-no">04 · Papers</span>Gains extend across 36 papers, but not to every one</h2>
-      <p class="lede">The main comparison pools tasks, so papers with more measurements weigh more. Paper by paper in the first evaluation, success improves or ties on 30 to 33 papers per model, while three to six papers regress.</p>
-    </div>
-
-    <!-- P1 · coverage and gains: the paper's coverage figure, re-created from RB_DATA.papers (assets/js/papers.js) -->
-    <div class="chart-card pp-card pp-cov" id="papers-coverage" data-reveal>
-      <div class="chart-head">
-        <div>
-          <h4>Research coverage and gains</h4>
-          <p class="cap">Eight ICML-adapted topic families and 22 subdomains across the 36 test papers; each paper is assigned once by its primary contribution. Outer marks show 144 paper–model pairs from the first evaluation with Codex auditing. <span class="tag-note">Eval 1 · Codex</span></p>
-        </div>
-        <div class="pp-jump" data-js-only>
-          <label for="pp-jump">Jump to a paper</label>
-          <span class="pp-select"><select id="pp-jump">
-            <option value="96">Any-Order GPT</option>
-            <option value="69">ATLAS</option>
-            <option value="112">AuxiliaryMCMC</option>
-            <option value="58">Chebyshev Policies</option>
-            <option value="90">Compositional Explanations</option>
-            <option value="50">Control Consistency Bridges</option>
-            <option value="113">DELTA4</option>
-            <option value="35">DivIn</option>
-            <option value="121">Effective Model Pruning</option>
-            <option value="20">EnergyDPS</option>
-            <option value="116">ETTFS</option>
-            <option value="7">ExactFANOVA</option>
-            <option value="81">FlashOptim</option>
-            <option value="40" selected>HELIX</option>
-            <option value="129">KPE/KTS</option>
-            <option value="134">LaST0</option>
-            <option value="66">Learning Randomized Reductions</option>
-            <option value="84">LiME</option>
-            <option value="24">LM Tail Risk</option>
-            <option value="95">Manifold-Aware Perturbations</option>
-            <option value="126">MindOmni</option>
-            <option value="135">Mixture of Concept Bottleneck Experts</option>
-            <option value="124">OC-space</option>
-            <option value="169">PLACy</option>
-            <option value="141">POET-X</option>
-            <option value="145">PonderLM-2</option>
-            <option value="149">PSAHS</option>
-            <option value="2">SCIQL</option>
-            <option value="223">Sequential Data Valuation</option>
-            <option value="187">SlaClip</option>
-            <option value="198">SurvDiff</option>
-            <option value="136">TACO</option>
-            <option value="1">TESS</option>
-            <option value="238">WBMM</option>
-            <option value="230">Weak-and-Strong Verification</option>
-            <option value="71">XDLM</option>
-          </select></span>
-        </div>
-      </div>
-      <div class="pp-legend" role="group" aria-label="Gain bins, counted in paper–model pairs. Press a bin to highlight its marks." data-js-only>
-        <button type="button" class="pp-bin" data-bin="dec" aria-pressed="false"><i class="gchip gb-dec" aria-hidden="true"></i><span class="pp-bin-l">Decrease</span><span class="pp-bin-n">18</span></button>
-        <button type="button" class="pp-bin" data-bin="tie" aria-pressed="false"><i class="gchip gb-tie" aria-hidden="true"></i><span class="pp-bin-l">Unchanged</span><span class="pp-bin-n">37</span></button>
-        <button type="button" class="pp-bin" data-bin="b0" aria-pressed="false"><i class="gchip gb-b0" aria-hidden="true"></i><span class="pp-bin-l">0–10 pp</span><span class="pp-bin-n">19</span></button>
-        <button type="button" class="pp-bin" data-bin="b10" aria-pressed="false"><i class="gchip gb-b10" aria-hidden="true"></i><span class="pp-bin-l">10–25 pp</span><span class="pp-bin-n">26</span></button>
-        <button type="button" class="pp-bin" data-bin="b25" aria-pressed="false"><i class="gchip gb-b25" aria-hidden="true"></i><span class="pp-bin-l">25–50 pp</span><span class="pp-bin-n">24</span></button>
-        <button type="button" class="pp-bin" data-bin="b50" aria-pressed="false"><i class="gchip gb-b50" aria-hidden="true"></i><span class="pp-bin-l">&gt;50 pp</span><span class="pp-bin-n">20</span></button>
-      </div>
-      <div class="pp-body" data-js-only>
-        <p class="cap pp-read">Each paper’s four marks run clockwise: Sonnet 4.6, Sonnet 5, Opus 5, Gemini 3.8 Flash. Green bars encode the RRA-minus-Raw success gain in pp from the blue zero ring, with dashed circles at 25, 50 and 100 pp; red and grey ticks mark decreases and ties without encoding magnitude. Legend counts are pairs; positive bins are (a, b].</p>
-        <div class="chart pp-sun" id="papers-sunburst"></div>
-        <div class="pp-detail" role="region" aria-label="Paper details">
-          <div class="pp-d-info">
-          <div class="pp-d-top"><span class="pp-d-state"><i aria-hidden="true"></i><span>Selected paper</span></span><span class="pp-d-pills"><span class="pp-d-n"><b class="pp-d-tasks">9</b> tasks</span><span class="pp-d-id">ID 40</span></span></div>
-          <h5 class="pp-d-name">HELIX</h5>
-          <p class="pp-d-title">HELIX: Hybrid Encoding with Learnable Identity and Cross-dimensional Synthesis for Time Series Imputation</p>
-          <p class="pp-d-author">Fengming Zhang et al.</p>
-          <p class="pp-d-area"><i class="pp-fdot fam-general" aria-hidden="true"></i><span class="pp-d-fam">General ML &amp; theory</span><span class="pp-d-sub">Time-series learning</span></p>
-          </div>
-          <div class="pp-d-data">
-          <div class="pp-d-rows-head"><span>Successful tasks, Raw → RRA</span><span>Gain</span></div>
-          <ul class="pp-d-rows">
-            <li class="pp-d-row"><span class="pp-d-model">Sonnet 4.6</span><span class="pp-d-count">6 of 9 → 9 of 9</span><span class="pp-d-gain"><i class="gchip gb-b25" aria-hidden="true"></i>+33.3 pp</span><span class="pp-d-bars" aria-hidden="true"><i class="b raw" style="--w:66.7%"></i><i class="b rra" style="--w:100.0%"></i></span></li>
-            <li class="pp-d-row"><span class="pp-d-model">Sonnet 5</span><span class="pp-d-count">8 of 9 → 9 of 9</span><span class="pp-d-gain"><i class="gchip gb-b10" aria-hidden="true"></i>+11.1 pp</span><span class="pp-d-bars" aria-hidden="true"><i class="b raw" style="--w:88.9%"></i><i class="b rra" style="--w:100.0%"></i></span></li>
-            <li class="pp-d-row"><span class="pp-d-model">Opus 5</span><span class="pp-d-count">4 of 9 → 9 of 9</span><span class="pp-d-gain"><i class="gchip gb-b50" aria-hidden="true"></i>+55.6 pp</span><span class="pp-d-bars" aria-hidden="true"><i class="b raw" style="--w:44.4%"></i><i class="b rra" style="--w:100.0%"></i></span></li>
-            <li class="pp-d-row"><span class="pp-d-model">Gemini 3.8 Flash</span><span class="pp-d-count">5 of 9 → 6 of 9</span><span class="pp-d-gain"><i class="gchip gb-b10" aria-hidden="true"></i>+11.1 pp</span><span class="pp-d-bars" aria-hidden="true"><i class="b raw" style="--w:55.6%"></i><i class="b rra" style="--w:66.7%"></i></span></li>
-          </ul>
-          <p class="pp-d-foot"><span class="tag-note">Derived from counts</span><span>Gain = 100 × (RRA − Raw) ÷ tasks. <span class="pp-d-key"><i class="b raw" aria-hidden="true"></i>Raw <i class="b rra" aria-hidden="true"></i>RRA</span></span></p>
-          </div>
-        </div>
-      </div>
-      <figure class="fig pp-fallback" data-nojs-only><div class="fig-frame">
-        <img src="assets/img/fig/domains_companion-1200.webp" srcset="assets/img/fig/domains_companion-1200.webp 1200w, assets/img/fig/domains_companion-2400.webp 2400w" sizes="(max-width: 1180px) 100vw, 1116px" width="1200" height="844" loading="lazy" decoding="async" alt="The paper's coverage figure. (a) Sunburst of the 36 test papers: an inner ring of eight topic families and a middle ring of 22 subdomains, with sector angles proportional to paper counts, surrounded by a blue zero ring and four outer marks per paper showing the gain of the refined artifact over Raw for Sonnet 4.6, Sonnet 5, Opus 5 and Gemini 3.8 Flash. (b) Paper selection: 742 ICML Spotlights, 241 eligible papers with official code, 50 randomly sampled, 36 retained. (c) Verified task scope: 1,029 tasks from 387 experiments; 631 full-procedure and 398 evaluation-only; 730 GPU and 299 CPU-only.">
-        <button class="zoom-btn" type="button" data-zoom="assets/img/fig/domains_companion-2400.webp" data-title="Paper figure: Research coverage and benchmark composition">Zoom</button>
-      </div><figcaption><b>Research coverage and benchmark composition.</b> (a) Eight ICML-adapted topic families and 22 subdomains cover 36 papers; sector angles encode paper counts. Outer marks show 144 paper–model pairs from the first evaluation with Codex auditing. Each paper’s four clockwise marks follow Sonnet 4.6, Sonnet 5, Opus 5, and Gemini 3.8 Flash. Green bars encode RRA-minus-Raw gains from the blue zero ring; dashed rings mark 25, 50, and 100 pp. Red/grey ticks indicate decreases/ties without magnitude. Legend counts are pairs; positive bins are (a, b]. (b) Paper selection. (c) Procedure and hardware are separate partitions of the same 1,029 verified tasks.</figcaption></figure>
-      <div class="chart-foot" data-js-only>
-        <p class="pp-hint">Hover or tap a paper’s marks to inspect it. Keyboard: Tab into the chart, step clockwise with the arrow keys, press Enter to select.</p>
-        <button class="paper-fig" type="button" data-zoom="assets/img/fig/domains_companion-2400.webp" data-title="Paper figure: Research coverage and benchmark composition">Paper figure: Research coverage and benchmark composition ↗</button>
-      </div>
-      <p class="sr-only" aria-live="polite" id="pp-live"></p>
+      <p class="lede">The main comparison pools tasks, so papers with more measurements weigh more. Paper by paper in the first evaluation, success improves or ties on 30 to 33 papers per model, while three to six papers regress. The <a href="#coverage">coverage chart</a> near the top of the page groups the same 36 papers by research area.</p>
     </div>
 
     <!-- P2 · Raw vs RRA per paper: small multiples re-creating the paper's paper-scatter figure -->
@@ -1452,7 +1468,7 @@
   </div>
 </section>
 
-<!-- ===== 08-cases.html ===== -->
+<!-- ===== 09-cases.html ===== -->
 <section class="sec sec-soft" id="cases" aria-labelledby="cases-title">
   <div class="wrap">
     <div class="sec-head" data-reveal>
@@ -1947,7 +1963,7 @@
   </div>
 </section>
 
-<!-- ===== 09-scope.html ===== -->
+<!-- ===== 10-scope.html ===== -->
 <section class="sec" id="scope" aria-labelledby="scope-title">
   <div class="wrap">
     <div class="sec-head" data-reveal>
@@ -2106,7 +2122,47 @@
   </div>
 </section>
 
-<!-- ===== 10-release.html ===== -->
+<!-- ===== 11-engage.html ===== -->
+<!-- Engage (#engage): anonymous page views and likes, counted with the free Abacus counting API
+     (abacus.jasoncameron.dev). engage.js counts one view per browser session on wyyyb.github.io (a dev counter
+     elsewhere; add ?nocount or localStorage rb-nocount=1 to exclude yourself) and sends one like per tap, with a
+     live-stream style burst. Without JS only the invitation shows. -->
+<section class="sec engage" id="engage" aria-labelledby="engage-title">
+  <div class="wrap">
+    <div class="eg-card" data-reveal>
+      <div class="eg-copy">
+        <p class="eyebrow">Thanks for reading</p>
+        <h2 id="engage-title">Enjoyed ReproBridge? <span>Leave a like.</span></h2>
+        <p class="eg-sub">Tap as often as you like; every tap counts. Views and likes are counted anonymously, without cookies.</p>
+      </div>
+      <div class="eg-panel" data-js-only>
+        <div class="eg-stats">
+          <div class="eg-stat">
+            <span class="eg-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+            <span class="eg-n" id="eg-views">—</span>
+            <span class="eg-l">views</span>
+          </div>
+          <div class="eg-stat eg-stat-likes">
+            <span class="eg-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.7S3.5 15.6 3.5 9.3A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 8.5 2.9c0 6.3-8.5 11.4-8.5 11.4z"/></svg></span>
+            <span class="eg-n" id="eg-likes">—</span>
+            <span class="eg-l">likes <span class="eg-live" hidden><i aria-hidden="true"></i>live</span></span>
+          </div>
+        </div>
+        <div class="eg-action">
+          <span class="eg-combo" aria-hidden="true"></span>
+          <button class="eg-like" type="button" aria-label="Like ReproBridge (each tap adds one like)">
+            <span class="eg-like-ring" aria-hidden="true"></span>
+            <svg class="eg-like-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.7S3.5 15.6 3.5 9.3A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 8.5 2.9c0 6.3-8.5 11.4-8.5 11.4z" fill="currentColor"/></svg>
+            <span class="eg-like-t">Like</span>
+          </button>
+          <p class="eg-you" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 12-release.html ===== -->
 <section class="sec" id="release" aria-labelledby="release-title">
   <div class="wrap">
     <div class="sec-head" data-reveal>
@@ -2194,14 +2250,15 @@
 <script src="assets/js/charts.js?v=37fa183b33"></script>
 <script src="assets/js/site.js?v=fca05058c8"></script>
 <script src="assets/js/hero.js?v=da6ebd6679"></script>
-<script src="assets/js/story.js?v=b3ece9e980"></script>
+<script src="assets/js/story.js?v=4f0ac01ed4"></script>
 <script src="assets/js/overview.js?v=fc6d4a9e0b"></script>
 <script src="assets/js/artifact.js?v=7f577a143b"></script>
 <script src="assets/js/benchmark.js?v=20902a2319"></script>
 <script src="assets/js/results.js?v=2cee7494c7"></script>
-<script src="assets/js/papers.js?v=36deae17be"></script>
+<script src="assets/js/papers.js?v=0808fed165"></script>
 <script src="assets/js/cases.js?v=2414618f16"></script>
 <script src="assets/js/scope.js?v=d9a3890377"></script>
+<script src="assets/js/engage.js?v=62a53ea785"></script>
 <script src="assets/js/release.js?v=c9aa11da14"></script>
 </body>
 </html>

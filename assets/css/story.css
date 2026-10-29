@@ -40,10 +40,11 @@
 
 /* ------------------------------------------------------------------ live (desktop): pinned frame, one step at a time */
 #story.is-live { padding: 0; scroll-margin-top: -16px; }   /* #story lands exactly on the pin line */
-#story.is-live .story-track { height: calc(100vh - var(--nav-h) + 330vh); }
+#story.is-live .story-track { height: calc(100vh - var(--nav-h) + 200vh); }   /* 40vh of scroll per step */
 #story.is-live .story-sticky {
   position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h));
   display: flex; align-items: center; overflow: hidden; overflow: clip;
+  padding-bottom: 58px;   /* room for the walkthrough HUD pinned to the bottom of the viewport */
 }
 #story.is-live .story-grid {
   width: 100%; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -305,3 +306,65 @@
   #story.is-live .story-step p { opacity: 1 !important; transform: none !important; margin: 6px 0 18px; padding: 0; }
   #story .story-skip { display: none; }
 }
+
+/* ------------------------------------------------------------------ walkthrough HUD (appended to <body> by story.js)
+ * A pill pinned to the bottom of the viewport while the walkthrough is on screen: progress, a bouncing scroll cue and
+ * a skip button, so a reader who only wants to skim never mistakes the pinned frame for the end of the page. */
+.story-hud {
+  position: fixed; left: 50%; bottom: 18px; z-index: 58;
+  display: flex; align-items: center; gap: 14px; max-width: calc(100vw - 24px);
+  padding: 7px 7px 7px 16px; border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent); border: 1px solid var(--line-2);
+  -webkit-backdrop-filter: saturate(170%) blur(14px); backdrop-filter: saturate(170%) blur(14px);
+  box-shadow: 0 14px 40px -14px rgba(16, 40, 48, .35), 0 2px 6px rgba(16, 40, 48, .08);
+  font-size: 13.5px; color: var(--ink-2); white-space: nowrap;
+  opacity: 0; transform: translate(-50%, 16px) scale(.96); pointer-events: none;
+  transition: opacity .35s var(--ease), transform .45s var(--ease-out);
+}
+.story-hud.on { opacity: 1; transform: translate(-50%, 0) scale(1); pointer-events: auto; }
+:root[data-theme="dark"] .story-hud { box-shadow: 0 14px 40px -12px rgba(0, 0, 0, .7); }
+.story-hud .sh-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--rra-ink);
+}
+.story-hud .sh-badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--rra); box-shadow: 0 0 0 0 color-mix(in srgb, var(--rra) 55%, transparent); animation: sh-live 1.8s var(--ease) infinite; }
+.story-hud .sh-segs { display: inline-flex; gap: 4px; }
+.story-hud .sh-segs i { width: 18px; height: 4px; border-radius: 3px; background: var(--line-2); transition: background-color .3s var(--ease), transform .3s var(--ease-out); }
+.story-hud .sh-segs i.done { background: var(--rra-2); }
+.story-hud .sh-segs i.cur { background: var(--rra); transform: scaleY(1.5); }
+.story-hud.is-ahead .sh-segs i { background: var(--line-2); }
+.story-hud .sh-step { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--ink); min-width: 74px; }
+.story-hud .sh-s { display: none; }
+.story-hud .sh-hint { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-3); }
+.story-hud .sh-arrow { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--rra-tint); color: var(--rra-ink); font-size: 12px; line-height: 1; animation: sh-bounce 1.15s var(--ease) infinite; }
+.story-hud .sh-skip {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 0; border-radius: 999px; cursor: pointer;
+  background: var(--accent-fill); color: var(--on-accent); font-size: 13.5px; font-weight: 600;
+  box-shadow: 0 6px 18px -8px color-mix(in srgb, var(--rra) 80%, transparent);
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+}
+.story-hud .sh-skip:hover { transform: translateY(-1px); box-shadow: 0 10px 22px -8px color-mix(in srgb, var(--rra) 90%, transparent); }
+.story-hud .sh-skip-i { display: inline-block; font-size: 14px; line-height: 1; }
+.story-hud .sh-skip:hover .sh-skip-i { animation: sh-bounce .9s var(--ease) infinite; }
+.story-hud.is-last .sh-arrow { background: var(--accent-fill); color: var(--on-accent); }
+/* first appearance: grow, overshoot, and ring twice so the reader notices it */
+.story-hud.pop { animation: sh-pop .7s var(--ease-out) both, sh-ring 1.1s .45s var(--ease) 2; }
+.story-hud.bump .sh-step { animation: sh-bump .45s var(--ease-out); }
+@keyframes sh-pop { 0% { transform: translate(-50%, 18px) scale(.82); } 60% { transform: translate(-50%, -4px) scale(1.07); } 100% { transform: translate(-50%, 0) scale(1); } }
+@keyframes sh-ring { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--rra) 45%, transparent), 0 14px 40px -14px rgba(16, 40, 48, .35); } 100% { box-shadow: 0 0 0 16px color-mix(in srgb, var(--rra) 0%, transparent), 0 14px 40px -14px rgba(16, 40, 48, .35); } }
+@keyframes sh-bounce { 0%, 100% { transform: translateY(-1px); } 50% { transform: translateY(3px); } }
+@keyframes sh-bump { 0% { transform: scale(1); } 40% { transform: scale(1.12); } 100% { transform: scale(1); } }
+@keyframes sh-live { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--rra) 55%, transparent); } 100% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--rra) 0%, transparent); } }
+@media (max-width: 640px) {
+  .story-hud { gap: 10px; padding: 6px 6px 6px 12px; bottom: 12px; font-size: 12.5px; }
+  .story-hud .sh-hint, .story-hud .sh-badge-t { display: none; }
+  .story-hud .sh-segs i { width: 12px; }
+  .story-hud .sh-step { min-width: 0; }
+  .story-hud .sh-l { display: none; }
+  .story-hud .sh-s { display: inline; }
+  .story-hud .sh-skip { padding: 7px 12px; font-size: 12.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .story-hud, .story-hud.pop, .story-hud .sh-arrow, .story-hud .sh-badge i, .story-hud.bump .sh-step { animation: none !important; transition: opacity .2s linear; }
+}
+@media print { .story-hud { display: none !important; } }

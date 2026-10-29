@@ -424,8 +424,8 @@
       ]));
     }
     if ((only === undefined || only === 4) && INV) {
-      var more = H('a', { class: 'ft-more', href: '#papers', html: 'See all ' + F.nPapers + ' papers <span aria-hidden="true">→</span>' });
-      more.addEventListener('click', function () { RB.emit('paper:select', F.paperId); });
+      var more = H('a', { class: 'ft-more', href: '#coverage', html: 'See all ' + F.nPapers + ' papers <span aria-hidden="true">↑</span>' });
+      more.addEventListener('click', function () { RB.emit('paper:select', { id: F.paperId, view: 'coverage' }); });
       f.appendChild(H('div', { class: 'ft-res' }, [
         H('span', { class: 'ft-k', text: 'HELIX · ' + F.model + ' · first evaluation · Codex auditing' }),
         H('span', { class: 'ft-n', html: '<b class="t-raw">' + INV.raw + ' of ' + INV.n + '</b><span class="ft-ar" aria-hidden="true">→</span><b class="t-rra">' + INV.rra + ' of ' + INV.n + '</b> tasks' }),
@@ -436,9 +436,64 @@
     return f;
   }
 
+  /* ---------------------------------------------------------------- walkthrough HUD: progress + skip, so readers who
+   * only want to skim always see that the page continues (and can jump past the walkthrough) */
+  function makeHud() {
+    var segs = [], last = { show: false, ahead: null, step: -1 }, popped = false, hideT = 0;
+    var el = H('div', { class: 'story-hud', role: 'region', 'aria-label': 'Walkthrough progress' });
+    el.hidden = true;
+    var badge = H('span', { class: 'sh-badge' }, [H('i', { 'aria-hidden': 'true' }), H('span', { class: 'sh-badge-t', text: 'Walkthrough' })]);
+    var segWrap = H('span', { class: 'sh-segs', 'aria-hidden': 'true' });
+    for (var k = 0; k < 5; k++) { var sg = H('i'); segs.push(sg); segWrap.appendChild(sg); }
+    var stepT = H('span', { class: 'sh-step', 'aria-live': 'off' });
+    var hint = H('span', { class: 'sh-hint', html: '<span class="sh-hint-t">Scroll</span><b class="sh-arrow" aria-hidden="true">↓</b>' });
+    var skip = H('button', { type: 'button', class: 'sh-skip', html: '<span class="sh-skip-t">Skip walkthrough</span><span class="sh-skip-i" aria-hidden="true">⤓</span>' });
+    skip.addEventListener('click', skipNow);
+    el.appendChild(badge); el.appendChild(segWrap); el.appendChild(stepT); el.appendChild(hint); el.appendChild(skip);
+    document.body.appendChild(el);
+    function update(show, ahead, step) {
+      if (show !== last.show) {
+        clearTimeout(hideT);
+        if (show) {
+          el.hidden = false;
+          void el.offsetWidth;
+          el.classList.add('on');
+          if (!popped && !RB.reduced()) { popped = true; el.classList.add('pop'); setTimeout(function () { el.classList.remove('pop'); }, 2600); }
+        } else {
+          el.classList.remove('on');
+          hideT = setTimeout(function () { if (!last.show) el.hidden = true; }, 400);
+        }
+      }
+      if (ahead !== last.ahead || step !== last.step) {
+        el.classList.toggle('is-ahead', ahead);
+        el.classList.toggle('is-last', !ahead && step === 4);
+        segs.forEach(function (sg, j) { sg.classList.toggle('done', !ahead && j < step); sg.classList.toggle('cur', !ahead && j === step); });
+        /* long labels on wide screens, short ones (.sh-s) on phones */
+        stepT.innerHTML = ahead ? '<span class="sh-l">5 steps ahead</span><span class="sh-s">5 steps</span>'
+          : '<span class="sh-l">Step </span>' + (step + 1) + '<span class="sh-l"> of </span><span class="sh-s">/</span>5';
+        hint.querySelector('.sh-hint-t').textContent = ahead ? 'Scroll to step through' : (step === 4 ? 'Keep scrolling' : 'Scroll');
+        skip.querySelector('.sh-skip-t').innerHTML = !ahead && step === 4 ? '<span class="sh-l">Next section</span><span class="sh-s">Next</span>'
+          : '<span class="sh-l">Skip walkthrough</span><span class="sh-s">Skip</span>';
+        if (!ahead && step !== last.step && last.step >= 0) { el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); }
+      }
+      last = { show: show, ahead: ahead, step: step };
+    }
+    function destroy() { clearTimeout(hideT); el.remove(); }
+    return { update: update, destroy: destroy };
+  }
+  /* jump to whatever follows the walkthrough (the overview), then hand keyboard focus to it */
+  function skipNow() {
+    var t = sec.nextElementSibling;
+    while (t && !/^(SECTION|HEADER|FOOTER)$/.test(t.tagName)) t = t.nextElementSibling;
+    if (!t) return;
+    var nh = parseFloat(C.css('--nav-h')) || 60;
+    window.scrollTo({ top: Math.round(t.getBoundingClientRect().top + window.pageYOffset - nh + 1), behavior: RB.reduced() ? 'auto' : 'smooth' });
+    setTimeout(function () { if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); }, RB.reduced() ? 0 : 900);
+  }
+
   /* ---------------------------------------------------------------- live: pinned, one step at a time */
   function goLive() {
-    var alive = true, active = -1, raf = 0, annT = 0, scene = null, nh = 60;
+    var alive = true, active = -1, raf = 0, annT = 0, scene = null, nh = 60, hud = makeHud();
     function navH() { return nh; }
     function readNav() { nh = parseFloat(C.css('--nav-h')) || 60; }
     readNav();
@@ -483,6 +538,8 @@
       ol.style.setProperty('--p', Math.max(0, Math.min(1, p * 1.25)).toFixed(4));
       var i = Math.max(0, Math.min(4, Math.floor(p * 5)));
       if (i !== active) activate(i, active < 0, p >= 0 && p <= 1);
+      /* show the HUD from half a screen before the pin until the frame lets go */
+      hud.update(p > -0.25 && p < 1, p < 0, i);
     }
     function onScroll() { if (!raf) raf = requestAnimationFrame(update); }
     function onResize() { readNav(); if (scene) scene.fit(); onScroll(); }
@@ -496,6 +553,7 @@
       alive = false;
       if (raf) cancelAnimationFrame(raf);
       clearTimeout(annT);
+      hud.destroy();
       window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onResize);
       if (ro) ro.disconnect();
       steps.forEach(function (li, i) {
@@ -532,6 +590,17 @@
     }
     function all(force) { if (alive) shots.forEach(function (s) { draw(s, force); if (s.fit) s.fit(); }); }
     all(true);
+    var hud = makeHud(), hraf = 0;
+    function hudTick() {
+      hraf = 0;
+      if (!alive) return;
+      var vh = window.innerHeight, r = sec.getBoundingClientRect(), k = -1;
+      steps.forEach(function (li, j) { if (li.getBoundingClientRect().top < vh * 0.5) k = j; });
+      hud.update(r.top < vh * 0.62 && r.bottom > vh * 0.45, k < 0, Math.max(0, k));
+    }
+    function onHudScroll() { if (!hraf) hraf = requestAnimationFrame(hudTick); }
+    window.addEventListener('scroll', onHudScroll, { passive: true });
+    hudTick();
     var ro = 'ResizeObserver' in window ? new ResizeObserver(function () { all(false); }) : null;
     if (ro) shots.forEach(function (s) { ro.observe(s.box); });
     function onResize() { all(false); }
@@ -541,6 +610,9 @@
       alive = false;
       if (ro) ro.disconnect();
       window.removeEventListener('resize', onResize);
+      window.removeEventListener('scroll', onHudScroll);
+      if (hraf) cancelAnimationFrame(hraf);
+      hud.destroy();
       shots.forEach(function (s) { s.box.remove(); });
       sec.classList.remove('is-still');
     };

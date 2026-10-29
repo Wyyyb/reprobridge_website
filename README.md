@@ -45,6 +45,14 @@ in the source (76 checks), plus consistency checks. For example, the per-paper i
 task totals, paper-macro rates and figure legend counts. If the paper changes a number, the build fails instead of
 publishing a stale value.
 
+## Views and likes
+
+The band above the release section shows page views and likes. They are counted with the free
+[Abacus](https://abacus.jsn.cam) counting API (no cookies, no keys in this repo; namespace `wyyyb.github.io`, keys
+`reprobridge_website-views` and `reprobridge_website-likes`). A view is counted once per browser session; every tap
+on the like button adds one like. Local previews use a separate dev counter. Add `?nocount` to the URL (or set
+`localStorage.rb-nocount = "1"`) to see the counts without adding a view.
+
 ## Before launch
 
 - Delete the `<meta name="robots" content="noindex, nofollow">` line in `src/head.html` so search engines can index the page.

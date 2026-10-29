@@ -1,9 +1,11 @@
-/* 04 · Papers: (P1) the paper's coverage sunburst re-created from RB_DATA.papers, with a linked detail panel;
+/* Coverage (#coverage, near the top) + 04 · Papers (#papers): (P1) the paper's coverage sunburst re-created from
+ * RB_DATA.papers, with a linked detail panel (lives in #coverage);
  * (P2) Raw-vs-RRA small multiples re-creating the paper-scatter figure; (P3) sortable headers for the static table.
  * All counts are successful-task counts from RB_DATA.papers.list (first evaluation, primary Codex auditing; model
  * order s46, s5, o5, g38). Per-paper gains and percentages are DERIVED from those counts:
  * gain = 100 × (RRA − Raw) / tasks; gain bins are (a, b] as in the paper's legend.
- * Listens for RB.emit('paper:select', id) (e.g. from the walkthrough) to select a paper and scroll to the chart. */
+ * Listens for RB.emit('paper:select', id | {id, view}) to select a paper and scroll to it: view 'coverage' scrolls to
+ * the sunburst (the walkthrough's link), anything else to the paper-by-paper scatter in #papers. */
 (function () {
   'use strict';
   var sec = document.getElementById('papers');
@@ -77,7 +79,7 @@
 
   /* ---------------------------------------------------------------- P1 · sunburst */
   var sunEl = document.getElementById('papers-sunburst');
-  var detail = sec.querySelector('.pp-detail');
+  var detail = document.querySelector('.pp-scope .pp-detail');
   var jump = document.getElementById('pp-jump');
   var live = document.getElementById('pp-live');
   var legendBtns = [].slice.call(sec.querySelectorAll('.pp-bin'));
@@ -699,13 +701,15 @@
       document.fonts.addEventListener('loadingdone', function () { clearTimeout(ft); ft = setTimeout(rerender, 60); });
     }
   }
+  RB.whenNear(document.getElementById('papers-coverage') || sec, init, '900px 0px');
   RB.whenNear(sec, init, '900px 0px');
 
-  RB.on('paper:select', function (id) {
+  RB.on('paper:select', function (d) {
+    var id = d && typeof d === 'object' ? d.id : d;
     if (!byId[Number(id)]) return;
     init();
     select(id);
-    var card = document.getElementById('papers-coverage') || sec;
+    var card = (d && d.view === 'coverage' ? document.getElementById('papers-coverage') : scCard) || sec;
     // defer so an in-page anchor jump (e.g. href="#papers") does not override this scroll
     setTimeout(function () { card.scrollIntoView({ behavior: RB.reduced() ? 'auto' : 'smooth', block: 'start' }); }, 30);
   });
