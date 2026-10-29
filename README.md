@@ -56,6 +56,6 @@ on the like button adds one like. Local previews use a separate dev counter. Add
 ## Before launch
 
 - Delete the `<meta name="robots" content="noindex, nofollow">` line in `src/head.html` so search engines can index the page.
-- Replace the "Soon" buttons in `src/partials/01-hero.html`, `00-nav.html` and `10-release.html` with links to
+- Replace the "Soon" buttons in `src/partials/01-hero.html`, `00-nav.html` and `12-release.html` with links to
   the paper, arXiv, code and ReproBridge-Bench. Add the arXiv identifier to the BibTeX entry.
 - Rebuild with `python3 build.py`, commit, and push; Pages redeploys automatically.
