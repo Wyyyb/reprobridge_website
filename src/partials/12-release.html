@@ -2,32 +2,34 @@
   <div class="wrap">
     <div class="sec-head" data-reveal>
       <p class="eyebrow">Release</p>
-      <h2 id="release-title">Code and <span class="nw">ReproBridge-Bench</span>, coming soon</h2>
-      <p class="lede">We will open-source the ReproBridge code and the ReproBridge-Bench dataset. Links will appear here once they are public.</p>
+      <h2 id="release-title">Read the paper; code and data are on the way</h2>
+      <p class="lede">The paper is on arXiv as <a href="https://arxiv.org/abs/2611.08452" target="_blank" rel="noopener">2611.08452</a>. The ReproBridge code and the ReproBridge-Bench dataset are going through internal review and will be open-sourced once it is approved.</p>
     </div>
 
     <!-- #cite wraps the release cards and the citation, so the nav "Cite" link lands with the BibTeX in view and the
          scrollspy can still mark "Release & cite" at the bottom of the page -->
     <div class="rel-body" id="cite">
-      <!-- TODO at release: turn each card into a link (keep the layout) and drop its "Soon" badge -->
+      <!-- Code and dataset cards: turn them into links (like the paper cards) once internal review approves the release -->
       <ul class="rel-grid" role="list" data-reveal>
-        <li class="rel-card">
+        <li class="rel-card is-live">
           <div class="rel-top">
             <span class="rel-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span>
           </div>
           <span class="kicker">Paper</span>
           <h3>ReproBridge paper</h3>
           <p>Full paper with appendices: protocols, inventories, and worked examples.</p>
-          <span class="soon">Soon</span>
+          <span class="rel-go" aria-hidden="true">PDF ↗</span>
+          <a class="rel-stretch" href="https://arxiv.org/pdf/2611.08452" target="_blank" rel="noopener"><span class="sr-only">Read the ReproBridge paper (PDF)</span></a>
         </li>
-        <li class="rel-card">
+        <li class="rel-card is-live">
           <div class="rel-top">
             <span class="rel-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
           </div>
           <span class="kicker">arXiv</span>
-          <h3>arXiv preprint</h3>
-          <p>Citable preprint.</p>
-          <span class="soon">Soon</span>
+          <h3>arXiv:2611.08452</h3>
+          <p>Abstract page, versions, and citation.</p>
+          <span class="rel-go" aria-hidden="true">Open ↗</span>
+          <a class="rel-stretch" href="https://arxiv.org/abs/2611.08452" target="_blank" rel="noopener"><span class="sr-only">Open the arXiv page of the paper</span></a>
         </li>
         <li class="rel-card">
           <div class="rel-top">
@@ -35,8 +37,8 @@
           </div>
           <span class="kicker">Code</span>
           <h3>ReproBridge</h3>
-          <p>The agent workflow that turns a paper and its released code into a refined reproducible artifact.</p>
-          <span class="soon">Soon</span>
+          <p>The agent workflow that turns a paper and its released code into a refined reproducible artifact. Under internal review; open-sourced once approved.</p>
+          <span class="soon">In review</span>
         </li>
         <li class="rel-card">
           <div class="rel-top">
@@ -44,8 +46,8 @@
           </div>
           <span class="kicker">Dataset</span>
           <h3 class="nw">ReproBridge-Bench</h3>
-          <p>1,029 tasks from 387 experiments across 36 papers, with five human-verified reference scores per task.</p>
-          <span class="soon">Soon</span>
+          <p>1,029 tasks from 387 experiments across 36 papers, with five human-verified reference scores per task. Under internal review; open-sourced once approved.</p>
+          <span class="soon">In review</span>
         </li>
       </ul>
 
@@ -59,8 +61,7 @@
             <span class="copy-label">Copy</span><span class="sr-only"> BibTeX citation</span>
           </button>
         </div>
-        <!-- TODO: add eprint/arXiv ID once assigned -->
-        <pre id="bibtex" tabindex="0" role="region" aria-label="BibTeX citation"><span class="bl"><span class="bt-at">@article</span>{<span class="bt-key">wang2026reprobridge</span>,</span><span class="bl">  <span class="bt-f">title</span>   = {{ReproBridge}: Building Reproducibility into {ML} Research Artifacts},</span><span class="bl">  <span class="bt-f">author</span>  = {Wang, Yubo and Meng, Rui and Nam, Jaehyun and Pfister, Tomas and Yoon, Jinsung},</span><span class="bl">  <span class="bt-f">journal</span> = {arXiv preprint},</span><span class="bl">  <span class="bt-f">year</span>    = {2026}</span><span class="bl">}</span></pre>
+        <pre id="bibtex" tabindex="0" role="region" aria-label="BibTeX citation"><span class="bl"><span class="bt-at">@article</span>{<span class="bt-key">wang2026reprobridge</span>,</span><span class="bl">  <span class="bt-f">title</span>   = {{ReproBridge}: Building Reproducibility into {ML} Research Artifacts},</span><span class="bl">  <span class="bt-f">author</span>  = {Wang, Yubo and Meng, Rui and Nam, Jaehyun and Pfister, Tomas and Yoon, Jinsung},</span><span class="bl">  <span class="bt-f">journal</span> = {arXiv preprint arXiv:2611.08452},</span><span class="bl">  <span class="bt-f">year</span>    = {2026}</span><span class="bl">}</span></pre>
       </div>
       <p class="sr-only" id="rel-copy-status" aria-live="polite"></p>
     </div>

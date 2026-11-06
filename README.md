@@ -53,9 +53,10 @@ The band above the release section shows page views and likes. They are counted 
 on the like button adds one like. Local previews use a separate dev counter. Add `?nocount` to the URL (or set
 `localStorage.rb-nocount = "1"`) to see the counts without adding a view.
 
-## Before launch
+## Release status
 
-- Delete the `<meta name="robots" content="noindex, nofollow">` line in `src/head.html` so search engines can index the page.
-- Replace the "Soon" buttons in `src/partials/01-hero.html`, `00-nav.html` and `12-release.html` with links to
-  the paper, arXiv, code and ReproBridge-Bench. Add the arXiv identifier to the BibTeX entry.
-- Rebuild with `python3 build.py`, commit, and push; Pages redeploys automatically.
+- Paper: [arXiv:2611.08452](https://arxiv.org/abs/2611.08452), linked from the hero, the nav and the release section.
+- Code and ReproBridge-Bench: under internal review. Once approved, turn the two "In review" buttons in
+  `src/partials/01-hero.html` and the matching cards in `src/partials/12-release.html` into links (the paper cards show
+  the pattern), and update the hero note and the release lede. Rebuild with `python3 build.py`, commit, and push; Pages
+  redeploys automatically.

@@ -35,6 +35,11 @@ html.js #top .hero-title .w2 { animation-delay: .12s; }
 #top .affils { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 8px 0 30px; font-size: 14.5px; color: var(--ink-3); }
 #top .affils sup { color: var(--rra-ink); font-weight: 600; margin-right: 2px; }
 #top .hero-btns { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 30px; max-width: 680px; }
+#top .hero-note {
+  display: flex; align-items: center; gap: 9px; margin: -14px 0 26px; max-width: 620px;
+  font-size: 13.5px; line-height: 1.45; color: var(--ink-3);
+}
+#top .hero-note::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 3px var(--gold-tint); }
 #top .hero-lede {
   font-size: clamp(16.5px, 1.3vw, 18px); line-height: 1.62; color: var(--ink-2); margin: 0 0 34px;
   padding-left: 18px; border-left: 2px solid var(--line-2); max-width: 600px;

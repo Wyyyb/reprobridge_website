@@ -13,8 +13,6 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wyyyb.github.io/reprobridge_website/assets/img/og.png">
 <link rel="canonical" href="https://wyyyb.github.io/reprobridge_website/">
-<!-- pre-release: reachable by link but kept out of search results; delete this line at launch -->
-<meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +20,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400..700&family=Google+Sans+Flex:opsz,wght@6..144,400..700&display=swap">
 <script>(function(){document.documentElement.classList.add('js');try{var t=localStorage.getItem('rb-theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0D1418');}}catch(e){}})();</script>
 <link rel="stylesheet" href="assets/css/base.css?v=1437474575">
-<link rel="stylesheet" href="assets/css/hero.css?v=db35d10324">
+<link rel="stylesheet" href="assets/css/hero.css?v=c2aa3967d3">
 <link rel="stylesheet" href="assets/css/story.css?v=e9fa8e5216">
 <link rel="stylesheet" href="assets/css/overview.css?v=87c02c2b07">
 <link rel="stylesheet" href="assets/css/artifact.css?v=0bd3b0b027">
@@ -32,7 +30,7 @@
 <link rel="stylesheet" href="assets/css/cases.css?v=207149bbe3">
 <link rel="stylesheet" href="assets/css/scope.css?v=9b93fbe5e8">
 <link rel="stylesheet" href="assets/css/engage.css?v=54190ecb60">
-<link rel="stylesheet" href="assets/css/release.css?v=f5666f183f">
+<link rel="stylesheet" href="assets/css/release.css?v=bf8649c2cc">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -53,7 +51,7 @@
       <a href="#cite" class="opt">Cite</a>
     </div>
     <div class="nav-tools">
-      <span class="btn btn-sm btn-accent is-soon" aria-disabled="true" title="The paper will be linked here once it is public">Paper <span class="soon">Soon</span></span>
+      <a class="btn btn-sm btn-accent" href="https://arxiv.org/pdf/2611.08452" target="_blank" rel="noopener">Paper <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
       <button class="icon-btn theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></svg>
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
@@ -104,20 +102,20 @@
     </div>
     <div class="affils"><span><sup>1</sup>University of Waterloo</span><span><sup>2</sup>Google</span></div>
     <div class="hero-btns">
-      <!-- TODO at release: turn each of these into a link and drop its "Soon" badge -->
-      <span class="btn btn-dark is-soon" aria-disabled="true">
+      <a class="btn btn-dark" href="https://arxiv.org/pdf/2611.08452" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
-        Paper <span class="soon">Soon</span></span>
-      <span class="btn is-soon" aria-disabled="true">
+        Paper</a>
+      <a class="btn" href="https://arxiv.org/abs/2611.08452" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
-        arXiv <span class="soon">Soon</span></span>
-      <span class="btn is-soon" aria-disabled="true">
+        arXiv</a>
+      <span class="btn is-soon" aria-disabled="true" title="Under internal review; it will be open-sourced once approved">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>
-        Code <span class="soon">Soon</span></span>
-      <span class="btn is-soon" aria-disabled="true" title="ReproBridge-Bench">
+        Code <span class="soon">In review</span></span>
+      <span class="btn is-soon" aria-disabled="true" title="ReproBridge-Bench is under internal review; it will be open-sourced once approved">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6.5c0 1.6 3.4 2.8 7.5 2.8s7.5-1.2 7.5-2.8V5.5M4.5 12v6.5c0 1.6 3.4 2.8 7.5 2.8s7.5-1.2 7.5-2.8V12"/></svg>
-        Dataset <span class="soon">Soon</span></span>
+        Dataset <span class="soon">In review</span></span>
     </div>
+    <p class="hero-note">Code and data are going through internal review and will be open-sourced once approved.</p>
     <p class="hero-lede">Reproducing an ML experiment often requires recovering details that its paper and released code leave implicit, and even a successful attempt can leave those decisions buried in conversations or shell histories. <b>ReproBridge</b> preserves them as a <b>refined reproducible artifact</b>: refined code, environment setup, experiment launchers, and a reproduction guide. Across four coding agents on 1,029 tasks, refined artifacts raise mean reproduction success from <b>76.4%</b> to <b>92.6%</b> and reduce downstream API spending by <b>19.7%</b> on average.</p>
     <a class="hero-cue" href="#coverage"><span>See where the gains land</span><span class="cue-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
   </div>
@@ -2167,32 +2165,34 @@
   <div class="wrap">
     <div class="sec-head" data-reveal>
       <p class="eyebrow">Release</p>
-      <h2 id="release-title">Code and <span class="nw">ReproBridge-Bench</span>, coming soon</h2>
-      <p class="lede">We will open-source the ReproBridge code and the ReproBridge-Bench dataset. Links will appear here once they are public.</p>
+      <h2 id="release-title">Read the paper; code and data are on the way</h2>
+      <p class="lede">The paper is on arXiv as <a href="https://arxiv.org/abs/2611.08452" target="_blank" rel="noopener">2611.08452</a>. The ReproBridge code and the ReproBridge-Bench dataset are going through internal review and will be open-sourced once it is approved.</p>
     </div>
 
     <!-- #cite wraps the release cards and the citation, so the nav "Cite" link lands with the BibTeX in view and the
          scrollspy can still mark "Release & cite" at the bottom of the page -->
     <div class="rel-body" id="cite">
-      <!-- TODO at release: turn each card into a link (keep the layout) and drop its "Soon" badge -->
+      <!-- Code and dataset cards: turn them into links (like the paper cards) once internal review approves the release -->
       <ul class="rel-grid" role="list" data-reveal>
-        <li class="rel-card">
+        <li class="rel-card is-live">
           <div class="rel-top">
             <span class="rel-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span>
           </div>
           <span class="kicker">Paper</span>
           <h3>ReproBridge paper</h3>
           <p>Full paper with appendices: protocols, inventories, and worked examples.</p>
-          <span class="soon">Soon</span>
+          <span class="rel-go" aria-hidden="true">PDF ↗</span>
+          <a class="rel-stretch" href="https://arxiv.org/pdf/2611.08452" target="_blank" rel="noopener"><span class="sr-only">Read the ReproBridge paper (PDF)</span></a>
         </li>
-        <li class="rel-card">
+        <li class="rel-card is-live">
           <div class="rel-top">
             <span class="rel-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
           </div>
           <span class="kicker">arXiv</span>
-          <h3>arXiv preprint</h3>
-          <p>Citable preprint.</p>
-          <span class="soon">Soon</span>
+          <h3>arXiv:2611.08452</h3>
+          <p>Abstract page, versions, and citation.</p>
+          <span class="rel-go" aria-hidden="true">Open ↗</span>
+          <a class="rel-stretch" href="https://arxiv.org/abs/2611.08452" target="_blank" rel="noopener"><span class="sr-only">Open the arXiv page of the paper</span></a>
         </li>
         <li class="rel-card">
           <div class="rel-top">
@@ -2200,8 +2200,8 @@
           </div>
           <span class="kicker">Code</span>
           <h3>ReproBridge</h3>
-          <p>The agent workflow that turns a paper and its released code into a refined reproducible artifact.</p>
-          <span class="soon">Soon</span>
+          <p>The agent workflow that turns a paper and its released code into a refined reproducible artifact. Under internal review; open-sourced once approved.</p>
+          <span class="soon">In review</span>
         </li>
         <li class="rel-card">
           <div class="rel-top">
@@ -2209,8 +2209,8 @@
           </div>
           <span class="kicker">Dataset</span>
           <h3 class="nw">ReproBridge-Bench</h3>
-          <p>1,029 tasks from 387 experiments across 36 papers, with five human-verified reference scores per task.</p>
-          <span class="soon">Soon</span>
+          <p>1,029 tasks from 387 experiments across 36 papers, with five human-verified reference scores per task. Under internal review; open-sourced once approved.</p>
+          <span class="soon">In review</span>
         </li>
       </ul>
 
@@ -2224,8 +2224,7 @@
             <span class="copy-label">Copy</span><span class="sr-only"> BibTeX citation</span>
           </button>
         </div>
-        <!-- TODO: add eprint/arXiv ID once assigned -->
-        <pre id="bibtex" tabindex="0" role="region" aria-label="BibTeX citation"><span class="bl"><span class="bt-at">@article</span>{<span class="bt-key">wang2026reprobridge</span>,</span><span class="bl">  <span class="bt-f">title</span>   = {{ReproBridge}: Building Reproducibility into {ML} Research Artifacts},</span><span class="bl">  <span class="bt-f">author</span>  = {Wang, Yubo and Meng, Rui and Nam, Jaehyun and Pfister, Tomas and Yoon, Jinsung},</span><span class="bl">  <span class="bt-f">journal</span> = {arXiv preprint},</span><span class="bl">  <span class="bt-f">year</span>    = {2026}</span><span class="bl">}</span></pre>
+        <pre id="bibtex" tabindex="0" role="region" aria-label="BibTeX citation"><span class="bl"><span class="bt-at">@article</span>{<span class="bt-key">wang2026reprobridge</span>,</span><span class="bl">  <span class="bt-f">title</span>   = {{ReproBridge}: Building Reproducibility into {ML} Research Artifacts},</span><span class="bl">  <span class="bt-f">author</span>  = {Wang, Yubo and Meng, Rui and Nam, Jaehyun and Pfister, Tomas and Yoon, Jinsung},</span><span class="bl">  <span class="bt-f">journal</span> = {arXiv preprint arXiv:2611.08452},</span><span class="bl">  <span class="bt-f">year</span>    = {2026}</span><span class="bl">}</span></pre>
       </div>
       <p class="sr-only" id="rel-copy-status" aria-live="polite"></p>
     </div>

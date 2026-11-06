@@ -73,3 +73,17 @@
   #release .rel-card .kicker { padding-right: 56px; }
   #release .rel-card p { grid-column: 2; font-size: 14px; }
 }
+
+/* published items: the whole card is a link (stretched anchor), with an accent badge instead of a status badge */
+#release .rel-card.is-live { transition: border-color .2s var(--ease), box-shadow .25s var(--ease), transform .2s var(--ease); }
+#release .rel-card.is-live:hover { border-color: color-mix(in srgb, var(--rra) 45%, var(--line)); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+#release .rel-card.is-live:focus-within { outline: 2px solid var(--rra); outline-offset: 3px; }
+#release .rel-stretch { position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+#release .rel-stretch:focus-visible { outline: none; }
+#release .rel-go {
+  position: absolute; top: 33px; right: 22px; padding: 2px 9px; border-radius: 999px;
+  font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  background: var(--accent-fill); color: var(--on-accent); line-height: 1.5;
+}
+#release .rel-lede a, #release .lede a { font-weight: 600; }
+@media (max-width: 560px) { #release .rel-go { top: 18px; right: 16px; } }
